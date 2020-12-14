@@ -10,11 +10,9 @@ namespace CovidConsole
         private string nom;
         private string prenom;
         private string codeCouleur;
-        private string sexe { get; set; }
+        private string sexe;
         private DateTime dateDeNaissance;
         private string status;
-
-
         private List<Lieux> histLieux;
         private List<Vaccination> histVaccination;
 
@@ -33,6 +31,11 @@ namespace CovidConsole
         public int getAge()
         {
             return DateTime.Today.Year - dateDeNaissance.Year;
+        }
+
+        public string getSexe()
+        {
+            return sexe;
         }
 
         public void setStatus(string stat)
