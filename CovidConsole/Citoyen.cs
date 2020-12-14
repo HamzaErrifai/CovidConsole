@@ -90,6 +90,15 @@ namespace CovidConsole
             return codeCouleur;
         }
 
+        public List<Vaccination> getHistDeVaccination()
+        {
+            return histVaccination;
+        }
+        public List<Lieux> getHistDesLieux()
+        {
+            return histLieux;
+        }
+
         public void addLieu(double longitude, double latitude)
         {
             histLieux.Add(new Lieux(longitude, latitude));
