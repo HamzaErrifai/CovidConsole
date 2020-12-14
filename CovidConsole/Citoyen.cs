@@ -6,7 +6,7 @@ namespace CovidConsole
 {
     class Citoyen
     {
-        private string cin { get; set; }
+        private string cin;
         private string nom;
         private string prenom;
         private string codeCouleur;
