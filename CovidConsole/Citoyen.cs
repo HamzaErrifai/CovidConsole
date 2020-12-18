@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CovidConsole
 {
@@ -13,6 +12,7 @@ namespace CovidConsole
         private string sexe;
         private DateTime dateDeNaissance;
         private string status;
+        private Test test;
         private List<Lieux> histLieux;
         private List<Vaccination> histVaccination;
 
@@ -26,6 +26,7 @@ namespace CovidConsole
             setStatus("inconnu");
             histLieux = new List<Lieux>();
             histVaccination = new List<Vaccination>();
+            test = new Test(this, DateTime.Now, "none", false);
         }
 
         public int getAge()
@@ -38,10 +39,16 @@ namespace CovidConsole
             return sexe;
         }
 
-        public void setStatus(string stat)
+        public void setStatus(string stat) // TODO: MAKE IT PRIVATE TO THE CLASS
         {
             status = stat;
             generateCodeCouleur();
+        }
+
+        public void generateStatusFromTest()
+        {
+            // set the status from the 
+            setStatus(test.getResultat());
         }
 
         public string getstatus()
@@ -75,7 +82,7 @@ namespace CovidConsole
                 case "suspect":
                     codeCouleur = "orange";
                     break;
-                case "Gueris":
+                case "Guerri":
                 case "vaccine":
                     codeCouleur = "vert";
                     break;

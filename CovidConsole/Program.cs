@@ -35,10 +35,10 @@ namespace CovidConsole
             c9.setStatus("vaccine");
             c10.setStatus("vaccine");
 
-            showStatus(listCitoyens);
+            showColorCode(listCitoyens);
 
         }
-        static void showStatus(List<Citoyen> ls)
+        static void showColorCode(List<Citoyen> ls)
         {
             foreach (Citoyen citoyen in ls)
             {
