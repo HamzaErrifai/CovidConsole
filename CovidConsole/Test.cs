@@ -24,7 +24,7 @@ namespace CovidConsole
             this.type = type;
             this.date = date;
             this.hasSymptoms = hasSymptoms;
-            resultat = "inconnu";
+            generateResultat();
         }
 
         public int getIdTest()
@@ -81,8 +81,10 @@ namespace CovidConsole
         {
             if (this.hasSymptoms && citoyen.getAge() >= 60)
                 setResultat("malade");
-            else if (!this.hasSymptoms && citoyen.getAge() < 60)
+            else if (!this.hasSymptoms && citoyen.getAge() < 60 && citoyen.getAge() >=40)
                 setResultat("suspect");
+            else if (citoyen.getAge() <= 15)
+                setResultat("mineur");
             else
             {
                 citoyen.addVaccination("ARN Messager");

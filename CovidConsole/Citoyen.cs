@@ -26,7 +26,6 @@ namespace CovidConsole
             setStatus("inconnu");
             histLieux = new List<Lieux>();
             histVaccination = new List<Vaccination>();
-            test = new Test(this, DateTime.Now, "none", false);
         }
 
         public int getAge()
@@ -34,12 +33,19 @@ namespace CovidConsole
             return DateTime.Today.Year - dateDeNaissance.Year;
         }
 
+        public void setTest(bool hasSymptoms, string type)
+        {
+            //si l'utilisateur appel cette methode donc le citoyen a fait un test
+            test = new Test(this, DateTime.Now, type, hasSymptoms);
+            generateStatusFromTest();
+        }
+
         public string getSexe()
         {
             return sexe;
         }
 
-        public void setStatus(string stat) // TODO: MAKE IT PRIVATE TO THE CLASS
+        private void setStatus(string stat) // TODO: MAKE IT PRIVATE TO THE CLASS
         {
             status = stat;
             generateCodeCouleur();
@@ -82,7 +88,8 @@ namespace CovidConsole
                 case "suspect":
                     codeCouleur = "orange";
                     break;
-                case "Guerri":
+                case "mineur":
+                case "guerri":
                 case "vaccine":
                     codeCouleur = "vert";
                     break;
