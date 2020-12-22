@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CovidConsole
 {
-    class Citoyen
+    class Citoyen : Model.Citoyen
     {
         private string cin;
         private string nom;
@@ -24,6 +24,8 @@ namespace CovidConsole
             sexe = o_sexe;
             setdateDeNaissance(jour, mois, annee);
             setStatus("inconnu");
+            //save data to db
+            add(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
             histLieux = new List<Lieux>();
             histVaccination = new List<Vaccination>();
         }
@@ -31,6 +33,15 @@ namespace CovidConsole
         public int getAge()
         {
             return DateTime.Today.Year - dateDeNaissance.Year;
+        }
+
+        public void add(string cin, string nom, string prenom, string sexe, string codecouleur, string statusC, DateTime dateDeNaissance)
+        {
+            this.addData(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
+        }
+        public void get()
+        {
+            this.getData();
         }
 
         public void setTest(bool hasSymptoms, string type)

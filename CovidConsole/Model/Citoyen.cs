@@ -11,7 +11,7 @@ namespace CovidConsole.Model
             tableName = "citoyen";
         }
 
-        public DataTable addData(string cin, string nom, string prenom, string sexe, string codecouleur, string statusC, DateTime dateDeNaissance)
+        protected void addData(string cin, string nom, string prenom, string sexe, string codecouleur, string statusC, DateTime dateDeNaissance)
         {
             SqlConnection conn = Db.Connect();
             SqlCommand command = new SqlCommand(null, conn);
@@ -20,12 +20,9 @@ namespace CovidConsole.Model
 
             conn.Open();
             command.CommandText = $"INSERT INTO {tableName} (cin, nom, prenom, sexe, codecouleur, statusC, dateDeNaissance)" +
-                $"VALUES ({cin}, {nom}, {prenom}, {sexe}, {codecouleur}, {statusC}, {dateDeNaissance})";
-            command.Prepare();
+                $"VALUES ('{cin}', '{nom}', '{prenom}', '{sexe}', '{codecouleur}', '{statusC}', '{dateDeNaissance}')";
             command.ExecuteNonQuery();
-            adapter.Fill(dt);
             conn.Close();
-            return dt;
         }
     }
 }
