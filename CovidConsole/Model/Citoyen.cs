@@ -46,7 +46,7 @@ namespace CovidConsole.Model
             DataTable dt = new DataTable();
 
             conn.Open();
-            command.CommandText = $"SELECT * FROM {tableName} WHERE cin = {idItem}";
+            command.CommandText = $"SELECT * FROM {tableName} WHERE cin = '{idItem}'";
             command.Prepare();
             command.ExecuteNonQuery();
             adapter.Fill(dt);

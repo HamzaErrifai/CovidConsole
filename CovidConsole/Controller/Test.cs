@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace CovidConsole.Controller
 {
     //TODO: Amélioration d'algorithme de verification + changement
-    //TODO: get from DB
-
 
     class Test : Model.Test
     {
@@ -22,6 +21,9 @@ namespace CovidConsole.Controller
         private bool hasSymptoms;
         private string resultat; // Le status du citoyen
 
+        public Test()
+        {
+        }
         public Test(Citoyen citoyen, DateTime date, string type, bool hasSymptoms)
         {
             this.citoyen = citoyen;
@@ -32,15 +34,46 @@ namespace CovidConsole.Controller
             this.add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
         }
 
-        public void add(string type, DateTime date, bool hassymptoms, string  resultat, string cinP)
+        public void add(string type, DateTime date, bool hassymptoms, string resultat, string cinP)
         {
             this.addData(type, date, hassymptoms, resultat, cinP);
         }
 
-        public static DataTable getAll()
+        public static List<Test> getAll()
         {
-            return Test.getData();
+            Test t = new Test();
+            List<Test> c = new List<Test>();
+
+            foreach (DataRow row in t.getData().Rows)
+            {
+                Test temp = new Test();
+                temp.idTest = (int)row["id"];
+                temp.citoyen = Citoyen.get(row["cinC"].ToString());
+                temp.type = row["type"].ToString();
+                temp.resultat = row["resultat"].ToString();
+                temp.date = ((DateTime)row["dateT"]);
+                c.Add(temp);
+
+            }
+            return c;
+
         }
+
+        public static Test get(int id)
+        {
+            Test t = new Test();
+            foreach (DataRow row in t.getById(id).Rows)
+            {
+                Test temp = new Test();
+                temp.idTest = (int)row["id"];
+                temp.citoyen = Citoyen.get(row["cinC"].ToString());
+                temp.type = row["type"].ToString();
+                temp.resultat = row["resultat"].ToString();
+                temp.date = ((DateTime)row["dateT"]);
+            }
+            return t;
+        }
+
         public int getIdTest()
         {
             return idTest;
@@ -56,19 +89,9 @@ namespace CovidConsole.Controller
             return type;
         }
 
-        public void setType(string type)
-        {
-            this.type = type;
-        }
-
         public DateTime getDate()
         {
             return date;
-        }
-
-        public void setDate(DateTime date)
-        {
-            this.date = date;
         }
 
         public bool getHasSymptoms()
@@ -76,19 +99,9 @@ namespace CovidConsole.Controller
             return hasSymptoms;
         }
 
-        public void setHasSymptoms(bool hasSymptoms)
-        {
-            this.hasSymptoms = hasSymptoms;
-        }
-
         public string getResultat()
         {
             return resultat;
-        }
-
-        public void setResultat(string resultat)
-        {
-            this.resultat = resultat;
         }
 
         public void generateResultat()
@@ -106,6 +119,28 @@ namespace CovidConsole.Controller
             }
 
         }
+
+        public void setType(string type)
+        {
+            this.type = type;
+        }
+
+        public void setDate(DateTime date)
+        {
+            this.date = date;
+        }
+
+        public void setHasSymptoms(bool hasSymptoms)
+        {
+            this.hasSymptoms = hasSymptoms;
+        }
+
+
+        public void setResultat(string resultat)
+        {
+            this.resultat = resultat;
+        }
+
 
     }
 }

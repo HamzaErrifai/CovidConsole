@@ -4,6 +4,7 @@ using System.Data;
 
 namespace CovidConsole.Controller
 {
+    //TODO: get or getAll should return an object Citoyen
     class Citoyen : Model.Citoyen
     {
         private string cin;
@@ -16,6 +17,11 @@ namespace CovidConsole.Controller
         private Test test;
         private List<Lieux> histLieux;
         private List<Vaccination> histVaccination;
+        
+        private Citoyen()
+        {
+
+        }
 
         public Citoyen(string o_cin, string o_nom, string o_sexe, string o_prenom, int jour, int mois, int annee)
         {
@@ -45,13 +51,44 @@ namespace CovidConsole.Controller
             catch (Exception e)
             {
 
-                Console.WriteLine(e.Message);
+                //Console.WriteLine(e.Message);
             }
         }
-        
-        public static DataTable getAll()
+
+        public static List<Citoyen> getAll()
         {
-            return Citoyen.getData();
+            Citoyen ct = new Citoyen();
+            List<Citoyen> c = new List<Citoyen>();
+            
+            foreach (DataRow row in ct.getData().Rows)
+            {
+                Citoyen temp = new Citoyen();
+                temp.cin = row["cin"].ToString();
+                temp.nom = row["nom"].ToString();
+                temp.prenom = row["prenom"].ToString();
+                temp.status = row["statusC"].ToString();
+                temp.codeCouleur = row["codecouleur"].ToString();
+                temp.dateDeNaissance = ((DateTime)row["dateDeNaissance"]);
+                c.Add(temp);
+
+            }
+            return c;
+        }
+
+        public static Citoyen get(string cin)
+        {
+            Citoyen c = new Citoyen();
+            foreach (DataRow row in c.getById(cin).Rows)
+            {
+                Citoyen temp = new Citoyen();
+                temp.cin = row["cin"].ToString();
+                temp.nom = row["nom"].ToString();
+                temp.prenom = row["prenom"].ToString();
+                temp.status = row["statusC"].ToString();
+                temp.codeCouleur = row["codecouleur"].ToString();
+                temp.dateDeNaissance = ((DateTime)row["dateDeNaissance"]);
+            }
+            return c;
         }
 
         public string getCin()
@@ -69,7 +106,7 @@ namespace CovidConsole.Controller
             // set the status from the 
             setStatus(test.getResultat());
         }
-        
+
         public string getstatus()
         {
             return char.ToUpper(status[0]) + status.Substring(1);
@@ -146,7 +183,7 @@ namespace CovidConsole.Controller
             dateDeNaissance = new DateTime(annee, mois, jour);
             update("dateDeNaissance", dateDeNaissance.ToString());
         }
-        
+
         public void setNom(string nom)
         {
             this.nom = nom;

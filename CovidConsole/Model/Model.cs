@@ -7,7 +7,7 @@ namespace CovidConsole.Model
     {
         protected static string tableName = "";
 
-        protected static DataTable getData()
+        protected DataTable getData()
         {
             SqlConnection conn = Db.Connect();
             SqlCommand command = new SqlCommand(null, conn);
