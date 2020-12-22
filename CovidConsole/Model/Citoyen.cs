@@ -38,7 +38,6 @@ namespace CovidConsole.Model
          * idItem  : valeur de l'id
          * @return datatable
          * **/
-
         protected DataTable getById(string idItem)
         {
             SqlConnection conn = Db.Connect();

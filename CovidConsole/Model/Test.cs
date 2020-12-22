@@ -1,0 +1,31 @@
+﻿using System;
+using System.Data.SqlClient;
+
+namespace CovidConsole.Model
+{
+    class Test : Model
+    {
+        protected void addData(string typeT, DateTime dateT, bool hassymptoms, string resultat, string cinC)
+        {
+            SqlConnection conn = Db.Connect();
+            SqlCommand command = new SqlCommand(null, conn);
+            try
+            {
+                conn.Open();
+                command.CommandText = $"INSERT INTO {tableName} (typeT, dateT, hassymptoms, resultat, cinC)" +
+                    $"VALUES ('{typeT}', '{dateT}', {hassymptoms}, '{resultat}', '{cinC}')";
+                command.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (SqlException e)
+            {
+                if (e.Number == 2627) //Violation of primary key
+                {
+                    throw new Exception("Ce citoyen existe déja");
+                }
+                else
+                    throw;
+            }
+        }
+    }
+}

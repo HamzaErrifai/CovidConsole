@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Data;
 
 namespace CovidConsole.Controller
 {
     //TODO: Amélioration d'algorithme de verification + changement
-    class Test
+    //TODO: get from DB
+
+
+    class Test : Model.Test
     {
         /* 3 Types
          * virologique
@@ -11,7 +15,7 @@ namespace CovidConsole.Controller
          * none : "il n'a pas fait du test"
          * https://www.normandie.ars.sante.fr/coronavirus-covid-19-les-differents-types-de-tests#:~:text=Les%20tests%20virologiques%20(RT%2DPCR,et%20recommand%C3%A9%20pour%20le%20d%C3%A9pistage.
         */
-        static public int idTest = 0;
+        private int idTest;
         private Citoyen citoyen;
         private string type;
         private DateTime date;
@@ -20,14 +24,23 @@ namespace CovidConsole.Controller
 
         public Test(Citoyen citoyen, DateTime date, string type, bool hasSymptoms)
         {
-            idTest++;
             this.citoyen = citoyen;
             this.type = type;
             this.date = date;
             this.hasSymptoms = hasSymptoms;
             generateResultat();
+            this.add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
         }
 
+        public void add(string type, DateTime date, bool hassymptoms, string  resultat, string cinP)
+        {
+            this.addData(type, date, hassymptoms, resultat, cinP);
+        }
+
+        public static DataTable getAll()
+        {
+            return Test.getData();
+        }
         public int getIdTest()
         {
             return idTest;
@@ -82,7 +95,7 @@ namespace CovidConsole.Controller
         {
             if (this.hasSymptoms && citoyen.getAge() >= 60)
                 setResultat("malade");
-            else if (!this.hasSymptoms && citoyen.getAge() < 60 && citoyen.getAge() >=40)
+            else if (!this.hasSymptoms && citoyen.getAge() < 60 && citoyen.getAge() >= 40)
                 setResultat("suspect");
             else if (citoyen.getAge() <= 15)
                 setResultat("mineur");

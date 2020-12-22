@@ -54,6 +54,11 @@ namespace CovidConsole.Controller
             return Citoyen.getData();
         }
 
+        public string getCin()
+        {
+            return cin;
+        }
+
         public string getSexe()
         {
             return sexe;
@@ -64,7 +69,7 @@ namespace CovidConsole.Controller
             // set the status from the 
             setStatus(test.getResultat());
         }
-
+        
         public string getstatus()
         {
             return char.ToUpper(status[0]) + status.Substring(1);
