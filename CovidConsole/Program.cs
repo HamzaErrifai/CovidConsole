@@ -12,15 +12,16 @@ namespace CovidConsole
         static void Main(string[] args)
         {
             List<Citoyen> people = Citoyen.getAll();
-            
+            setTest(people);
             showColorCode(people);
         }
 
         static void setTest(List<Citoyen> cs)
         {
+            //Just to test the program
             foreach (Citoyen c in cs)
             {
-                //row[""];
+                c.setTest(true, "virologique");
             }
         }
         static void showColorCode(List<Citoyen> cs)

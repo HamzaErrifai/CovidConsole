@@ -4,11 +4,11 @@ using System.Text;
 
 namespace CovidConsole.Model
 {
-    class Lieux : Model
+    class Vaccination : Model
     {
-        public Lieux()
+        public Vaccination()
         {
-            tableName = "lieux";
+            tableName = "vaccination";
         }
     }
 }

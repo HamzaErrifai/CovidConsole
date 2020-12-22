@@ -18,8 +18,8 @@ namespace CovidConsole.Model
             try
             {
                 conn.Open();
-                command.CommandText = $"INSERT INTO {tableName} (cin, nom, prenom, sexe, codecouleur, statusC, dateDeNaissance)" +
-                    $"VALUES ('{cin}', '{nom}', '{prenom}', '{sexe}', '{codecouleur}', '{statusC}', '{dateDeNaissance}')";
+                command.CommandText = $"INSERT INTO citoyen (cin, nom, prenom, sexe, codecouleur, statusC, dateDeNaissance)" +
+                    $"VALUES ('{cin}', '{nom}', '{prenom}', '{sexe}', '{codecouleur}', '{statusC}', '{dateDeNaissance.ToString("MM/dd/yyyy HH:mm:ss")}')";
                 command.ExecuteNonQuery();
                 conn.Close();
             }
@@ -46,7 +46,7 @@ namespace CovidConsole.Model
             DataTable dt = new DataTable();
 
             conn.Open();
-            command.CommandText = $"SELECT * FROM {tableName} WHERE cin = '{idItem}'";
+            command.CommandText = $"SELECT * FROM citoyen WHERE cin = '{idItem}'";
             command.Prepare();
             command.ExecuteNonQuery();
             adapter.Fill(dt);
@@ -65,7 +65,7 @@ namespace CovidConsole.Model
             SqlCommand command = new SqlCommand(null, conn);
 
             conn.Open();
-            command.CommandText = $"UPDATE {tableName} SET {itemName} = '{itemValue}' WHERE cin = '{idItem}'";
+            command.CommandText = $"UPDATE citoyen SET {itemName} = '{itemValue}' WHERE cin = '{idItem}'";
             command.Prepare();
             command.ExecuteNonQuery();
             conn.Close();

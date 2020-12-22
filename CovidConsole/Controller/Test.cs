@@ -32,6 +32,8 @@ namespace CovidConsole.Controller
             this.hasSymptoms = hasSymptoms;
             generateResultat();
             this.add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
+            this.citoyen.setStatus(this.resultat);
+            this.citoyen.update("codecouleur", this.citoyen.getCodeCouleur());
         }
 
         public void add(string type, DateTime date, bool hassymptoms, string resultat, string cinP)
@@ -59,7 +61,7 @@ namespace CovidConsole.Controller
 
         }
 
-        public static Test get(int id)
+        public static Test get(int id) 
         {
             Test t = new Test();
             foreach (DataRow row in t.getById(id).Rows)

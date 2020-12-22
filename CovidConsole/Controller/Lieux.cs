@@ -1,6 +1,7 @@
 ﻿using System;
 namespace CovidConsole.Controller
 {
+    //TODO: manipulate Lieux in DB
     class Point
     {
         double x { get; set; }

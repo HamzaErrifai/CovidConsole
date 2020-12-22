@@ -15,12 +15,11 @@ namespace CovidConsole.Controller
         private DateTime dateDeNaissance;
         private string status;
         private Test test;
-        private List<Lieux> histLieux;
-        private List<Vaccination> histVaccination;
-        
+        private List<Lieux> histLieux = new List<Lieux>();
+        private List<Vaccination> histVaccination = new List<Vaccination>();
+
         private Citoyen()
         {
-
         }
 
         public Citoyen(string o_cin, string o_nom, string o_sexe, string o_prenom, int jour, int mois, int annee)
@@ -33,8 +32,6 @@ namespace CovidConsole.Controller
             status = "inconnu";
             //save data to db
             add(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
-            histLieux = new List<Lieux>();
-            histVaccination = new List<Vaccination>();
         }
 
         public int getAge()
@@ -51,7 +48,7 @@ namespace CovidConsole.Controller
             catch (Exception e)
             {
 
-                //Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -59,7 +56,7 @@ namespace CovidConsole.Controller
         {
             Citoyen ct = new Citoyen();
             List<Citoyen> c = new List<Citoyen>();
-            
+
             foreach (DataRow row in ct.getData().Rows)
             {
                 Citoyen temp = new Citoyen();
@@ -171,7 +168,7 @@ namespace CovidConsole.Controller
             generateStatusFromTest();
         }
 
-        private void setStatus(string stat)
+        public void setStatus(string stat)
         {
             status = stat;
             generateCodeCouleur();

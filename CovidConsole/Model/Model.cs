@@ -3,9 +3,9 @@ using System.Data.SqlClient;
 
 namespace CovidConsole.Model
 {
-    abstract class Model
+    class Model
     {
-        protected static string tableName = "";
+        protected string tableName = "";
 
         protected DataTable getData()
         {
