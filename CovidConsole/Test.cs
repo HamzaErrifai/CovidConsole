@@ -4,15 +4,15 @@ namespace CovidConsole
 {
     class Test
     {
-        static public int idTest = 0;
-        private Citoyen citoyen;
-        private string type;
         /* 3 Types
          * virologique
          * sérologique 
          * none : "il n'a pas fait du test"
          * https://www.normandie.ars.sante.fr/coronavirus-covid-19-les-differents-types-de-tests#:~:text=Les%20tests%20virologiques%20(RT%2DPCR,et%20recommand%C3%A9%20pour%20le%20d%C3%A9pistage.
         */
+        static public int idTest = 0;
+        private Citoyen citoyen;
+        private string type;
         private DateTime date;
         private bool hasSymptoms;
         private string resultat; // Le status du citoyen

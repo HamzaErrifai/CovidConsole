@@ -4,7 +4,6 @@ namespace CovidConsole
     class Point
     {
         double x { get; set; }
-
         double y { get; set; }
 
         public Point(double ox, double oy)
