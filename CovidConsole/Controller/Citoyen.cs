@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace CovidConsole.Controller
 {
-    //TODO: add setters for cin, nom, prenom
-
     class Citoyen : Model.Citoyen
     {
         private string cin;
@@ -49,34 +48,15 @@ namespace CovidConsole.Controller
                 Console.WriteLine(e.Message);
             }
         }
-        public void get()
+        
+        public static DataTable getAll()
         {
-            this.getData();
+            return Citoyen.getData();
         }
 
         public string getSexe()
         {
             return sexe;
-        }
-
-        public void setTest(bool hasSymptoms, string type)
-        {
-            //si l'utilisateur appel cette methode donc le citoyen a fait un test
-            test = new Test(this, DateTime.Now, type, hasSymptoms);
-            generateStatusFromTest();
-        }
-
-        private void setStatus(string stat)
-        {
-            status = stat;
-            generateCodeCouleur();
-            update("statusC", status);
-        }
-
-        public void setdateDeNaissance(int jour, int mois, int annee)
-        {
-            dateDeNaissance = new DateTime(annee, mois, jour);
-            update("dateDeNaissance", dateDeNaissance.ToString());
         }
 
         public void generateStatusFromTest()
@@ -136,9 +116,45 @@ namespace CovidConsole.Controller
         {
             return histVaccination;
         }
+
         public List<Lieux> getHistDesLieux()
         {
             return histLieux;
+        }
+
+        public void setTest(bool hasSymptoms, string type)
+        {
+            //si l'utilisateur appel cette methode donc le citoyen a fait un test
+            test = new Test(this, DateTime.Now, type, hasSymptoms);
+            generateStatusFromTest();
+        }
+
+        private void setStatus(string stat)
+        {
+            status = stat;
+            generateCodeCouleur();
+            update("statusC", status);
+        }
+
+        public void setdateDeNaissance(int jour, int mois, int annee)
+        {
+            dateDeNaissance = new DateTime(annee, mois, jour);
+            update("dateDeNaissance", dateDeNaissance.ToString());
+        }
+        
+        public void setNom(string nom)
+        {
+            this.nom = nom;
+        }
+
+        public void setPrenom(string prenom)
+        {
+            this.prenom = prenom;
+        }
+
+        public void setCin(string cin)
+        {
+            this.cin = cin;
         }
 
         public void addLieu(double longitude, double latitude)

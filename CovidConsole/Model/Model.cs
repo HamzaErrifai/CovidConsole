@@ -3,11 +3,11 @@ using System.Data.SqlClient;
 
 namespace CovidConsole.Model
 {
-    class Model
+    abstract class Model
     {
-        protected string tableName = "";
+        protected static string tableName = "";
 
-        protected DataTable getData()
+        protected static DataTable getData()
         {
             SqlConnection conn = Db.Connect();
             SqlCommand command = new SqlCommand(null, conn);
@@ -22,5 +22,6 @@ namespace CovidConsole.Model
             conn.Close();
             return dt;
         }
+
     }
 }

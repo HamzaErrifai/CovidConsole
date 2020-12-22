@@ -2,6 +2,7 @@
 
 namespace CovidConsole.Controller
 {
+    //TODO: Amélioration d'algorithme de verification + changement
     class Test
     {
         /* 3 Types
