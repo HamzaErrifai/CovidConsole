@@ -21,7 +21,10 @@ namespace CovidConsole
             //Just to test the program
             foreach (Citoyen c in cs)
             {
-                c.setTest(true, "virologique");
+                if (c.getAge() >= 40 && c.getAge() < 60)
+                    c.setTest(false, "virologique");
+                else
+                    c.setTest(true, "virologique");
             }
         }
         static void showColorCode(List<Citoyen> cs)

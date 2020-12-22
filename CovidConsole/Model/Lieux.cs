@@ -4,6 +4,7 @@ using System.Text;
 
 namespace CovidConsole.Model
 {
+    //TODO: add lieux to the db
     class Lieux : Model
     {
         public Lieux()
