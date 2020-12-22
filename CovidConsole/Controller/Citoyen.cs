@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace CovidConsole.Controller
 {
-    //TODO: setters should modify the database
+    //TODO: add setters for cin, nom, prenom
+
     class Citoyen : Model.Citoyen
     {
         private string cin;
@@ -16,7 +17,6 @@ namespace CovidConsole.Controller
         private Test test;
         private List<Lieux> histLieux;
         private List<Vaccination> histVaccination;
-        private string idName = "cin";
 
         public Citoyen(string o_cin, string o_nom, string o_sexe, string o_prenom, int jour, int mois, int annee)
         {
@@ -97,7 +97,7 @@ namespace CovidConsole.Controller
 
         public void update(string itemName, string itemValue)
         {
-            this.UpdateItem(idName, this.cin, itemName, itemValue);
+            this.UpdateItem(this.cin, itemName, itemValue);
         }
         public DateTime getdateDeNaissance()
         {

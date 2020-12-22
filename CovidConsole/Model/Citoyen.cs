@@ -33,5 +33,43 @@ namespace CovidConsole.Model
                     throw;
             }
         }
+
+        /*
+         * idItem  : valeur de l'id
+         * @return datatable
+         * **/
+
+        protected DataTable getById(string idItem)
+        {
+            SqlConnection conn = Db.Connect();
+            SqlCommand command = new SqlCommand(null, conn);
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable dt = new DataTable();
+
+            conn.Open();
+            command.CommandText = $"SELECT * FROM {tableName} WHERE cin = {idItem}";
+            command.Prepare();
+            command.ExecuteNonQuery();
+            adapter.Fill(dt);
+            conn.Close();
+            return dt;
+        }
+
+        /*
+         * itemName  : field name in db 
+         * itemValue : value that user want to change
+         * **/
+
+        protected void UpdateItem(string idItem, string itemName, string itemValue)
+        {
+            SqlConnection conn = Db.Connect();
+            SqlCommand command = new SqlCommand(null, conn);
+
+            conn.Open();
+            command.CommandText = $"UPDATE {tableName} SET {itemName} = '{itemValue}' WHERE cin = '{idItem}'";
+            command.Prepare();
+            command.ExecuteNonQuery();
+            conn.Close();
+        }
     }
 }
