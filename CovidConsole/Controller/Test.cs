@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CovidConsole
+namespace CovidConsole.Controller
 {
     class Test
     {

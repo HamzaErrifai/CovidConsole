@@ -15,14 +15,24 @@ namespace CovidConsole.Model
         {
             SqlConnection conn = Db.Connect();
             SqlCommand command = new SqlCommand(null, conn);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataTable dt = new DataTable();
+            try
+            {
+                conn.Open();
+                command.CommandText = $"INSERT INTO {tableName} (cin, nom, prenom, sexe, codecouleur, statusC, dateDeNaissance)" +
+                    $"VALUES ('{cin}', '{nom}', '{prenom}', '{sexe}', '{codecouleur}', '{statusC}', '{dateDeNaissance}')";
+                command.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (SqlException e)
+            {
+                if (e.Number == 2627) //Violation of primary key
+                {
+                    throw new Exception("Ce citoyen existe déja");
+                }
+                else
+                    throw;
+            }
 
-            conn.Open();
-            command.CommandText = $"INSERT INTO {tableName} (cin, nom, prenom, sexe, codecouleur, statusC, dateDeNaissance)" +
-                $"VALUES ('{cin}', '{nom}', '{prenom}', '{sexe}', '{codecouleur}', '{statusC}', '{dateDeNaissance}')";
-            command.ExecuteNonQuery();
-            conn.Close();
         }
     }
 }

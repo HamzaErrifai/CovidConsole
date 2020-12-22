@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CovidConsole
+namespace CovidConsole.Controller
 {
+    //TODO: setters should modify the database
     class Citoyen : Model.Citoyen
     {
         private string cin;
@@ -37,7 +38,15 @@ namespace CovidConsole
 
         public void add(string cin, string nom, string prenom, string sexe, string codecouleur, string statusC, DateTime dateDeNaissance)
         {
-            this.addData(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
+            try
+            {
+                this.addData(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
         }
         public void get()
         {

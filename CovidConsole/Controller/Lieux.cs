@@ -1,5 +1,5 @@
 ﻿using System;
-namespace CovidConsole
+namespace CovidConsole.Controller
 {
     class Point
     {
