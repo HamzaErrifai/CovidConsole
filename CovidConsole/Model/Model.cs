@@ -42,7 +42,22 @@ namespace CovidConsole.Model
             conn.Close();
             return dt;
         }
-        
+
+        /*
+         * itemName  : field name in db 
+         * itemValue : value that user want to change
+         * **/
+        protected void UpdateItem(string idDbName, string idItem, string itemName, string itemValue)
+        {
+            SqlConnection conn = Db.Connect();
+            SqlCommand command = new SqlCommand(null, conn);
+
+            conn.Open();
+            command.CommandText = $"UPDATE {tableName} SET {itemName} = '{itemValue}' WHERE {idDbName} = {idItem}" ;
+            command.Prepare();
+            command.ExecuteNonQuery();
+            conn.Close();
+        }
 
     }
 }

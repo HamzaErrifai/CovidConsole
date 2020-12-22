@@ -16,6 +16,7 @@ namespace CovidConsole.Controller
         private Test test;
         private List<Lieux> histLieux;
         private List<Vaccination> histVaccination;
+        private string idName = "cin";
 
         public Citoyen(string o_cin, string o_nom, string o_sexe, string o_prenom, int jour, int mois, int annee)
         {
@@ -24,7 +25,7 @@ namespace CovidConsole.Controller
             prenom = o_prenom;
             sexe = o_sexe;
             setdateDeNaissance(jour, mois, annee);
-            setStatus("inconnu");
+            status = "inconnu";
             //save data to db
             add(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
             histLieux = new List<Lieux>();
@@ -53,6 +54,11 @@ namespace CovidConsole.Controller
             this.getData();
         }
 
+        public string getSexe()
+        {
+            return sexe;
+        }
+
         public void setTest(bool hasSymptoms, string type)
         {
             //si l'utilisateur appel cette methode donc le citoyen a fait un test
@@ -60,15 +66,17 @@ namespace CovidConsole.Controller
             generateStatusFromTest();
         }
 
-        public string getSexe()
-        {
-            return sexe;
-        }
-
-        private void setStatus(string stat) // TODO: MAKE IT PRIVATE TO THE CLASS
+        private void setStatus(string stat)
         {
             status = stat;
             generateCodeCouleur();
+            update("statusC", status);
+        }
+
+        public void setdateDeNaissance(int jour, int mois, int annee)
+        {
+            dateDeNaissance = new DateTime(annee, mois, jour);
+            update("dateDeNaissance", dateDeNaissance.ToString());
         }
 
         public void generateStatusFromTest()
@@ -87,11 +95,10 @@ namespace CovidConsole.Controller
             return prenom + " " + nom;
         }
 
-        public void setdateDeNaissance(int jour, int mois, int annee)
+        public void update(string itemName, string itemValue)
         {
-            dateDeNaissance = new DateTime(annee, mois, jour);
+            this.UpdateItem(idName, this.cin, itemName, itemValue);
         }
-
         public DateTime getdateDeNaissance()
         {
             return dateDeNaissance;
@@ -117,6 +124,7 @@ namespace CovidConsole.Controller
                     codeCouleur = "gris";
                     break;
             }
+            update("codecouleur", codeCouleur);
         }
 
         public string getCodeCouleur()

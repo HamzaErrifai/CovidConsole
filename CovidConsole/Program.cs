@@ -5,6 +5,7 @@ namespace CovidConsole
 {
     class Program
     {
+        //TODO: add a view folder
 
         static void Main(string[] args)
         {

@@ -32,7 +32,6 @@ namespace CovidConsole.Model
                 else
                     throw;
             }
-
         }
     }
 }
