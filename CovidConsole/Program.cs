@@ -14,7 +14,7 @@ namespace CovidConsole
             List<Citoyen> people = Citoyen.getAll();
             setTest(people);
             showColorCode(people);
-            //setRandomPosition(people);
+            setRandomPosition(people);
             showlieux(people[0]);
         }
 
@@ -33,7 +33,6 @@ namespace CovidConsole
                 double randomLon = rndLat.NextDouble() * (MAX_LONGITUDE_VALUE - MIN_LONGITUDE_VALUE) + MIN_LONGITUDE_VALUE;
                 c.addLieu(randomLat, randomLon);
             }
-
         }
 
         static void setTest(List<Citoyen> cs)
@@ -50,10 +49,10 @@ namespace CovidConsole
 
         static void showlieux(Citoyen c)
         {
+            Console.WriteLine("Lieux visité par " + c.getFullName());
             foreach (Lieux l in c.getHistLieux())
             {
-                if (l.getPosition() != null)
-                    Console.WriteLine(l.getPosition());
+                Console.WriteLine(l.getPosition());
             }
             Console.WriteLine("DONE");
         }

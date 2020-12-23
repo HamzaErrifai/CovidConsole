@@ -6,7 +6,7 @@ namespace CovidConsole.Model
 {
     class Test : Model
     {
-        public Test()
+        protected Test()
         {
             tableName = "test";
         }

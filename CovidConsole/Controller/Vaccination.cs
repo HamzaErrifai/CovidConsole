@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace CovidConsole.Controller
 {
@@ -10,9 +12,26 @@ namespace CovidConsole.Controller
         * Vecteur viral
         * sanofi
         */
-        //TODO: getter and setter to type
-        public string type { get; set; }
-        protected DateTime dateV;
+        private string type;
+        private DateTime dateV;
+        private string cinC;
+
+        public Vaccination()
+        {}
+
+        public Vaccination(string type, string cinC)
+        {
+            dateV = DateTime.Now;
+            this.type = type;
+            this.cinC = cinC;
+            this.addData(this.cinC, this.type, dateV);
+        }
+
+
+        public void update<T>(string itemName, T itemValue)
+        {
+            this.UpdateByCin<T>(cinC, itemName, itemValue);
+        }
 
         public DateTime getTime()
         {
@@ -22,12 +41,32 @@ namespace CovidConsole.Controller
         public void setTime(int jour, int mois, int annee)
         {
             dateV = new DateTime(jour, mois, annee);
+            update<string>("dateV", dateV.ToString("MM/dd/yyyy HH:mm:ss"));
         }
 
-        public Vaccination(string type)
+        public void setType(string type)
         {
-            dateV = DateTime.Now;
             this.type = type;
+            update<string>("typeV", this.type);
         }
+        public string getType()
+        {
+            return type;
+        }
+
+        public List<Vaccination> getAll(string cinC)
+        {
+            List<Vaccination> lt = new List<Vaccination>();
+            foreach (DataRow row in getByCin(cinC).Rows)
+            {
+                Vaccination temp = new Vaccination();
+                temp.cinC = row["cinC"].ToString();
+                temp.type = row["typeV"].ToString();
+                temp.dateV = ((DateTime)row["dateV"]);
+                lt.Add(temp);
+            }
+            return lt;
+        }
+
     }
 }

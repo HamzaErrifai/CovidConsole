@@ -17,7 +17,7 @@ namespace CovidConsole.Controller
 
         public override string ToString()
         {
-            return "{" + x + ", " + y + "}";
+            return $"({x}, {y})";
         }
 
 
@@ -28,7 +28,7 @@ namespace CovidConsole.Controller
     {
         private double longitude;
         private double latitude;
-        protected DateTime dateL;
+        private DateTime dateL;
         private string cinC;
 
         public Lieux()
@@ -40,7 +40,7 @@ namespace CovidConsole.Controller
             dateL = DateTime.Now;
             this.cinC = cinC;
             setPosition(o_latitude, o_longitude);
-            this.addData(cinC, longitude, latitude, dateL);
+            addData(this.cinC, longitude, latitude, dateL);
         }
 
         public DateTime getTime()

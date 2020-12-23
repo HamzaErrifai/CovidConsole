@@ -15,13 +15,13 @@ namespace CovidConsole.Controller
         private string status;
         private Test test;
         private Lieux histLieux = new Lieux();
-        private List<Vaccination> histVaccination = new List<Vaccination>();
+        private Vaccination histVaccination = new Vaccination();
 
         private Citoyen()
         {
         }
 
-        public Citoyen(string o_cin, string o_nom, string o_sexe, string o_prenom, int jour, int mois, int annee)
+        public Citoyen(string o_cin, string o_nom, string o_prenom, string o_sexe, int jour, int mois, int annee)
         {
             cin = o_cin;
             nom = o_nom;
@@ -29,6 +29,7 @@ namespace CovidConsole.Controller
             sexe = o_sexe;
             setdateDeNaissance(jour, mois, annee);
             status = "inconnu";
+            generateCodeCouleur();
             //save data to db
             add(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
         }
@@ -150,7 +151,7 @@ namespace CovidConsole.Controller
 
         public List<Vaccination> getHistDeVaccination()
         {
-            return histVaccination;
+            return histVaccination.getAll(cin);
         }
 
         public List<Lieux> getHistLieux()
@@ -203,7 +204,7 @@ namespace CovidConsole.Controller
 
         public void addVaccination(string type)
         {
-            histVaccination.Add(new Vaccination(type));
+            histVaccination = new Vaccination(type, cin);
         }
 
     }

@@ -5,7 +5,7 @@ namespace CovidConsole.Model
 {
     class Lieux : Model
     {
-        public Lieux()
+        protected Lieux()
         {
             tableName = "lieux";
         }
