@@ -1,18 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace CovidConsole.Controller
 {
-    //TODO: add get list of Lieux by CIN
     class Point
     {
-        double x { get; set; }
-        double y { get; set; }
+        public double x { get; set; }
+        public double y { get; set; }
 
         public Point(double ox, double oy)
         {
             x = ox;
             y = oy;
         }
+
+        public override string ToString()
+        {
+            return "{" + x + ", " + y + "}";
+        }
+
+
+
     }
 
     class Lieux : Model.Lieux
@@ -22,11 +31,15 @@ namespace CovidConsole.Controller
         protected DateTime dateL;
         private string cinC;
 
-        public Lieux(double o_longitude, double o_latitude, string cinC)
+        public Lieux()
+        {
+        }
+
+        public Lieux(double o_latitude, double o_longitude, string cinC)
         {
             dateL = DateTime.Now;
             this.cinC = cinC;
-            setPosistion(o_longitude, o_latitude);
+            setPosition(o_latitude, o_longitude);
             this.addData(cinC, longitude, latitude, dateL);
         }
 
@@ -41,7 +54,7 @@ namespace CovidConsole.Controller
             update<string>("dateL", dateL.ToString("MM/dd/yyyy HH:mm:ss"));
         }
 
-        public void setPosistion(double o_longitude, double o_latitude)
+        public void setPosition(double o_latitude, double o_longitude)
         {
             longitude = o_longitude; //x
             latitude = o_latitude; //y
@@ -54,7 +67,22 @@ namespace CovidConsole.Controller
             this.UpdateByCin<T>(cinC, itemName, itemValue);
         }
 
-        public Point getPosistion()
+        public List<Lieux> getAll(string cinC)
+        {
+            List<Lieux> lt = new List<Lieux>();
+            foreach (DataRow row in getByCin(cinC).Rows)
+            {
+                Lieux temp = new Lieux();
+                temp.cinC = row["cinC"].ToString();
+                temp.latitude = (double)row["latitude"];
+                temp.longitude = (double)row["longitude"];
+                temp.dateL = ((DateTime)row["dateL"]);
+                lt.Add(temp);
+            }
+            return lt;
+        }
+
+        public Point getPosition()
         {
             return new Point(longitude, latitude);
         }

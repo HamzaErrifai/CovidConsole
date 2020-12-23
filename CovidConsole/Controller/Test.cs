@@ -21,9 +21,10 @@ namespace CovidConsole.Controller
         private bool hasSymptoms;
         private string resultat; // Le status du citoyen
 
-        public Test()
+        private Test()
         {
         }
+
         public Test(Citoyen citoyen, DateTime date, string type, bool hasSymptoms)
         {
             this.citoyen = citoyen;
@@ -41,12 +42,10 @@ namespace CovidConsole.Controller
             this.addData(type, date, hassymptoms, resultat, cinP);
         }
 
-        public static List<Test> getAll()
+        public List<Test> getAll(string cinC)
         {
-            Test t = new Test();
-            List<Test> c = new List<Test>();
-
-            foreach (DataRow row in t.getData().Rows)
+            List<Test> lt = new List<Test>();
+            foreach (DataRow row in getByCin(cinC).Rows)
             {
                 Test temp = new Test();
                 temp.idTest = (int)row["id"];
@@ -54,25 +53,9 @@ namespace CovidConsole.Controller
                 temp.type = row["type"].ToString();
                 temp.resultat = row["resultat"].ToString();
                 temp.date = ((DateTime)row["dateT"]);
-                c.Add(temp);
+                lt.Add(temp);
             }
-            return c;
-
-        }
-
-        public static Test get(string cinC)
-        {
-            Test t = new Test();
-            foreach (DataRow row in t.getByCin(cinC).Rows)
-            {
-                Test temp = new Test();
-                temp.idTest = (int)row["id"];
-                temp.citoyen = Citoyen.get(row["cinC"].ToString());
-                temp.type = row["type"].ToString();
-                temp.resultat = row["resultat"].ToString();
-                temp.date = ((DateTime)row["dateT"]);
-            }
-            return t;
+            return lt;
         }
 
         public int getIdTest()

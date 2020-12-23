@@ -14,7 +14,7 @@ namespace CovidConsole.Controller
         private DateTime dateDeNaissance;
         private string status;
         private Test test;
-        private List<Lieux> histLieux = new List<Lieux>();
+        private Lieux histLieux = new Lieux();
         private List<Vaccination> histVaccination = new List<Vaccination>();
 
         private Citoyen()
@@ -46,7 +46,6 @@ namespace CovidConsole.Controller
             }
             catch (Exception e)
             {
-
                 Console.WriteLine(e.Message);
             }
         }
@@ -154,9 +153,9 @@ namespace CovidConsole.Controller
             return histVaccination;
         }
 
-        public List<Lieux> getHistDesLieux()
+        public List<Lieux> getHistLieux()
         {
-            return histLieux;
+            return histLieux.getAll(cin);
         }
 
         public void setTest(bool hasSymptoms, string type)
@@ -197,9 +196,9 @@ namespace CovidConsole.Controller
             update("cin", this.cin);
         }
 
-        public void addLieu(double longitude, double latitude)
+        public void addLieu(double latitude, double longitude)
         {
-            histLieux.Add(new Lieux(longitude, latitude, this.cin));
+            histLieux = new Lieux(latitude, longitude, this.cin);
         }
 
         public void addVaccination(string type)

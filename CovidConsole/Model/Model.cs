@@ -62,8 +62,11 @@ namespace CovidConsole.Model
 
             conn.Open();
             //if the item is numeric remove the Apostrophe ( ' )
-            if (itemValue.GetType() == typeof(int) || (itemValue.GetType() == typeof(double)) || itemValue.GetType() == typeof(bool))
-                command.CommandText = $"UPDATE {tableName} SET {itemName} = {itemValue} WHERE {cinName} = '{idItem}'";
+            if (itemValue.GetType() == typeof(int) || (itemValue.GetType() == typeof(double)))
+            {
+                string itemVal = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", itemValue);
+                command.CommandText = $"UPDATE {tableName} SET {itemName} = {itemVal} WHERE {cinName} = '{idItem}'";
+            }
             else
                 command.CommandText = $"UPDATE {tableName} SET {itemName} = '{itemValue}' WHERE {cinName} = '{idItem}'";
             command.Prepare();

@@ -3,7 +3,6 @@ using System.Data.SqlClient;
 
 namespace CovidConsole.Model
 {
-    //TODO: add modification of lieux in citoyen
     class Lieux : Model
     {
         public Lieux()
@@ -17,9 +16,12 @@ namespace CovidConsole.Model
             SqlCommand command = new SqlCommand(null, conn);
             try
             {
+                string longitudeStr = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", longitude);
+                string latitudeStr = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", latitude);
+
                 conn.Open();
                 command.CommandText = $"INSERT INTO lieux (cinC, longitude, latitude, dateL)" +
-                    $"VALUES ('{cinC}', '{longitude}', '{latitude}', '{dateL.ToString("MM/dd/yyyy HH:mm:ss")}')";
+                    $"VALUES ('{cinC}', {longitudeStr}, {latitudeStr}, '{dateL.ToString("MM/dd/yyyy HH:mm:ss")}')";
                 command.ExecuteNonQuery();
                 conn.Close();
             }
