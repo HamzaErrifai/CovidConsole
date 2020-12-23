@@ -31,9 +31,9 @@ namespace CovidConsole.Controller
             this.date = date;
             this.hasSymptoms = hasSymptoms;
             generateResultat();
-            this.add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
+            add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
             this.citoyen.setStatus(this.resultat);
-            this.citoyen.update("codecouleur", this.citoyen.getCodeCouleur());
+            this.citoyen.update<string>("codecouleur", this.citoyen.getCodeCouleur());
         }
 
         public void add(string type, DateTime date, bool hassymptoms, string resultat, string cinP)
@@ -55,16 +55,15 @@ namespace CovidConsole.Controller
                 temp.resultat = row["resultat"].ToString();
                 temp.date = ((DateTime)row["dateT"]);
                 c.Add(temp);
-
             }
             return c;
 
         }
 
-        public static Test get(int id) 
+        public static Test get(string cinC)
         {
             Test t = new Test();
-            foreach (DataRow row in t.getById(id).Rows)
+            foreach (DataRow row in t.getByCin(cinC).Rows)
             {
                 Test temp = new Test();
                 temp.idTest = (int)row["id"];
@@ -122,19 +121,27 @@ namespace CovidConsole.Controller
 
         }
 
+        public void update<T>(string itemName, T itemValue)
+        {
+            UpdateByCin<T>(this.citoyen.getCin(), itemName, itemValue);
+        }
+
         public void setType(string type)
         {
             this.type = type;
+            update("typeT", type);
         }
 
         public void setDate(DateTime date)
         {
             this.date = date;
+            update("dateT", date.ToString("MM/dd/yyyy HH:mm:ss"));
         }
 
         public void setHasSymptoms(bool hasSymptoms)
         {
             this.hasSymptoms = hasSymptoms;
+            update("hassymptoms", (this.hasSymptoms ? 1 : 0));
         }
 
 

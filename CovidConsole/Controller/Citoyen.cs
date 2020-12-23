@@ -4,7 +4,6 @@ using System.Data;
 
 namespace CovidConsole.Controller
 {
-    //TODO: get or getAll should return an object Citoyen
     class Citoyen : Model.Citoyen
     {
         private string cin;
@@ -67,7 +66,6 @@ namespace CovidConsole.Controller
                 temp.codeCouleur = row["codecouleur"].ToString();
                 temp.dateDeNaissance = ((DateTime)row["dateDeNaissance"]);
                 c.Add(temp);
-
             }
             return c;
         }
@@ -75,7 +73,7 @@ namespace CovidConsole.Controller
         public static Citoyen get(string cin)
         {
             Citoyen c = new Citoyen();
-            foreach (DataRow row in c.getById(cin).Rows)
+            foreach (DataRow row in c.getByCin(cin).Rows)
             {
                 Citoyen temp = new Citoyen();
                 temp.cin = row["cin"].ToString();
@@ -114,9 +112,9 @@ namespace CovidConsole.Controller
             return prenom + " " + nom;
         }
 
-        public void update(string itemName, string itemValue)
+        public void update<T>(string itemName, T itemValue)
         {
-            this.UpdateItem(this.cin, itemName, itemValue);
+            this.UpdateByCin<T>(cin, itemName, itemValue);
         }
         public DateTime getdateDeNaissance()
         {
@@ -178,27 +176,30 @@ namespace CovidConsole.Controller
         public void setdateDeNaissance(int jour, int mois, int annee)
         {
             dateDeNaissance = new DateTime(annee, mois, jour);
-            update("dateDeNaissance", dateDeNaissance.ToString());
+            update("dateDeNaissance", dateDeNaissance.ToString("MM/dd/yyyy HH:mm:ss"));
         }
 
         public void setNom(string nom)
         {
             this.nom = nom;
+            update("nom", this.nom);
         }
 
         public void setPrenom(string prenom)
         {
             this.prenom = prenom;
+            update("prenom", this.prenom);
         }
 
         public void setCin(string cin)
         {
             this.cin = cin;
+            update("cin", this.cin);
         }
 
         public void addLieu(double longitude, double latitude)
         {
-            histLieux.Add(new Lieux(longitude, latitude));
+            histLieux.Add(new Lieux(longitude, latitude, this.cin));
         }
 
         public void addVaccination(string type)
