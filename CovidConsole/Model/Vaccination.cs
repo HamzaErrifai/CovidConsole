@@ -18,7 +18,7 @@ namespace CovidConsole.Model
             {
                 conn.Open();
                 command.CommandText = $"INSERT INTO vaccination (cinC, typeV, dateV)" +
-                    $"VALUES ('{cinC}', '{type}', '{dateV.ToString("MM/dd/yyyy HH:mm:ss")}')";
+                    $"VALUES ('{cinC}', '{type}', '{dateV}')";
                 command.ExecuteNonQuery();
                 conn.Close();
             }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace CovidConsole.Model
@@ -19,7 +18,7 @@ namespace CovidConsole.Model
             {
                 conn.Open();
                 command.CommandText = $"INSERT INTO citoyen (cin, nom, prenom, sexe, codecouleur, statusC, dateDeNaissance)" +
-                    $"VALUES ('{cin}', '{nom}', '{prenom}', '{sexe}', '{codecouleur}', '{statusC}', '{dateDeNaissance.ToString("MM/dd/yyyy HH:mm:ss")}')";
+                    $"VALUES ('{cin}', '{nom}', '{prenom}', '{sexe}', '{codecouleur}', '{statusC}', '{dateDeNaissance}')";
                 command.ExecuteNonQuery();
                 conn.Close();
             }

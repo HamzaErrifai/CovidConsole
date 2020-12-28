@@ -51,7 +51,7 @@ namespace CovidConsole.Controller
         public void setDateL(int jour, int mois, int annee)
         {
             dateL = new DateTime(jour, mois, annee);
-            update<string>("dateL", dateL.ToString("MM/dd/yyyy HH:mm:ss"));
+            update<DateTime>("dateL", dateL);
         }
 
         public void setPosition(double o_latitude, double o_longitude)

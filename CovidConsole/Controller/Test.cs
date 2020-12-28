@@ -118,7 +118,7 @@ namespace CovidConsole.Controller
         public void setDate(DateTime date)
         {
             this.date = date;
-            update("dateT", date.ToString("MM/dd/yyyy HH:mm:ss"));
+            update("dateT", date);
         }
 
         public void setHasSymptoms(bool hasSymptoms)

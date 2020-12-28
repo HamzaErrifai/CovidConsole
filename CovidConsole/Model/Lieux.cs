@@ -21,7 +21,7 @@ namespace CovidConsole.Model
 
                 conn.Open();
                 command.CommandText = $"INSERT INTO lieux (cinC, longitude, latitude, dateL)" +
-                    $"VALUES ('{cinC}', {longitudeStr}, {latitudeStr}, '{dateL.ToString("MM/dd/yyyy HH:mm:ss")}')";
+                    $"VALUES ('{cinC}', {longitudeStr}, {latitudeStr}, '{dateL}')";
                 command.ExecuteNonQuery();
                 conn.Close();
             }

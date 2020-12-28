@@ -176,7 +176,7 @@ namespace CovidConsole.Controller
         public void setdateDeNaissance(int jour, int mois, int annee)
         {
             dateDeNaissance = new DateTime(annee, mois, jour);
-            update("dateDeNaissance", dateDeNaissance.ToString("MM/dd/yyyy HH:mm:ss"));
+            update("dateDeNaissance", dateDeNaissance);
         }
 
         public void setNom(string nom)

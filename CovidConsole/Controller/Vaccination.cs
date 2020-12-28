@@ -41,7 +41,7 @@ namespace CovidConsole.Controller
         public void setTime(int jour, int mois, int annee)
         {
             dateV = new DateTime(jour, mois, annee);
-            update<string>("dateV", dateV.ToString("MM/dd/yyyy HH:mm:ss"));
+            update<DateTime>("dateV", dateV);
         }
 
         public void setType(string type)

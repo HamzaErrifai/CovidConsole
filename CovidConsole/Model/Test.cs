@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace CovidConsole.Model
@@ -20,7 +19,7 @@ namespace CovidConsole.Model
             {
                 conn.Open();
                 command.CommandText = $"INSERT INTO test (typeT, dateT, hassymptoms, resultat, cinC)" +
-                    $"VALUES ('{typeT}', '{dateT.ToString("MM/dd/yyyy HH:mm:ss")}', {(hassymptoms ? 1 : 0)}, '{resultat}', '{cinC}')";
+                    $"VALUES ('{typeT}', '{dateT}', {(hassymptoms ? 1 : 0)}, '{resultat}', '{cinC}')";
                 command.ExecuteNonQuery();
                 conn.Close();
             }
