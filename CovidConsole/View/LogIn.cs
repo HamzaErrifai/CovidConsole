@@ -57,12 +57,12 @@ namespace CovidConsole
             // 
             this.loginLbl.AutoSize = true;
             this.loginLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginLbl.ForeColor = System.Drawing.Color.Black;
-            this.loginLbl.Location = new System.Drawing.Point(317, 123);
+            this.loginLbl.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.loginLbl.Location = new System.Drawing.Point(227, 117);
             this.loginLbl.Name = "loginLbl";
-            this.loginLbl.Size = new System.Drawing.Size(176, 63);
+            this.loginLbl.Size = new System.Drawing.Size(344, 63);
             this.loginLbl.TabIndex = 0;
-            this.loginLbl.Text = "Log In";
+            this.loginLbl.Text = "Se connecter";
             // 
             // UsernameTxt
             // 
