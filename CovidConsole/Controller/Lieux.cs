@@ -19,9 +19,6 @@ namespace CovidConsole.Controller
         {
             return $"({x}, {y})";
         }
-
-
-
     }
 
     class Lieux : Model.Lieux
@@ -31,9 +28,7 @@ namespace CovidConsole.Controller
         private DateTime dateL;
         private string cinC;
 
-        public Lieux()
-        {
-        }
+        public Lieux() { }
 
         public Lieux(double o_latitude, double o_longitude, string cinC)
         {

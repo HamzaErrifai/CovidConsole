@@ -101,12 +101,11 @@ namespace CovidConsole.Controller
                 citoyen.addVaccination("ARN Messager");
                 setResultat("vaccine");
             }
-
         }
 
         public void update<T>(string itemName, T itemValue)
         {
-            UpdateByCin(this.citoyen.getCin(), itemName, itemValue);
+            UpdateByCin(citoyen.getCin(), itemName, itemValue);
         }
 
         public void setType(string type)
@@ -124,7 +123,7 @@ namespace CovidConsole.Controller
         public void setHasSymptoms(bool hasSymptoms)
         {
             this.hasSymptoms = hasSymptoms;
-            update("hassymptoms", (this.hasSymptoms ? 1 : 0));
+            update("hassymptoms", this.hasSymptoms ? 1 : 0);
         }
 
 
