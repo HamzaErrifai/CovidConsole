@@ -5,12 +5,11 @@ namespace CovidConsole.Controller
     class Admin : Model.Admin
     {
         public string username { get; set; }
-        DataTable dt;
+
+        private readonly DataTable dt;
 
         public Admin()
         {
-            //takes informations about the admin
-            //username in the database is unique
             dt = getData();
         }
 
@@ -29,8 +28,6 @@ namespace CovidConsole.Controller
         {
             addData(username, Utils.hashPwd(pwd));
         }
-
-
 
     }
 }
