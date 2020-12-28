@@ -141,13 +141,14 @@ namespace CovidConsole
         {
             string username = UsernameTxt.Text;
             string pwd = PwdTxt.Text;
-            if ()
-            {
-                if (admin.verifyConnection(username.Trim(), pwd.Trim()))
-                {
-                    MessageBox.Show("WELCOME");
-                }
-            }
+            //if (pwd.Trim() != "" || username.Trim() != "")
+            //{
+            //    if (admin.verifyConnection(username.Trim(), pwd.Trim()))
+            //    {
+            //        MessageBox.Show("WELCOME");
+            //    }
+            //}
+
         }
     }
 }

@@ -16,7 +16,7 @@ namespace CovidConsole.Model
             try
             {
                 conn.Open();
-                command.CommandText = $"INSERT INTO lieux (username, pwd)" +
+                command.CommandText = $"INSERT INTO admins (username, pwd)" +
                     $"VALUES ('{username}', '{pwd}')";
                 command.ExecuteNonQuery();
                 conn.Close();
