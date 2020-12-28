@@ -21,9 +21,7 @@ namespace CovidConsole.Controller
         private bool hasSymptoms;
         private string resultat; // Le status du citoyen
 
-        private Test()
-        {
-        }
+        private Test(){}
 
         public Test(Citoyen citoyen, DateTime date, string type, bool hasSymptoms)
         {
@@ -34,12 +32,12 @@ namespace CovidConsole.Controller
             generateResultat();
             add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
             this.citoyen.setStatus(this.resultat);
-            this.citoyen.update<string>("codecouleur", this.citoyen.getCodeCouleur());
+            this.citoyen.update("codecouleur", this.citoyen.getCodeCouleur());
         }
 
         public void add(string type, DateTime date, bool hassymptoms, string resultat, string cinP)
         {
-            this.addData(type, date, hassymptoms, resultat, cinP);
+            addData(type, date, hassymptoms, resultat, cinP);
         }
 
         public List<Test> getAll(string cinC)
@@ -88,11 +86,11 @@ namespace CovidConsole.Controller
             return resultat;
         }
 
-        public void generateResultat()
+        public void generateResultat() //needs changement
         {
-            if (this.hasSymptoms && citoyen.getAge() >= 60)
+            if (hasSymptoms && citoyen.getAge() >= 60)
                 setResultat("malade");
-            else if (!this.hasSymptoms && citoyen.getAge() < 60 && citoyen.getAge() >= 40)
+            else if (!hasSymptoms && citoyen.getAge() < 60 && citoyen.getAge() >= 40)
                 setResultat("suspect");
             else if (citoyen.getAge() <= 15)
                 setResultat("mineur");
