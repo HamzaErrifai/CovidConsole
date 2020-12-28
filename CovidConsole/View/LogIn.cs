@@ -97,6 +97,7 @@ namespace CovidConsole
             this.PwdTxt.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PwdTxt.Location = new System.Drawing.Point(225, 283);
             this.PwdTxt.Name = "PwdTxt";
+            this.PwdTxt.PasswordChar = '*';
             this.PwdTxt.Size = new System.Drawing.Size(442, 39);
             this.PwdTxt.TabIndex = 4;
             // 
@@ -139,15 +140,18 @@ namespace CovidConsole
 
         private void connectBtn_Click(object sender, System.EventArgs e)
         {
+            //TODO: ADMIN infos: Admin 12345
             string username = UsernameTxt.Text;
             string pwd = PwdTxt.Text;
-            //if (pwd.Trim() != "" || username.Trim() != "")
-            //{
-            //    if (admin.verifyConnection(username.Trim(), pwd.Trim()))
-            //    {
-            //        MessageBox.Show("WELCOME");
-            //    }
-            //}
+            if (pwd.Trim() != "" || username.Trim() != "")
+            {
+                if (admin.verifyConnection(username.Trim(), pwd.Trim()))
+                {
+                    MessageBox.Show("Welcome " + admin.username);
+                }
+            }
+
+
 
         }
     }
