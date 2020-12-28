@@ -51,20 +51,20 @@ namespace CovidConsole.Controller
         public void setDateL(int jour, int mois, int annee)
         {
             dateL = new DateTime(jour, mois, annee);
-            update<DateTime>("dateL", dateL);
+            update("dateL", dateL);
         }
 
         public void setPosition(double o_latitude, double o_longitude)
         {
             longitude = o_longitude; //x
             latitude = o_latitude; //y
-            update<double>("longitude", longitude);
-            update<double>("latitude", latitude);
+            update("longitude", longitude);
+            update("latitude", latitude);
         }
 
         public void update<T>(string itemName, T itemValue)
         {
-            this.UpdateByCin<T>(cinC, itemName, itemValue);
+            UpdateByCin(cinC, itemName, itemValue);
         }
 
         public List<Lieux> getAll(string cinC)

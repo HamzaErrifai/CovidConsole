@@ -24,13 +24,13 @@ namespace CovidConsole.Controller
             dateV = DateTime.Now;
             this.type = type;
             this.cinC = cinC;
-            this.addData(this.cinC, this.type, dateV);
+            addData(this.cinC, this.type, dateV);
         }
 
 
         public void update<T>(string itemName, T itemValue)
         {
-            this.UpdateByCin<T>(cinC, itemName, itemValue);
+            UpdateByCin(cinC, itemName, itemValue);
         }
 
         public DateTime getTime()
@@ -41,13 +41,13 @@ namespace CovidConsole.Controller
         public void setTime(int jour, int mois, int annee)
         {
             dateV = new DateTime(jour, mois, annee);
-            update<DateTime>("dateV", dateV);
+            update("dateV", dateV);
         }
 
         public void setType(string type)
         {
             this.type = type;
-            update<string>("typeV", this.type);
+            update("typeV", this.type);
         }
         public string getType()
         {

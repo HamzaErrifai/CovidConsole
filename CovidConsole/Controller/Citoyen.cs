@@ -114,7 +114,7 @@ namespace CovidConsole.Controller
 
         public void update<T>(string itemName, T itemValue)
         {
-            this.UpdateByCin<T>(cin, itemName, itemValue);
+            UpdateByCin(cin, itemName, itemValue);
         }
         public DateTime getdateDeNaissance()
         {
@@ -123,7 +123,6 @@ namespace CovidConsole.Controller
 
         public void generateCodeCouleur()
         {
-
             switch (status.ToLower())
             {
                 case "malade":

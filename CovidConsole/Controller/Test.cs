@@ -106,7 +106,7 @@ namespace CovidConsole.Controller
 
         public void update<T>(string itemName, T itemValue)
         {
-            UpdateByCin<T>(this.citoyen.getCin(), itemName, itemValue);
+            UpdateByCin(this.citoyen.getCin(), itemName, itemValue);
         }
 
         public void setType(string type)
