@@ -53,28 +53,5 @@ namespace CovidConsole
 
         }
 
-        static void Main(string[] args)
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Accueil());
-        }
-
-        private void connectBtn_Click(object sender, System.EventArgs e)
-        {
-            //TODO: ADMIN infos: Admin 12345
-            string username = UsernameTxt.Text;
-            string pwd = PwdTxt.Text;
-            if (pwd.Trim() != "" || username.Trim() != "")
-            {
-                if (admin.verifyConnection(username.Trim(), pwd.Trim()))
-                {
-                    MessageBox.Show("Welcome " + admin.username);
-                }
-            }
-
-
-
-        }
     }
 }

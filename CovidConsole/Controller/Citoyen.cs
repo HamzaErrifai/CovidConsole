@@ -45,9 +45,9 @@ namespace CovidConsole.Controller
             {
                 this.addData(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message);
+                throw;
             }
         }
 

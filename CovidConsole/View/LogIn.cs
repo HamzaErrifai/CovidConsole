@@ -147,7 +147,14 @@ namespace CovidConsole
             {
                 if (admin.verifyConnection(username.Trim(), pwd.Trim()))
                 {
-                    MessageBox.Show("Welcome " + admin.username);
+                    Accueil accueil = new Accueil();
+                    this.Hide();
+                    accueil.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    //TODO: Show an Error message
                 }
             }
 
