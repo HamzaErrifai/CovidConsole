@@ -1,4 +1,5 @@
 ﻿using CovidConsole.Controller;
+using System;
 using System.Windows.Forms;
 
 namespace CovidConsole
@@ -100,6 +101,7 @@ namespace CovidConsole
             this.PwdTxt.PasswordChar = '*';
             this.PwdTxt.Size = new System.Drawing.Size(442, 39);
             this.PwdTxt.TabIndex = 4;
+            this.PwdTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PwdTxt_KeyPress);
             // 
             // connectBtn
             // 
@@ -131,6 +133,10 @@ namespace CovidConsole
 
         }
 
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
@@ -138,7 +144,7 @@ namespace CovidConsole
             Application.Run(new LogIn());
         }
 
-        private void connectBtn_Click(object sender, System.EventArgs e)
+        private void connecter()
         {
             //TODO: ADMIN infos: Admin 12345
             string username = UsernameTxt.Text;
@@ -157,9 +163,20 @@ namespace CovidConsole
                     //TODO: Show an Error message
                 }
             }
+        }
 
+        private void connectBtn_Click(object sender, System.EventArgs e)
+        {
+            connecter();
+        }
 
-
+        private void PwdTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                e.Handled = true;
+                connecter();
+            }
         }
     }
 }
