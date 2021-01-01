@@ -4,7 +4,7 @@ using System.Data;
 
 namespace CovidConsole.Controller
 {
-    //TODO: Amélioration d'algorithme de verification + changement
+    //TODO: Modification du status de patient est manuelle
 
     class Test : Model.Test
     {
