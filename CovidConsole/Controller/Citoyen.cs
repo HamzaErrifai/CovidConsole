@@ -63,6 +63,7 @@ namespace CovidConsole.Controller
                 temp.nom = row["nom"].ToString();
                 temp.prenom = row["prenom"].ToString();
                 temp.status = row["statusC"].ToString();
+                temp.sexe = row["sexe"].ToString();
                 temp.codeCouleur = row["codecouleur"].ToString();
                 temp.dateDeNaissance = ((DateTime)row["dateDeNaissance"]);
                 c.Add(temp);
@@ -79,6 +80,7 @@ namespace CovidConsole.Controller
                 temp.cin = row["cin"].ToString();
                 temp.nom = row["nom"].ToString();
                 temp.prenom = row["prenom"].ToString();
+                temp.sexe = row["sexe"].ToString();
                 temp.status = row["statusC"].ToString();
                 temp.codeCouleur = row["codecouleur"].ToString();
                 temp.dateDeNaissance = ((DateTime)row["dateDeNaissance"]);
@@ -89,6 +91,15 @@ namespace CovidConsole.Controller
         public string getCin()
         {
             return cin;
+        }
+
+        public string getPrenom()
+        {
+            return prenom;
+        }
+        public string getNom()
+        {
+            return nom;
         }
 
         public string getSexe()
@@ -126,7 +137,7 @@ namespace CovidConsole.Controller
             switch (status.ToLower())
             {
                 case "malade":
-                    codeCouleur = "rouge";
+                    codeCouleur = "red";
                     break;
                 case "suspect":
                     codeCouleur = "orange";
@@ -134,10 +145,10 @@ namespace CovidConsole.Controller
                 case "mineur":
                 case "guerri":
                 case "vaccine":
-                    codeCouleur = "vert";
+                    codeCouleur = "green";
                     break;
                 default:
-                    codeCouleur = "gris";
+                    codeCouleur = "gray";
                     break;
             }
             update("codecouleur", codeCouleur);

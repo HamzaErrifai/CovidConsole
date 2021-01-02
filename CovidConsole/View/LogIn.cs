@@ -14,6 +14,7 @@ namespace CovidConsole
         private Button connectBtn;
         private Label label2;
         private Label UsernameLbl;
+        private Label msglbl;
         private Admin admin = new Admin();
 
         public LogIn()
@@ -31,6 +32,7 @@ namespace CovidConsole
             this.label1 = new System.Windows.Forms.Label();
             this.PwdTxt = new System.Windows.Forms.TextBox();
             this.connectBtn = new System.Windows.Forms.Button();
+            this.msglbl = new System.Windows.Forms.Label();
             this.NavBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,9 +116,20 @@ namespace CovidConsole
             this.connectBtn.UseVisualStyleBackColor = true;
             this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
             // 
+            // msglbl
+            // 
+            this.msglbl.AutoSize = true;
+            this.msglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msglbl.ForeColor = System.Drawing.Color.Red;
+            this.msglbl.Location = new System.Drawing.Point(46, 379);
+            this.msglbl.Name = "msglbl";
+            this.msglbl.Size = new System.Drawing.Size(0, 24);
+            this.msglbl.TabIndex = 7;
+            // 
             // LogIn
             // 
             this.ClientSize = new System.Drawing.Size(784, 480);
+            this.Controls.Add(this.msglbl);
             this.Controls.Add(this.loginLbl);
             this.Controls.Add(this.connectBtn);
             this.Controls.Add(this.label1);
@@ -124,6 +137,8 @@ namespace CovidConsole
             this.Controls.Add(this.UsernameLbl);
             this.Controls.Add(this.UsernameTxt);
             this.Controls.Add(this.NavBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "LogIn";
             this.Text = "Login";
             this.NavBar.ResumeLayout(false);
@@ -161,8 +176,17 @@ namespace CovidConsole
                 else
                 {
                     //TODO: Show an Error message
+                    ShowError();
                 }
             }
+        }
+
+        private void ShowError()
+        {
+            Timer t = new Timer();
+            t.Start()
+            msglbl.Text = "";
+
         }
 
         private void connectBtn_Click(object sender, System.EventArgs e)
