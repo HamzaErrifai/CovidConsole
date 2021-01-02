@@ -117,6 +117,14 @@ namespace CovidConsole.Controller
         {
             return char.ToUpper(status[0]) + status.Substring(1);
         }
+        public string _cin
+        {
+
+            get
+            {
+                return cin;
+            }
+        }
 
         public string getFullName()
         {

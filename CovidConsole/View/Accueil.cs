@@ -37,6 +37,8 @@ namespace CovidConsole
         private List<Button> lCtrlBtns;
         private List<TextBox> textBoxes;
         private List<Citoyen> citoyens;
+        private Label nbPatTxt;
+        private Label label8;
         private Citoyen currentCitoyen;
 
         public Accueil()
@@ -53,7 +55,9 @@ namespace CovidConsole
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
                 textBoxes = new List<TextBox> { NameTxt, LnameTxt, SexeTxt, StatusTxt, DobTxt };
                 cinBox.DataSource = citoyens;
-                cinBox.DisplayMember = "cin";
+                cinBox.DisplayMember = "_cin";
+
+                nbPatTxt.Text = citoyens.Count.ToString();
 
             }
             catch (Exception)
@@ -86,6 +90,8 @@ namespace CovidConsole
             this.SexeTxt = new System.Windows.Forms.TextBox();
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nbPatTxt = new System.Windows.Forms.Label();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +118,8 @@ namespace CovidConsole
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.nbPatTxt);
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.AnnulerBtn);
             this.panel1.Controls.Add(this.EnregistrerBtn);
             this.panel1.Controls.Add(this.SupprimerBtn);
@@ -324,6 +332,26 @@ namespace CovidConsole
             this.NameTxt.Size = new System.Drawing.Size(258, 29);
             this.NameTxt.TabIndex = 0;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(64, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(217, 26);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Nombre de Patients: ";
+            // 
+            // nbPatTxt
+            // 
+            this.nbPatTxt.AutoSize = true;
+            this.nbPatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nbPatTxt.Location = new System.Drawing.Point(311, 14);
+            this.nbPatTxt.Name = "nbPatTxt";
+            this.nbPatTxt.Size = new System.Drawing.Size(24, 26);
+            this.nbPatTxt.TabIndex = 18;
+            this.nbPatTxt.Text = "0";
+            // 
             // Accueil
             // 
             this.ClientSize = new System.Drawing.Size(1107, 759);
@@ -344,8 +372,6 @@ namespace CovidConsole
 
         private bool textBoxesAreEmpty()
         {
-
-
             foreach (TextBox txtbx in textBoxes)
             {
                 if (txtbx.Text.Trim() != "")
@@ -363,7 +389,7 @@ namespace CovidConsole
 
 
         private void activateAllCtrlButtons()
-        {   
+        {
             foreach (Button nowBtn in lCtrlBtns)
             {
                 nowBtn.Enabled = true;
@@ -412,7 +438,7 @@ namespace CovidConsole
 
         private void deleteCitoyen()
         {
-            DialogResult result1 = MessageBox.Show("Vous êtes sure de suprimer cette élément ?", NameTxt.Text, MessageBoxButtons.YesNo);
+            DialogResult result1 = MessageBox.Show(currentCitoyen.getFullName(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
             {
                 //Se qu'il faut faire si il valide
@@ -451,12 +477,14 @@ namespace CovidConsole
                     break;
                 default:
                     break;
-                    setAllOptBtnsTo(false);
-                    AjouterBtn.Enabled = true;
-                    currentAction = "";
-                    changeReadOnlyTxtBoxsTo(true);
-                    setTextBoxes(cinBox.SelectedIndex);
+
             }
+            setAllOptBtnsTo(false);
+            AjouterBtn.Enabled = true;
+            currentAction = "";
+            changeReadOnlyTxtBoxsTo(true);
+            setTextBoxes(cinBox.SelectedIndex);
+
         }
 
         private void AnnulerBtn_Click(object sender, EventArgs e)
@@ -511,6 +539,6 @@ namespace CovidConsole
             setTextBoxes(cinBox.SelectedIndex);
         }
 
-        
+
     }
 }

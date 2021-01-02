@@ -74,6 +74,7 @@ namespace CovidConsole
             this.UsernameTxt.Name = "UsernameTxt";
             this.UsernameTxt.Size = new System.Drawing.Size(442, 39);
             this.UsernameTxt.TabIndex = 2;
+            this.UsernameTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UsernameTxt_KeyPress);
             // 
             // UsernameLbl
             // 
@@ -171,22 +172,32 @@ namespace CovidConsole
                     Accueil accueil = new Accueil();
                     this.Hide();
                     accueil.ShowDialog();
+                    this.Dispose();
                     this.Close();
                 }
                 else
                 {
                     //TODO: Show an Error message
-                    ShowError();
+                    ShowError("Username ou Mot de passe Incorrect !");
                 }
             }
         }
 
-        private void ShowError()
+        private void ShowError(string msg)
         {
-            Timer t = new Timer();
-            t.Start()
-            msglbl.Text = "";
+            Timer timer1 = new Timer
+            {
+                Interval = 3000
+            };
+            timer1.Enabled = true;
+            timer1.Tick += new System.EventHandler(OnTimerEvent);
+            msglbl.Text = msg;
 
+        }
+
+        private void OnTimerEvent(object sender, EventArgs e)
+        {
+            msglbl.Text = "";
         }
 
         private void connectBtn_Click(object sender, System.EventArgs e)
@@ -195,6 +206,15 @@ namespace CovidConsole
         }
 
         private void PwdTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                e.Handled = true;
+                connecter();
+            }
+        }
+
+        private void UsernameTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
