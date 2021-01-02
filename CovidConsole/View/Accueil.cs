@@ -5,9 +5,8 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace CovidConsole
-{
-    //TODO: Make it responsive
-    //TODO: Know more about OsmSharp to use maps
+{   //TODO: Know more about OsmSharp to use maps
+    //todo: 
     //TODO: https://www.youtube.com/watch?v=fzgKmHzBWic
     public partial class Accueil : Form
     {
@@ -385,6 +384,7 @@ namespace CovidConsole
             {
                 txtbx.Text = "";
             }
+            cinBox.Text = "";
         }
 
 
@@ -420,11 +420,6 @@ namespace CovidConsole
             }
         }
 
-        private void setColorPanel()
-        {
-            //colorPanel.BackColor = currentCitoyen.getCodeCouleur();
-        }
-
         private void setTextBoxes(int i)
         {
             currentCitoyen = citoyens[i];
@@ -441,13 +436,18 @@ namespace CovidConsole
             DialogResult result1 = MessageBox.Show(currentCitoyen.getFullName(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
             {
-                //Se qu'il faut faire si il valide
+                currentCitoyen.delete();
             }
         }
 
         private void modifyCitoyen()
         {
-
+            currentCitoyen.generateCodeCouleur();
+            currentCitoyen.updateAll(cinBox.Text, LnameTxt.Text, NameTxt.Text, SexeTxt.Text, currentCitoyen.getCodeCouleur(), StatusTxt.Text, Convert.ToDateTime(DobTxt));
+        }
+        private void addCitoyen()
+        {
+            currentCitoyen.add(cinBox.Text, LnameTxt.Text, NameTxt.Text, SexeTxt.Text, currentCitoyen.getCodeCouleur(), StatusTxt.Text, Convert.ToDateTime(DobTxt.Text));
         }
 
         private void EnregistrerBtn_Click(object sender, EventArgs e)
@@ -457,14 +457,14 @@ namespace CovidConsole
                 case "Ajouter":
                     if (!textBoxesAreEmpty())
                     {
-                        //addIntoDb();
+                        addCitoyen();
                         activateAllCtrlButtons();
                     }
                     break;
                 case "Modifier":
                     if (!textBoxesAreEmpty())
                     {
-                        //updatetoDb();
+                        modifyCitoyen();
                         activateAllCtrlButtons();
                     }
                     break;
@@ -483,7 +483,7 @@ namespace CovidConsole
             AjouterBtn.Enabled = true;
             currentAction = "";
             changeReadOnlyTxtBoxsTo(true);
-            setTextBoxes(cinBox.SelectedIndex);
+            setTextBoxes(0);
 
         }
 

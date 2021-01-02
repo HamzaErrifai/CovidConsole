@@ -4,6 +4,8 @@ using System.Data;
 
 namespace CovidConsole.Controller
 {
+
+    //TODO: stop generateCodecoleur from giving values based on age
     class Citoyen : Model.Citoyen
     {
         private string cin;
@@ -51,6 +53,10 @@ namespace CovidConsole.Controller
             }
         }
 
+        public void delete()
+        {
+            deleteByCin(this.cin);
+        }
         public static List<Citoyen> getAll()
         {
             Citoyen ct = new Citoyen();
@@ -119,7 +125,6 @@ namespace CovidConsole.Controller
         }
         public string _cin
         {
-
             get
             {
                 return cin;
@@ -225,5 +230,15 @@ namespace CovidConsole.Controller
             histVaccination = new Vaccination(type, cin);
         }
 
+        internal void updateAll(string cin, string nom, string prenom, string sexe, string codecouleur, string statusC, DateTime dateDeNaissance)
+        {
+            update("cin", cin);
+            update("nom", nom);
+            update("prenom", prenom);
+            update("sexe", sexe);
+            update("codecouleur", codecouleur);
+            update("statusC", statusC);
+            update("dateDeNaissance", dateDeNaissance);
+        }
     }
 }

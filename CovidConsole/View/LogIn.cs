@@ -177,7 +177,6 @@ namespace CovidConsole
                 }
                 else
                 {
-                    //TODO: Show an Error message
                     ShowError("Username ou Mot de passe Incorrect !");
                 }
             }

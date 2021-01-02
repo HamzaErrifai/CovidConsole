@@ -74,5 +74,19 @@ namespace CovidConsole.Model
             conn.Close();
         }
 
+        protected void deleteByCin(string idItem)
+        {
+            //Deletes an item by the cin of the user
+            SqlConnection conn = Db.Connect();
+            SqlCommand command = new SqlCommand(null, conn);
+            string cinName = (tableName == "citoyen") ? "cin" : "cinC";
+            command.CommandText = $"DELETE FROM {tableName} WHERE {cinName} = '{idItem}'";
+            command.Prepare();
+            command.ExecuteNonQuery();
+            conn.Close();
+
+
+        }
+
     }
 }
