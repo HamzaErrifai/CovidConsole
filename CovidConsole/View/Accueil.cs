@@ -678,10 +678,8 @@ namespace CovidConsole
 
         private void viewMapBtn_Click(object sender, EventArgs e)
         {
-            MapView mapView = new MapView();
             this.Hide();
-            mapView.ShowDialog();
-            this.Dispose();
+            new MapView().ShowDialog();
             this.Close();
         }
     }
