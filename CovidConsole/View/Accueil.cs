@@ -490,12 +490,12 @@ namespace CovidConsole
         {
             currentCitoyen.generateCodeCouleur();
             currentCitoyen.updateAll(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), SexeTxt.Text.Trim(),
-                Citoyen.getColorByStatus(StatusTxt.Text.Trim()), StatusTxt.Text.Trim(), Convert.ToDateTime(DobTxt.Text.Trim()));
+                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), Convert.ToDateTime(DobTxt.Text.Trim()));
         }
         private void addCitoyen()
         {
             currentCitoyen.add(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), SexeTxt.Text.Trim(),
-                Citoyen.getColorByStatus(StatusTxt.Text.Trim()), StatusTxt.Text.Trim(), Convert.ToDateTime(DobTxt.Text));
+                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), Convert.ToDateTime(DobTxt.Text));
         }
 
         private void EnregistrerBtn_Click(object sender, EventArgs e)
