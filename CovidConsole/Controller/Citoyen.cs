@@ -18,12 +18,13 @@ namespace CovidConsole.Controller
         private Test test;
         private Lieux histLieux = new Lieux();
         private Vaccination histVaccination = new Vaccination();
+        public static List<string> possibleStatus { get; } = new List<string> { "malade", "suspect", "guerri", "bonne sante", "inconnu" };
 
         private Citoyen()
         {
         }
 
-        public Citoyen(string o_cin, string o_nom, string o_prenom, string o_sexe, int jour, int mois, int annee)
+        public Citoyen(string o_cin, string o_nom, string o_prenom, string o_sexe, int jour, int mois, int annee) 
         {
             cin = o_cin;
             nom = o_nom;
@@ -45,7 +46,7 @@ namespace CovidConsole.Controller
         {
             try
             {
-                this.addData(cin, nom, prenom, sexe, codeCouleur, status, dateDeNaissance);
+                this.addData(cin, nom, prenom, sexe, codecouleur, statusC, dateDeNaissance);
             }
             catch (Exception)
             {
@@ -145,24 +146,26 @@ namespace CovidConsole.Controller
             return dateDeNaissance;
         }
 
-        public void generateCodeCouleur()
+        public static string getColorByStatus(string stat)
         {
-            switch (status.ToLower())
+            switch (stat.ToLower())
             {
                 case "malade":
-                    codeCouleur = "red";
-                    break;
+                    return "red";
                 case "suspect":
-                    codeCouleur = "orange";
-                    break;
+                    return "orange";
                 case "guerri":
                 case "bonne sante":
-                    codeCouleur = "green";
-                    break;
+                    return "green";
                 default:
-                    codeCouleur = "gray";
                     break;
             }
+            return "gray";
+        }
+
+        public void generateCodeCouleur()
+        {
+            getColorByStatus(status);
             update("codecouleur", codeCouleur);
         }
 

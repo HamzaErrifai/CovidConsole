@@ -6,7 +6,8 @@ using System.Windows.Forms;
 
 namespace CovidConsole
 {   //TODO: Know more about OsmSharp to use maps
-    //TODO: pick date (or format the text to dd/mm/yyyy)
+    //TODO: verify if the date is correct
+    //Todo: give options to the user for the status, and sex
     //TODO: status should be in a combobox ("malade","suspect","inconnue","guerri", "bonne sante")
     //TODO: implement a map https://www.youtube.com/watch?v=fzgKmHzBWic
 
@@ -40,6 +41,7 @@ namespace CovidConsole
         private List<Citoyen> citoyens;
         private Label nbPatTxt;
         private Label label8;
+        private ComboBox statusBox;
         private Citoyen currentCitoyen;
 
         public Accueil()
@@ -47,19 +49,12 @@ namespace CovidConsole
             InitializeComponent();
             try
             {
-                //https://www.google.com/maps/search/?api=1&query=47.5951518,-122.3316393
-                //StringBuilder location = new StringBuilder("https://www.openstreetmap.org/#map=6/32.278/-4.878");
-                //string urlStr = location.ToString();
-                //webBrowser1.Navigate(urlStr);
-                citoyens = Citoyen.getAll();
-                currentCitoyen = citoyens[0]; // at the start the selected citoyen is the first from the list
+                //to initate citoyens
+                fillCitoyens();
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
                 textBoxes = new List<TextBox> { NameTxt, LnameTxt, SexeTxt, StatusTxt, DobTxt };
-                cinBox.DataSource = citoyens;
-                cinBox.DisplayMember = "_cin";
 
-                nbPatTxt.Text = citoyens.Count.ToString();
-
+                fillCinBox(true);
             }
             catch (Exception)
             {
@@ -72,6 +67,8 @@ namespace CovidConsole
             this.NavBar = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.nbPatTxt = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.AnnulerBtn = new System.Windows.Forms.Button();
             this.EnregistrerBtn = new System.Windows.Forms.Button();
             this.SupprimerBtn = new System.Windows.Forms.Button();
@@ -91,8 +88,7 @@ namespace CovidConsole
             this.SexeTxt = new System.Windows.Forms.TextBox();
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nbPatTxt = new System.Windows.Forms.Label();
+            this.statusBox = new System.Windows.Forms.ComboBox();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -119,6 +115,7 @@ namespace CovidConsole
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.statusBox);
             this.panel1.Controls.Add(this.nbPatTxt);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.AnnulerBtn);
@@ -144,6 +141,26 @@ namespace CovidConsole
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1107, 682);
             this.panel1.TabIndex = 2;
+            // 
+            // nbPatTxt
+            // 
+            this.nbPatTxt.AutoSize = true;
+            this.nbPatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nbPatTxt.Location = new System.Drawing.Point(311, 14);
+            this.nbPatTxt.Name = "nbPatTxt";
+            this.nbPatTxt.Size = new System.Drawing.Size(24, 26);
+            this.nbPatTxt.TabIndex = 18;
+            this.nbPatTxt.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(64, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(217, 26);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Nombre de Patients: ";
             // 
             // AnnulerBtn
             // 
@@ -300,7 +317,7 @@ namespace CovidConsole
             // StatusTxt
             // 
             this.StatusTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusTxt.Location = new System.Drawing.Point(338, 339);
+            this.StatusTxt.Location = new System.Drawing.Point(338, 336);
             this.StatusTxt.Name = "StatusTxt";
             this.StatusTxt.ReadOnly = true;
             this.StatusTxt.Size = new System.Drawing.Size(258, 29);
@@ -333,25 +350,15 @@ namespace CovidConsole
             this.NameTxt.Size = new System.Drawing.Size(258, 29);
             this.NameTxt.TabIndex = 0;
             // 
-            // label8
+            // statusBox
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(64, 14);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(217, 26);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Nombre de Patients: ";
-            // 
-            // nbPatTxt
-            // 
-            this.nbPatTxt.AutoSize = true;
-            this.nbPatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nbPatTxt.Location = new System.Drawing.Point(311, 14);
-            this.nbPatTxt.Name = "nbPatTxt";
-            this.nbPatTxt.Size = new System.Drawing.Size(24, 26);
-            this.nbPatTxt.TabIndex = 18;
-            this.nbPatTxt.Text = "0";
+            this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusBox.FormattingEnabled = true;
+            this.statusBox.Location = new System.Drawing.Point(338, 336);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Size = new System.Drawing.Size(258, 32);
+            this.statusBox.TabIndex = 19;
+            this.statusBox.Visible = false;
             // 
             // Accueil
             // 
@@ -374,22 +381,58 @@ namespace CovidConsole
         private bool textBoxesAreEmpty()
         {
             foreach (TextBox txtbx in textBoxes)
-            {
                 if (txtbx.Text.Trim() != "")
                     return false;
-            }
+            if (cinBox.Text.Trim() != "")
+                return false;
             return true;
         }
+
+        private void fillCinBox(bool yes)
+        {
+            //to fill or unFill the cinbox
+            if (yes)
+            {
+                cinBox.DataSource = citoyens;
+                cinBox.DisplayMember = "_cin";
+            }
+            else
+            {
+                cinBox.DataSource = null;
+            }
+        }
+
+        private void fillCitoyens()
+        {
+            citoyens = Citoyen.getAll();
+            // at the start the selected citoyen is the first from the list
+            currentCitoyen = citoyens[0];
+            //set the number of patients we have
+            nbPatTxt.Text = citoyens.Count.ToString();
+        }
+
         private void clearTextBoxes()
         {
             foreach (var txtbx in textBoxes)
-            {
                 txtbx.Text = "";
-            }
             cinBox.Text = "";
         }
 
-
+        private void showComboboxes(bool yes)
+        {
+            if (yes)
+            {
+                statusBox.DataSource = Citoyen.possibleStatus;
+                statusBox.DisplayMember = "possibleStatus";
+                statusBox.Visible = true;
+                StatusTxt.Visible = false;
+            }
+            else
+            {
+                statusBox.Visible = false;
+                StatusTxt.Visible = true;
+            }
+        }
         private void activateAllCtrlButtons()
         {
             foreach (Button nowBtn in lCtrlBtns)
@@ -417,20 +460,21 @@ namespace CovidConsole
         private void changeReadOnlyTxtBoxsTo(bool yes)
         {
             foreach (TextBox textBox in textBoxes)
-            {
                 textBox.ReadOnly = yes;
-            }
         }
 
         private void setTextBoxes(int i)
         {
-            currentCitoyen = citoyens[i];
-            NameTxt.Text = currentCitoyen.getPrenom();
-            LnameTxt.Text = currentCitoyen.getNom();
-            SexeTxt.Text = currentCitoyen.getSexe();
-            StatusTxt.Text = currentCitoyen.getstatus();
-            DobTxt.Text = currentCitoyen.getdateDeNaissance().ToString();
-            colorPanel.BackColor = Color.FromName(currentCitoyen.getCodeCouleur());
+            if (cinBox.SelectedIndex > -1)
+            {
+                currentCitoyen = citoyens[i];
+                NameTxt.Text = currentCitoyen.getPrenom();
+                LnameTxt.Text = currentCitoyen.getNom();
+                SexeTxt.Text = currentCitoyen.getSexe();
+                StatusTxt.Text = currentCitoyen.getstatus();
+                DobTxt.Text = currentCitoyen.getdateDeNaissance().ToString("dd/MM/yyyy");
+                colorPanel.BackColor = Color.FromName(currentCitoyen.getCodeCouleur());
+            }
         }
 
         private void deleteCitoyen()
@@ -445,11 +489,13 @@ namespace CovidConsole
         private void modifyCitoyen()
         {
             currentCitoyen.generateCodeCouleur();
-            currentCitoyen.updateAll(cinBox.Text, LnameTxt.Text, NameTxt.Text, SexeTxt.Text, currentCitoyen.getCodeCouleur(), StatusTxt.Text, Convert.ToDateTime(DobTxt));
+            currentCitoyen.updateAll(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), SexeTxt.Text.Trim(),
+                Citoyen.getColorByStatus(StatusTxt.Text.Trim()), StatusTxt.Text.Trim(), Convert.ToDateTime(DobTxt.Text.Trim()));
         }
         private void addCitoyen()
         {
-            currentCitoyen.add(cinBox.Text, LnameTxt.Text, NameTxt.Text, SexeTxt.Text, currentCitoyen.getCodeCouleur(), StatusTxt.Text, Convert.ToDateTime(DobTxt.Text));
+            currentCitoyen.add(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), SexeTxt.Text.Trim(),
+                Citoyen.getColorByStatus(StatusTxt.Text.Trim()), StatusTxt.Text.Trim(), Convert.ToDateTime(DobTxt.Text));
         }
 
         private void EnregistrerBtn_Click(object sender, EventArgs e)
@@ -461,6 +507,7 @@ namespace CovidConsole
                     {
                         addCitoyen();
                         activateAllCtrlButtons();
+                        fillCitoyens();
                     }
                     break;
                 case "Modifier":
@@ -468,6 +515,7 @@ namespace CovidConsole
                     {
                         modifyCitoyen();
                         activateAllCtrlButtons();
+                        fillCitoyens();
                     }
                     break;
                 case "Supprimer":
@@ -475,6 +523,7 @@ namespace CovidConsole
                     {
                         deleteCitoyen();
                         activateAllCtrlButtons();
+                        fillCitoyens();
                     }
                     break;
                 default:
@@ -486,6 +535,8 @@ namespace CovidConsole
             currentAction = "";
             changeReadOnlyTxtBoxsTo(true);
             setTextBoxes(0);
+            fillCinBox(true);
+            showComboboxes(false);
 
         }
 
@@ -497,14 +548,19 @@ namespace CovidConsole
             setAllOptBtnsTo(false);
             activateAllCtrlButtons();
             AjouterBtn.Enabled = true;
+            fillCinBox(true);
+            showComboboxes(false);
         }
 
         private void AjouterBtn_Click(object sender, EventArgs e)
         {
+            
             disableAllCtrlBtns();
             changeReadOnlyTxtBoxsTo(false);
             clearTextBoxes();
             currentAction = "Ajouter";
+            fillCinBox(false);
+            showComboboxes(true);
         }
 
         private void ModifierBtn_Click(object sender, EventArgs e)
@@ -512,6 +568,8 @@ namespace CovidConsole
             disableAllCtrlBtns();
             changeReadOnlyTxtBoxsTo(false);
             currentAction = "Modifier";
+            fillCinBox(false);
+            showComboboxes(true);
         }
 
         private void SupprimerBtn_Click(object sender, EventArgs e)
