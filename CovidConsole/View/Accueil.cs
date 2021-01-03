@@ -6,8 +6,10 @@ using System.Windows.Forms;
 
 namespace CovidConsole
 {   //TODO: Know more about OsmSharp to use maps
-    //todo: 
-    //TODO: https://www.youtube.com/watch?v=fzgKmHzBWic
+    //TODO: pick date (or format the text to dd/mm/yyyy)
+    //TODO: status should be in a combobox ("malade","suspect","inconnue","guerri", "bonne sante")
+    //TODO: implement a map https://www.youtube.com/watch?v=fzgKmHzBWic
+
     public partial class Accueil : Form
     {
         private Panel NavBar;

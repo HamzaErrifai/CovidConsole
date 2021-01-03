@@ -4,16 +4,15 @@ using System.Data;
 
 namespace CovidConsole.Controller
 {
-    //TODO: Modification du status de patient est manuelle
-
-    class Test : Model.Test
-    {
-        /* 3 Types
+    //TODO: ADD types of Tests
+    /* Types
          * virologique
          * sérologique 
-         * none : "il n'a pas fait du test"
          * https://www.normandie.ars.sante.fr/coronavirus-covid-19-les-differents-types-de-tests#:~:text=Les%20tests%20virologiques%20(RT%2DPCR,et%20recommand%C3%A9%20pour%20le%20d%C3%A9pistage.
         */
+    class Test : Model.Test
+    {
+        
         private int idTest;
         private Citoyen citoyen;
         private string type;
@@ -29,7 +28,6 @@ namespace CovidConsole.Controller
             this.type = type;
             this.date = date;
             this.hasSymptoms = hasSymptoms;
-            generateResultat();
             add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
             this.citoyen.setStatus(this.resultat);
             this.citoyen.update("codecouleur", this.citoyen.getCodeCouleur());
@@ -84,21 +82,6 @@ namespace CovidConsole.Controller
         public string getResultat()
         {
             return resultat;
-        }
-
-        public void generateResultat() //needs changement
-        {
-            if (hasSymptoms && citoyen.getAge() >= 60)
-                setResultat("malade");
-            else if (!hasSymptoms && citoyen.getAge() < 60 && citoyen.getAge() >= 40)
-                setResultat("suspect");
-            else if (citoyen.getAge() <= 15)
-                setResultat("mineur");
-            else
-            {
-                citoyen.addVaccination("ARN Messager");
-                setResultat("vaccine");
-            }
         }
 
         public void update<T>(string itemName, T itemValue)

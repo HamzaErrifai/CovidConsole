@@ -155,9 +155,8 @@ namespace CovidConsole.Controller
                 case "suspect":
                     codeCouleur = "orange";
                     break;
-                case "mineur":
                 case "guerri":
-                case "vaccine":
+                case "bonne sante":
                     codeCouleur = "green";
                     break;
                 default:
@@ -182,7 +181,7 @@ namespace CovidConsole.Controller
             return histLieux.getAll(cin);
         }
 
-        public void setTest(bool hasSymptoms, string type)
+        public void setTest(string type, bool hasSymptoms)
         {
             //si l'utilisateur appel cette methode donc le citoyen a fait un test
             test = new Test(this, DateTime.Now, type, hasSymptoms);
