@@ -15,6 +15,7 @@ namespace CovidConsole
         private Label label2;
         private Label UsernameLbl;
         private Label msglbl;
+        private Button viewMapBtn;
         private Admin admin = new Admin();
 
         public LogIn()
@@ -33,6 +34,7 @@ namespace CovidConsole
             this.PwdTxt = new System.Windows.Forms.TextBox();
             this.connectBtn = new System.Windows.Forms.Button();
             this.msglbl = new System.Windows.Forms.Label();
+            this.viewMapBtn = new System.Windows.Forms.Button();
             this.NavBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,9 +129,21 @@ namespace CovidConsole
             this.msglbl.Size = new System.Drawing.Size(0, 24);
             this.msglbl.TabIndex = 7;
             // 
+            // viewMapBtn
+            // 
+            this.viewMapBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewMapBtn.Location = new System.Drawing.Point(623, 117);
+            this.viewMapBtn.Name = "viewMapBtn";
+            this.viewMapBtn.Size = new System.Drawing.Size(130, 41);
+            this.viewMapBtn.TabIndex = 8;
+            this.viewMapBtn.Text = "Voir La map";
+            this.viewMapBtn.UseVisualStyleBackColor = true;
+            this.viewMapBtn.Click += new System.EventHandler(this.viewMapBtn_Click);
+            // 
             // LogIn
             // 
             this.ClientSize = new System.Drawing.Size(784, 480);
+            this.Controls.Add(this.viewMapBtn);
             this.Controls.Add(this.msglbl);
             this.Controls.Add(this.loginLbl);
             this.Controls.Add(this.connectBtn);
@@ -224,6 +238,15 @@ namespace CovidConsole
                 e.Handled = true;
                 connecter();
             }
+        }
+
+        private void viewMapBtn_Click(object sender, EventArgs e)
+        {
+            MapView mapView = new MapView();
+            this.Hide();
+            mapView.ShowDialog();
+            this.Dispose();
+            this.Close();
         }
     }
 }

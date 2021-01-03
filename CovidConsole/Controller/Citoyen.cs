@@ -4,8 +4,6 @@ using System.Data;
 
 namespace CovidConsole.Controller
 {
-
-    //TODO: stop generateCodecoleur from giving values based on age
     class Citoyen : Model.Citoyen
     {
         private string cin;

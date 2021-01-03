@@ -5,11 +5,11 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace CovidConsole
-{   //TODO: Know more about OsmSharp to use maps
+{
+    //TODO: Know more about OsmSharp or any map lib
     //TODO: add Test
+    //TODO: add location
     //TODO: demonstration comme le diagramme d'etat-transition
-    //TODO: implement a map https://www.youtube.com/watch?v=fzgKmHzBWic
-
     public partial class Accueil : Form
     {
         private Panel NavBar;
@@ -36,7 +36,6 @@ namespace CovidConsole
         private string currentAction = "";
         private List<Button> lCtrlBtns;
         private List<TextBox> textBoxes;
-        private List<ComboBox> comboBoxes;
         private List<Citoyen> citoyens;
         private Label nbPatTxt;
         private Label label8;
@@ -44,6 +43,7 @@ namespace CovidConsole
         private ComboBox sexeBox;
         private Label msglbl;
         private DateTimePicker dobPick;
+        private Button viewMapBtn;
         private Citoyen currentCitoyen;
 
         public Accueil()
@@ -55,7 +55,6 @@ namespace CovidConsole
                 fillCitoyens();
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
                 textBoxes = new List<TextBox> { NameTxt, LnameTxt, SexeTxt, StatusTxt };
-                comboBoxes = new List<ComboBox> { cinBox, sexeBox, statusBox };
                 fillCinBox(true);
                 setAllOptBtnsTo(false);
             }
@@ -70,6 +69,10 @@ namespace CovidConsole
             this.NavBar = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dobPick = new System.Windows.Forms.DateTimePicker();
+            this.msglbl = new System.Windows.Forms.Label();
+            this.sexeBox = new System.Windows.Forms.ComboBox();
+            this.statusBox = new System.Windows.Forms.ComboBox();
             this.nbPatTxt = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.AnnulerBtn = new System.Windows.Forms.Button();
@@ -90,10 +93,7 @@ namespace CovidConsole
             this.SexeTxt = new System.Windows.Forms.TextBox();
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
-            this.statusBox = new System.Windows.Forms.ComboBox();
-            this.sexeBox = new System.Windows.Forms.ComboBox();
-            this.msglbl = new System.Windows.Forms.Label();
-            this.dobPick = new System.Windows.Forms.DateTimePicker();
+            this.viewMapBtn = new System.Windows.Forms.Button();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -101,6 +101,7 @@ namespace CovidConsole
             // NavBar
             // 
             this.NavBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(141)))), ((int)(((byte)(201)))));
+            this.NavBar.Controls.Add(this.viewMapBtn);
             this.NavBar.Controls.Add(this.label2);
             this.NavBar.Location = new System.Drawing.Point(0, 1);
             this.NavBar.Name = "NavBar";
@@ -148,6 +149,46 @@ namespace CovidConsole
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1107, 682);
             this.panel1.TabIndex = 2;
+            // 
+            // dobPick
+            // 
+            this.dobPick.Enabled = false;
+            this.dobPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dobPick.Location = new System.Drawing.Point(338, 408);
+            this.dobPick.Name = "dobPick";
+            this.dobPick.Size = new System.Drawing.Size(258, 27);
+            this.dobPick.TabIndex = 22;
+            // 
+            // msglbl
+            // 
+            this.msglbl.AutoSize = true;
+            this.msglbl.BackColor = System.Drawing.SystemColors.Control;
+            this.msglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msglbl.ForeColor = System.Drawing.Color.Red;
+            this.msglbl.Location = new System.Drawing.Point(66, 506);
+            this.msglbl.Name = "msglbl";
+            this.msglbl.Size = new System.Drawing.Size(0, 24);
+            this.msglbl.TabIndex = 21;
+            // 
+            // sexeBox
+            // 
+            this.sexeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sexeBox.FormattingEnabled = true;
+            this.sexeBox.Location = new System.Drawing.Point(338, 270);
+            this.sexeBox.Name = "sexeBox";
+            this.sexeBox.Size = new System.Drawing.Size(258, 32);
+            this.sexeBox.TabIndex = 20;
+            this.sexeBox.Visible = false;
+            // 
+            // statusBox
+            // 
+            this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusBox.FormattingEnabled = true;
+            this.statusBox.Location = new System.Drawing.Point(338, 336);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Size = new System.Drawing.Size(258, 32);
+            this.statusBox.TabIndex = 19;
+            this.statusBox.Visible = false;
             // 
             // nbPatTxt
             // 
@@ -348,45 +389,16 @@ namespace CovidConsole
             this.NameTxt.Size = new System.Drawing.Size(258, 29);
             this.NameTxt.TabIndex = 0;
             // 
-            // statusBox
+            // viewMapBtn
             // 
-            this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusBox.FormattingEnabled = true;
-            this.statusBox.Location = new System.Drawing.Point(338, 336);
-            this.statusBox.Name = "statusBox";
-            this.statusBox.Size = new System.Drawing.Size(258, 32);
-            this.statusBox.TabIndex = 19;
-            this.statusBox.Visible = false;
-            // 
-            // sexeBox
-            // 
-            this.sexeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sexeBox.FormattingEnabled = true;
-            this.sexeBox.Location = new System.Drawing.Point(338, 270);
-            this.sexeBox.Name = "sexeBox";
-            this.sexeBox.Size = new System.Drawing.Size(258, 32);
-            this.sexeBox.TabIndex = 20;
-            this.sexeBox.Visible = false;
-            // 
-            // msglbl
-            // 
-            this.msglbl.AutoSize = true;
-            this.msglbl.BackColor = System.Drawing.SystemColors.Control;
-            this.msglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.msglbl.ForeColor = System.Drawing.Color.Red;
-            this.msglbl.Location = new System.Drawing.Point(66, 506);
-            this.msglbl.Name = "msglbl";
-            this.msglbl.Size = new System.Drawing.Size(0, 24);
-            this.msglbl.TabIndex = 21;
-            // 
-            // dobPick
-            // 
-            this.dobPick.Enabled = false;
-            this.dobPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dobPick.Location = new System.Drawing.Point(338, 408);
-            this.dobPick.Name = "dobPick";
-            this.dobPick.Size = new System.Drawing.Size(258, 27);
-            this.dobPick.TabIndex = 22;
+            this.viewMapBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewMapBtn.Location = new System.Drawing.Point(950, 11);
+            this.viewMapBtn.Name = "viewMapBtn";
+            this.viewMapBtn.Size = new System.Drawing.Size(130, 41);
+            this.viewMapBtn.TabIndex = 2;
+            this.viewMapBtn.Text = "Voir La map";
+            this.viewMapBtn.UseVisualStyleBackColor = true;
+            this.viewMapBtn.Click += new System.EventHandler(this.viewMapBtn_Click);
             // 
             // Accueil
             // 
@@ -657,7 +669,6 @@ namespace CovidConsole
                     default:
                         break;
                 }
-
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
@@ -665,6 +676,13 @@ namespace CovidConsole
             setTextBoxes(cinBox.SelectedIndex);
         }
 
-
+        private void viewMapBtn_Click(object sender, EventArgs e)
+        {
+            MapView mapView = new MapView();
+            this.Hide();
+            mapView.ShowDialog();
+            this.Dispose();
+            this.Close();
+        }
     }
 }
