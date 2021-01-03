@@ -7,7 +7,6 @@ using System.Windows.Forms;
 namespace CovidConsole
 {   //TODO: Know more about OsmSharp to use maps
     //TODO: verify if the date is correct
-    //Todo: give options to the user for the status, and sex
     //TODO: status should be in a combobox ("malade","suspect","inconnue","guerri", "bonne sante")
     //TODO: implement a map https://www.youtube.com/watch?v=fzgKmHzBWic
 
@@ -42,6 +41,7 @@ namespace CovidConsole
         private Label nbPatTxt;
         private Label label8;
         private ComboBox statusBox;
+        private ComboBox sexeBox;
         private Citoyen currentCitoyen;
 
         public Accueil()
@@ -89,6 +89,7 @@ namespace CovidConsole
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
             this.statusBox = new System.Windows.Forms.ComboBox();
+            this.sexeBox = new System.Windows.Forms.ComboBox();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -115,6 +116,7 @@ namespace CovidConsole
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.sexeBox);
             this.panel1.Controls.Add(this.statusBox);
             this.panel1.Controls.Add(this.nbPatTxt);
             this.panel1.Controls.Add(this.label8);
@@ -360,6 +362,16 @@ namespace CovidConsole
             this.statusBox.TabIndex = 19;
             this.statusBox.Visible = false;
             // 
+            // sexeBox
+            // 
+            this.sexeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sexeBox.FormattingEnabled = true;
+            this.sexeBox.Location = new System.Drawing.Point(338, 270);
+            this.sexeBox.Name = "sexeBox";
+            this.sexeBox.Size = new System.Drawing.Size(258, 32);
+            this.sexeBox.TabIndex = 20;
+            this.sexeBox.Visible = false;
+            // 
             // Accueil
             // 
             this.ClientSize = new System.Drawing.Size(1107, 759);
@@ -426,11 +438,20 @@ namespace CovidConsole
                 statusBox.DisplayMember = "possibleStatus";
                 statusBox.Visible = true;
                 StatusTxt.Visible = false;
+
+                sexeBox.DataSource = Citoyen.possibleSexe;
+                sexeBox.DisplayMember = "possibleSexe";
+                sexeBox.Visible = true;
+                SexeTxt.Visible = false;
+
             }
             else
             {
                 statusBox.Visible = false;
                 StatusTxt.Visible = true;
+
+                sexeBox.Visible = false;
+                SexeTxt.Visible = true;
             }
         }
         private void activateAllCtrlButtons()
