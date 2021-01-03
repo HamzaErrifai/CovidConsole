@@ -180,6 +180,10 @@ namespace CovidConsole
                     ShowError("Username ou Mot de passe Incorrect !");
                 }
             }
+            else
+            {
+                ShowError("Remplisez tous les champs !");
+            }
         }
 
         private void ShowError(string msg)

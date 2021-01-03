@@ -6,8 +6,8 @@ using System.Windows.Forms;
 
 namespace CovidConsole
 {   //TODO: Know more about OsmSharp to use maps
-    //TODO: verify if the date is correct
-    //TODO: status should be in a combobox ("malade","suspect","inconnue","guerri", "bonne sante")
+    //TODO: add Test
+    //TODO: demonstration comme le diagramme d'etat-transition
     //TODO: implement a map https://www.youtube.com/watch?v=fzgKmHzBWic
 
     public partial class Accueil : Form
@@ -34,14 +34,16 @@ namespace CovidConsole
         private Button AjouterBtn;
         private Button AnnulerBtn;
         private string currentAction = "";
-        private TextBox DobTxt;
         private List<Button> lCtrlBtns;
         private List<TextBox> textBoxes;
+        private List<ComboBox> comboBoxes;
         private List<Citoyen> citoyens;
         private Label nbPatTxt;
         private Label label8;
         private ComboBox statusBox;
         private ComboBox sexeBox;
+        private Label msglbl;
+        private DateTimePicker dobPick;
         private Citoyen currentCitoyen;
 
         public Accueil()
@@ -52,9 +54,10 @@ namespace CovidConsole
                 //to initate citoyens
                 fillCitoyens();
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
-                textBoxes = new List<TextBox> { NameTxt, LnameTxt, SexeTxt, StatusTxt, DobTxt };
-
+                textBoxes = new List<TextBox> { NameTxt, LnameTxt, SexeTxt, StatusTxt };
+                comboBoxes = new List<ComboBox> { cinBox, sexeBox, statusBox };
                 fillCinBox(true);
+                setAllOptBtnsTo(false);
             }
             catch (Exception)
             {
@@ -83,13 +86,14 @@ namespace CovidConsole
             this.label1 = new System.Windows.Forms.Label();
             this.CcLbl = new System.Windows.Forms.Label();
             this.colorPanel = new System.Windows.Forms.Panel();
-            this.DobTxt = new System.Windows.Forms.TextBox();
             this.StatusTxt = new System.Windows.Forms.TextBox();
             this.SexeTxt = new System.Windows.Forms.TextBox();
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
             this.statusBox = new System.Windows.Forms.ComboBox();
             this.sexeBox = new System.Windows.Forms.ComboBox();
+            this.msglbl = new System.Windows.Forms.Label();
+            this.dobPick = new System.Windows.Forms.DateTimePicker();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -116,6 +120,8 @@ namespace CovidConsole
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.dobPick);
+            this.panel1.Controls.Add(this.msglbl);
             this.panel1.Controls.Add(this.sexeBox);
             this.panel1.Controls.Add(this.statusBox);
             this.panel1.Controls.Add(this.nbPatTxt);
@@ -134,7 +140,6 @@ namespace CovidConsole
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.CcLbl);
             this.panel1.Controls.Add(this.colorPanel);
-            this.panel1.Controls.Add(this.DobTxt);
             this.panel1.Controls.Add(this.StatusTxt);
             this.panel1.Controls.Add(this.SexeTxt);
             this.panel1.Controls.Add(this.LnameTxt);
@@ -307,15 +312,6 @@ namespace CovidConsole
             this.colorPanel.Size = new System.Drawing.Size(269, 254);
             this.colorPanel.TabIndex = 5;
             // 
-            // DobTxt
-            // 
-            this.DobTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DobTxt.Location = new System.Drawing.Point(338, 408);
-            this.DobTxt.Name = "DobTxt";
-            this.DobTxt.ReadOnly = true;
-            this.DobTxt.Size = new System.Drawing.Size(258, 29);
-            this.DobTxt.TabIndex = 4;
-            // 
             // StatusTxt
             // 
             this.StatusTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -372,6 +368,26 @@ namespace CovidConsole
             this.sexeBox.TabIndex = 20;
             this.sexeBox.Visible = false;
             // 
+            // msglbl
+            // 
+            this.msglbl.AutoSize = true;
+            this.msglbl.BackColor = System.Drawing.SystemColors.Control;
+            this.msglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msglbl.ForeColor = System.Drawing.Color.Red;
+            this.msglbl.Location = new System.Drawing.Point(66, 506);
+            this.msglbl.Name = "msglbl";
+            this.msglbl.Size = new System.Drawing.Size(0, 24);
+            this.msglbl.TabIndex = 21;
+            // 
+            // dobPick
+            // 
+            this.dobPick.Enabled = false;
+            this.dobPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dobPick.Location = new System.Drawing.Point(338, 408);
+            this.dobPick.Name = "dobPick";
+            this.dobPick.Size = new System.Drawing.Size(258, 27);
+            this.dobPick.TabIndex = 22;
+            // 
             // Accueil
             // 
             this.ClientSize = new System.Drawing.Size(1107, 759);
@@ -392,12 +408,7 @@ namespace CovidConsole
 
         private bool textBoxesAreEmpty()
         {
-            foreach (TextBox txtbx in textBoxes)
-                if (txtbx.Text.Trim() != "")
-                    return false;
-            if (cinBox.Text.Trim() != "")
-                return false;
-            return true;
+            return NameTxt.Text.Trim() == "" || LnameTxt.Text.Trim() == "" || sexeBox.Text.Trim() == "" || statusBox.Text.Trim() == "";
         }
 
         private void fillCinBox(bool yes)
@@ -411,6 +422,8 @@ namespace CovidConsole
             else
             {
                 cinBox.DataSource = null;
+                if (currentAction == "modifier")
+                    cinBox.Text = currentCitoyen.getCin();
             }
         }
 
@@ -434,25 +447,43 @@ namespace CovidConsole
         {
             if (yes)
             {
+                //statusBox
                 statusBox.DataSource = Citoyen.possibleStatus;
                 statusBox.DisplayMember = "possibleStatus";
                 statusBox.Visible = true;
                 StatusTxt.Visible = false;
-
+                //sexeBox
                 sexeBox.DataSource = Citoyen.possibleSexe;
                 sexeBox.DisplayMember = "possibleSexe";
                 sexeBox.Visible = true;
                 SexeTxt.Visible = false;
-
             }
             else
             {
+                //statusBox
                 statusBox.Visible = false;
                 StatusTxt.Visible = true;
-
+                //sexeBox
                 sexeBox.Visible = false;
                 SexeTxt.Visible = true;
             }
+        }
+
+        private void ShowError(string msg)
+        {
+            Timer timer1 = new Timer
+            {
+                Interval = 5000 // 5 seconds
+            };
+            timer1.Enabled = true;
+            timer1.Tick += new System.EventHandler(OnTimerEvent);
+            msglbl.Text = msg;
+
+        }
+
+        private void OnTimerEvent(object sender, EventArgs e)
+        {
+            msglbl.Text = "";
         }
         private void activateAllCtrlButtons()
         {
@@ -482,6 +513,7 @@ namespace CovidConsole
         {
             foreach (TextBox textBox in textBoxes)
                 textBox.ReadOnly = yes;
+            dobPick.Enabled = !yes;
         }
 
         private void setTextBoxes(int i)
@@ -493,8 +525,9 @@ namespace CovidConsole
                 LnameTxt.Text = currentCitoyen.getNom();
                 SexeTxt.Text = currentCitoyen.getSexe();
                 StatusTxt.Text = currentCitoyen.getstatus();
-                DobTxt.Text = currentCitoyen.getdateDeNaissance().ToString("dd/MM/yyyy");
+                dobPick.Value = currentCitoyen.getdateDeNaissance();
                 colorPanel.BackColor = Color.FromName(currentCitoyen.getCodeCouleur());
+
             }
         }
 
@@ -510,41 +543,51 @@ namespace CovidConsole
         private void modifyCitoyen()
         {
             currentCitoyen.generateCodeCouleur();
-            currentCitoyen.updateAll(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), SexeTxt.Text.Trim(),
-                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), Convert.ToDateTime(DobTxt.Text.Trim()));
+            currentCitoyen.updateAll(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), sexeBox.Text.Trim(),
+                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), dobPick.Value);
         }
+
         private void addCitoyen()
         {
-            currentCitoyen.add(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), SexeTxt.Text.Trim(),
-                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), Convert.ToDateTime(DobTxt.Text));
+            currentCitoyen.add(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), sexeBox.Text.Trim(),
+                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), dobPick.Value);
         }
 
         private void EnregistrerBtn_Click(object sender, EventArgs e)
         {
-            switch (currentAction)
+            switch (currentAction.ToLower())
             {
-                case "Ajouter":
+                case "ajouter":
                     if (!textBoxesAreEmpty())
                     {
                         addCitoyen();
                         activateAllCtrlButtons();
-                        fillCitoyens();
+                    }
+                    else
+                    {
+                        ShowError("Il faut remplir tous les champs");
                     }
                     break;
-                case "Modifier":
+                case "modifier":
                     if (!textBoxesAreEmpty())
                     {
                         modifyCitoyen();
                         activateAllCtrlButtons();
-                        fillCitoyens();
+                    }
+                    else
+                    {
+                        ShowError("Il faut remplir tous les champs");
                     }
                     break;
-                case "Supprimer":
+                case "supprimer":
                     if (!textBoxesAreEmpty())
                     {
                         deleteCitoyen();
                         activateAllCtrlButtons();
-                        fillCitoyens();
+                    }
+                    else
+                    {
+                        ShowError("Il faut remplir tous les champs");
                     }
                     break;
                 default:
@@ -552,6 +595,7 @@ namespace CovidConsole
 
             }
             setAllOptBtnsTo(false);
+            fillCitoyens();
             AjouterBtn.Enabled = true;
             currentAction = "";
             changeReadOnlyTxtBoxsTo(true);
@@ -575,7 +619,7 @@ namespace CovidConsole
 
         private void AjouterBtn_Click(object sender, EventArgs e)
         {
-            
+
             disableAllCtrlBtns();
             changeReadOnlyTxtBoxsTo(false);
             clearTextBoxes();
@@ -603,7 +647,8 @@ namespace CovidConsole
         private void Accueil_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (currentAction != "")
-                switch (MessageBox.Show(this, "Vous êtes sùr de quiter le programme ?", "Vous allez perdre les données non sauvgardées", MessageBoxButtons.YesNo))
+                switch (MessageBox.Show(this, "Vous êtes sùr de quiter le programme ?",
+                    "Vous allez perdre les données non sauvgardées", MessageBoxButtons.YesNo))
                 {
                     //Stay on this form
                     case DialogResult.No:
