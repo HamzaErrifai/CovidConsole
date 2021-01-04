@@ -5,14 +5,12 @@ using System.Data;
 namespace CovidConsole.Controller
 {
     //TODO: ADD types of Tests
-    /* Types
-         * virologique
-         * sérologique 
-         * https://www.normandie.ars.sante.fr/coronavirus-covid-19-les-differents-types-de-tests#:~:text=Les%20tests%20virologiques%20(RT%2DPCR,et%20recommand%C3%A9%20pour%20le%20d%C3%A9pistage.
-        */
     class Test : Model.Test
     {
-        
+        public static List<string> possibleTypes { get; } = new List<string> { "", "virologique", "sérologique" };
+        public static List<string> possibleSymptoms { get; } = new List<string> { "", "oui", "non" };
+        public static List<string> possibleResultat { get; } = new List<string> { "", "Positive", "Negative" };
+
         private int idTest;
         private Citoyen citoyen;
         private string type;
@@ -20,7 +18,7 @@ namespace CovidConsole.Controller
         private bool hasSymptoms;
         private string resultat; // Le status du citoyen
 
-        private Test(){}
+        private Test() { }
 
         public Test(Citoyen citoyen, DateTime date, string type, bool hasSymptoms)
         {
@@ -38,10 +36,11 @@ namespace CovidConsole.Controller
             addData(type, date, hassymptoms, resultat, cinP);
         }
 
-        public List<Test> getAll(string cinC)
+        public static List<Test> getAll(string cinC)
         {
+            Test t = new Test();
             List<Test> lt = new List<Test>();
-            foreach (DataRow row in getByCin(cinC).Rows)
+            foreach (DataRow row in t.getByCin(cinC).Rows)
             {
                 Test temp = new Test();
                 temp.idTest = (int)row["id"];
@@ -62,6 +61,14 @@ namespace CovidConsole.Controller
         public Citoyen getCitoyen()
         {
             return citoyen;
+        }
+
+        public int _idTest
+        {
+            get
+            {
+                return idTest;
+            }
         }
 
         public string getType()
@@ -113,6 +120,17 @@ namespace CovidConsole.Controller
             this.resultat = resultat;
         }
 
+        public void delete()
+        {
+            deleteByCin(citoyen.getCin());
+        }
 
+        public void updateAll(string type, bool hasSymptoms)
+        {
+
+            update("hassymptoms", hasSymptoms);
+            update("typeT", type);
+
+        }
     }
 }

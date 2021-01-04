@@ -26,6 +26,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="View\TestView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="View\MapView.cs">
       <SubType>Form</SubType>
     </Compile>

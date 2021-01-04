@@ -231,7 +231,7 @@ namespace CovidConsole.Controller
             histVaccination = new Vaccination(type, cin);
         }
 
-        internal void updateAll(string cin, string nom, string prenom, string sexe, string codecouleur, string statusC, DateTime dateDeNaissance)
+        public void updateAll(string cin, string nom, string prenom, string sexe, string codecouleur, string statusC, DateTime dateDeNaissance)
         {
             update("cin", cin);
             update("nom", nom);

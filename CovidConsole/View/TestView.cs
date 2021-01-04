@@ -1,7 +1,6 @@
 ﻿using CovidConsole.Controller;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace CovidConsole
@@ -10,25 +9,20 @@ namespace CovidConsole
     //TODO: add Test
     //TODO: add location
     //TODO: demonstration comme le diagramme d'etat-transition
-    //TODO: Fix the counting problem from the Test
-    public partial class Accueil : Form
+    public partial class TestView : Form
     {
         private Panel NavBar;
         private Label label2;
         private Panel panel1;
-        private TextBox SexeTxt;
-        private TextBox LnameTxt;
-        private TextBox NameTxt;
-        private TextBox StatusTxt;
-        private Panel colorPanel;
-        private Label label1;
-        private Label CcLbl;
+        private TextBox typeTxt;
+        private TextBox resultatTxt;
+        private TextBox hasSymptomsTxt;
         private Label label6;
         private Label label5;
         private Label label4;
         private Label label3;
         private Label label7;
-        private ComboBox cinBox;
+        private ComboBox idTestBox;
         private Button EnregistrerBtn;
         private Button SupprimerBtn;
         private Button ModifierBtn;
@@ -37,28 +31,27 @@ namespace CovidConsole
         private string currentAction = "";
         private List<Button> lCtrlBtns;
         private List<TextBox> textBoxes;
-        private List<Citoyen> citoyens;
-        private Label nbPatTxt;
-        private Label label8;
-        private ComboBox statusBox;
-        private ComboBox sexeBox;
+        private List<Test> tests;
+        private ComboBox hasSymptomsBox;
+        private ComboBox typeBox;
         private Label msglbl;
-        private DateTimePicker dobPick;
-        private Button viewMapBtn;
-        private Button testViewBtn;
-        private Citoyen currentCitoyen;
-        private int crntCitoyenTestCount = 0;
+        private DateTimePicker datePick;
+        private Test currentTest;
+        private ComboBox resulatBox;
+        private Button BackBtn;
+        private string cinC = "";
 
-        public Accueil()
+        public TestView(string cinC)
         {
             InitializeComponent();
             try
             {
                 //to initate citoyens
-                fillCitoyens();
-                lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn, testViewBtn };
-                textBoxes = new List<TextBox> { NameTxt, LnameTxt, SexeTxt, StatusTxt };
-                fillCinBox(true);
+                this.cinC = cinC;
+                fillTests();
+                lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
+                textBoxes = new List<TextBox> { resultatTxt, typeTxt, hasSymptomsTxt };
+                fillIdBox(true);
                 setAllOptBtnsTo(false);
             }
             catch (Exception)
@@ -70,34 +63,28 @@ namespace CovidConsole
         private void InitializeComponent()
         {
             this.NavBar = new System.Windows.Forms.Panel();
-            this.viewMapBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dobPick = new System.Windows.Forms.DateTimePicker();
+            this.datePick = new System.Windows.Forms.DateTimePicker();
             this.msglbl = new System.Windows.Forms.Label();
-            this.sexeBox = new System.Windows.Forms.ComboBox();
-            this.statusBox = new System.Windows.Forms.ComboBox();
-            this.nbPatTxt = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.typeBox = new System.Windows.Forms.ComboBox();
+            this.hasSymptomsBox = new System.Windows.Forms.ComboBox();
             this.AnnulerBtn = new System.Windows.Forms.Button();
             this.EnregistrerBtn = new System.Windows.Forms.Button();
             this.SupprimerBtn = new System.Windows.Forms.Button();
             this.ModifierBtn = new System.Windows.Forms.Button();
             this.AjouterBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.cinBox = new System.Windows.Forms.ComboBox();
+            this.idTestBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.CcLbl = new System.Windows.Forms.Label();
-            this.colorPanel = new System.Windows.Forms.Panel();
-            this.StatusTxt = new System.Windows.Forms.TextBox();
-            this.SexeTxt = new System.Windows.Forms.TextBox();
-            this.LnameTxt = new System.Windows.Forms.TextBox();
-            this.NameTxt = new System.Windows.Forms.TextBox();
-            this.testViewBtn = new System.Windows.Forms.Button();
+            this.hasSymptomsTxt = new System.Windows.Forms.TextBox();
+            this.typeTxt = new System.Windows.Forms.TextBox();
+            this.resultatTxt = new System.Windows.Forms.TextBox();
+            this.resulatBox = new System.Windows.Forms.ComboBox();
+            this.BackBtn = new System.Windows.Forms.Button();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -105,23 +92,12 @@ namespace CovidConsole
             // NavBar
             // 
             this.NavBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(141)))), ((int)(((byte)(201)))));
-            this.NavBar.Controls.Add(this.viewMapBtn);
+            this.NavBar.Controls.Add(this.BackBtn);
             this.NavBar.Controls.Add(this.label2);
             this.NavBar.Location = new System.Drawing.Point(0, 1);
             this.NavBar.Name = "NavBar";
             this.NavBar.Size = new System.Drawing.Size(1107, 70);
             this.NavBar.TabIndex = 1;
-            // 
-            // viewMapBtn
-            // 
-            this.viewMapBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.viewMapBtn.Location = new System.Drawing.Point(950, 11);
-            this.viewMapBtn.Name = "viewMapBtn";
-            this.viewMapBtn.Size = new System.Drawing.Size(130, 41);
-            this.viewMapBtn.TabIndex = 2;
-            this.viewMapBtn.Text = "Voir La map";
-            this.viewMapBtn.UseVisualStyleBackColor = true;
-            this.viewMapBtn.Click += new System.EventHandler(this.viewMapBtn_Click);
             // 
             // label2
             // 
@@ -136,44 +112,38 @@ namespace CovidConsole
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.testViewBtn);
-            this.panel1.Controls.Add(this.dobPick);
+            this.panel1.Controls.Add(this.resulatBox);
+            this.panel1.Controls.Add(this.datePick);
             this.panel1.Controls.Add(this.msglbl);
-            this.panel1.Controls.Add(this.sexeBox);
-            this.panel1.Controls.Add(this.statusBox);
-            this.panel1.Controls.Add(this.nbPatTxt);
-            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.typeBox);
+            this.panel1.Controls.Add(this.hasSymptomsBox);
             this.panel1.Controls.Add(this.AnnulerBtn);
             this.panel1.Controls.Add(this.EnregistrerBtn);
             this.panel1.Controls.Add(this.SupprimerBtn);
             this.panel1.Controls.Add(this.ModifierBtn);
             this.panel1.Controls.Add(this.AjouterBtn);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.cinBox);
+            this.panel1.Controls.Add(this.idTestBox);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.CcLbl);
-            this.panel1.Controls.Add(this.colorPanel);
-            this.panel1.Controls.Add(this.StatusTxt);
-            this.panel1.Controls.Add(this.SexeTxt);
-            this.panel1.Controls.Add(this.LnameTxt);
-            this.panel1.Controls.Add(this.NameTxt);
+            this.panel1.Controls.Add(this.hasSymptomsTxt);
+            this.panel1.Controls.Add(this.typeTxt);
+            this.panel1.Controls.Add(this.resultatTxt);
             this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1107, 682);
             this.panel1.TabIndex = 2;
             // 
-            // dobPick
+            // datePick
             // 
-            this.dobPick.Enabled = false;
-            this.dobPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dobPick.Location = new System.Drawing.Point(338, 408);
-            this.dobPick.Name = "dobPick";
-            this.dobPick.Size = new System.Drawing.Size(258, 27);
-            this.dobPick.TabIndex = 22;
+            this.datePick.Enabled = false;
+            this.datePick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.datePick.Location = new System.Drawing.Point(393, 393);
+            this.datePick.Name = "datePick";
+            this.datePick.Size = new System.Drawing.Size(258, 27);
+            this.datePick.TabIndex = 22;
             // 
             // msglbl
             // 
@@ -186,45 +156,25 @@ namespace CovidConsole
             this.msglbl.Size = new System.Drawing.Size(0, 24);
             this.msglbl.TabIndex = 21;
             // 
-            // sexeBox
+            // typeBox
             // 
-            this.sexeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sexeBox.FormattingEnabled = true;
-            this.sexeBox.Location = new System.Drawing.Point(338, 270);
-            this.sexeBox.Name = "sexeBox";
-            this.sexeBox.Size = new System.Drawing.Size(258, 32);
-            this.sexeBox.TabIndex = 20;
-            this.sexeBox.Visible = false;
+            this.typeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeBox.FormattingEnabled = true;
+            this.typeBox.Location = new System.Drawing.Point(393, 255);
+            this.typeBox.Name = "typeBox";
+            this.typeBox.Size = new System.Drawing.Size(258, 32);
+            this.typeBox.TabIndex = 20;
+            this.typeBox.Visible = false;
             // 
-            // statusBox
+            // hasSymptomsBox
             // 
-            this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusBox.FormattingEnabled = true;
-            this.statusBox.Location = new System.Drawing.Point(338, 336);
-            this.statusBox.Name = "statusBox";
-            this.statusBox.Size = new System.Drawing.Size(258, 32);
-            this.statusBox.TabIndex = 19;
-            this.statusBox.Visible = false;
-            // 
-            // nbPatTxt
-            // 
-            this.nbPatTxt.AutoSize = true;
-            this.nbPatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nbPatTxt.Location = new System.Drawing.Point(311, 14);
-            this.nbPatTxt.Name = "nbPatTxt";
-            this.nbPatTxt.Size = new System.Drawing.Size(24, 26);
-            this.nbPatTxt.TabIndex = 18;
-            this.nbPatTxt.Text = "0";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(64, 14);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(217, 26);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Nombre de Patients: ";
+            this.hasSymptomsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hasSymptomsBox.FormattingEnabled = true;
+            this.hasSymptomsBox.Location = new System.Drawing.Point(393, 321);
+            this.hasSymptomsBox.Name = "hasSymptomsBox";
+            this.hasSymptomsBox.Size = new System.Drawing.Size(258, 32);
+            this.hasSymptomsBox.TabIndex = 19;
+            this.hasSymptomsBox.Visible = false;
             // 
             // AnnulerBtn
             // 
@@ -285,27 +235,27 @@ namespace CovidConsole
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(64, 62);
+            this.label7.Location = new System.Drawing.Point(119, 108);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 26);
+            this.label7.Size = new System.Drawing.Size(89, 26);
             this.label7.TabIndex = 12;
-            this.label7.Text = "CIN :";
+            this.label7.Text = "Id Test :";
             // 
-            // cinBox
+            // idTestBox
             // 
-            this.cinBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.cinBox.FormattingEnabled = true;
-            this.cinBox.Location = new System.Drawing.Point(338, 62);
-            this.cinBox.Name = "cinBox";
-            this.cinBox.Size = new System.Drawing.Size(258, 32);
-            this.cinBox.TabIndex = 11;
-            this.cinBox.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            this.idTestBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.idTestBox.FormattingEnabled = true;
+            this.idTestBox.Location = new System.Drawing.Point(393, 108);
+            this.idTestBox.Name = "idTestBox";
+            this.idTestBox.Size = new System.Drawing.Size(258, 32);
+            this.idTestBox.TabIndex = 11;
+            this.idTestBox.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(64, 408);
+            this.label6.Location = new System.Drawing.Point(119, 393);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(204, 26);
             this.label6.TabIndex = 10;
@@ -315,116 +265,87 @@ namespace CovidConsole
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(64, 339);
+            this.label5.Location = new System.Drawing.Point(119, 324);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 26);
+            this.label5.Size = new System.Drawing.Size(193, 26);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Status :";
+            this.label5.Text = "A des symptoms ?";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(64, 270);
+            this.label4.Location = new System.Drawing.Point(119, 255);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 26);
+            this.label4.Size = new System.Drawing.Size(71, 26);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Sexe :";
+            this.label4.Text = "Type :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(64, 201);
+            this.label3.Location = new System.Drawing.Point(119, 186);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 26);
+            this.label3.Size = new System.Drawing.Size(104, 26);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Nom :";
+            this.label3.Text = "Resultat :";
             // 
-            // label1
+            // hasSymptomsTxt
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(64, 132);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 26);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Prenom :";
+            this.hasSymptomsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hasSymptomsTxt.Location = new System.Drawing.Point(393, 321);
+            this.hasSymptomsTxt.Name = "hasSymptomsTxt";
+            this.hasSymptomsTxt.ReadOnly = true;
+            this.hasSymptomsTxt.Size = new System.Drawing.Size(258, 29);
+            this.hasSymptomsTxt.TabIndex = 3;
             // 
-            // CcLbl
+            // typeTxt
             // 
-            this.CcLbl.AutoSize = true;
-            this.CcLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CcLbl.Location = new System.Drawing.Point(695, 98);
-            this.CcLbl.Name = "CcLbl";
-            this.CcLbl.Size = new System.Drawing.Size(147, 26);
-            this.CcLbl.TabIndex = 0;
-            this.CcLbl.Text = "Code couleur:";
+            this.typeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeTxt.Location = new System.Drawing.Point(393, 255);
+            this.typeTxt.Name = "typeTxt";
+            this.typeTxt.ReadOnly = true;
+            this.typeTxt.Size = new System.Drawing.Size(258, 29);
+            this.typeTxt.TabIndex = 2;
             // 
-            // colorPanel
+            // resultatTxt
             // 
-            this.colorPanel.BackColor = System.Drawing.Color.Gray;
-            this.colorPanel.Location = new System.Drawing.Point(701, 132);
-            this.colorPanel.Name = "colorPanel";
-            this.colorPanel.Size = new System.Drawing.Size(269, 254);
-            this.colorPanel.TabIndex = 5;
+            this.resultatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultatTxt.Location = new System.Drawing.Point(393, 186);
+            this.resultatTxt.Name = "resultatTxt";
+            this.resultatTxt.ReadOnly = true;
+            this.resultatTxt.Size = new System.Drawing.Size(258, 29);
+            this.resultatTxt.TabIndex = 1;
             // 
-            // StatusTxt
+            // resulatBox
             // 
-            this.StatusTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusTxt.Location = new System.Drawing.Point(338, 336);
-            this.StatusTxt.Name = "StatusTxt";
-            this.StatusTxt.ReadOnly = true;
-            this.StatusTxt.Size = new System.Drawing.Size(258, 29);
-            this.StatusTxt.TabIndex = 3;
+            this.resulatBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resulatBox.FormattingEnabled = true;
+            this.resulatBox.Location = new System.Drawing.Point(393, 186);
+            this.resulatBox.Name = "resulatBox";
+            this.resulatBox.Size = new System.Drawing.Size(258, 32);
+            this.resulatBox.TabIndex = 23;
             // 
-            // SexeTxt
+            // BackBtn
             // 
-            this.SexeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SexeTxt.Location = new System.Drawing.Point(338, 270);
-            this.SexeTxt.Name = "SexeTxt";
-            this.SexeTxt.ReadOnly = true;
-            this.SexeTxt.Size = new System.Drawing.Size(258, 29);
-            this.SexeTxt.TabIndex = 2;
+            this.BackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackBtn.Location = new System.Drawing.Point(22, 11);
+            this.BackBtn.Name = "BackBtn";
+            this.BackBtn.Size = new System.Drawing.Size(129, 41);
+            this.BackBtn.TabIndex = 24;
+            this.BackBtn.Text = "Revenir";
+            this.BackBtn.UseVisualStyleBackColor = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
-            // LnameTxt
-            // 
-            this.LnameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LnameTxt.Location = new System.Drawing.Point(338, 201);
-            this.LnameTxt.Name = "LnameTxt";
-            this.LnameTxt.ReadOnly = true;
-            this.LnameTxt.Size = new System.Drawing.Size(258, 29);
-            this.LnameTxt.TabIndex = 1;
-            // 
-            // NameTxt
-            // 
-            this.NameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameTxt.Location = new System.Drawing.Point(338, 132);
-            this.NameTxt.Name = "NameTxt";
-            this.NameTxt.ReadOnly = true;
-            this.NameTxt.Size = new System.Drawing.Size(258, 29);
-            this.NameTxt.TabIndex = 0;
-            // 
-            // testViewBtn
-            // 
-            this.testViewBtn.Enabled = false;
-            this.testViewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.testViewBtn.Location = new System.Drawing.Point(702, 428);
-            this.testViewBtn.Name = "testViewBtn";
-            this.testViewBtn.Size = new System.Drawing.Size(267, 45);
-            this.testViewBtn.TabIndex = 23;
-            this.testViewBtn.Text = "Voir les tests de ce patient";
-            this.testViewBtn.UseVisualStyleBackColor = true;
-            this.testViewBtn.Click += new System.EventHandler(this.testViewBtn_Click);
-            // 
-            // Accueil
+            // TestView
             // 
             this.ClientSize = new System.Drawing.Size(1107, 759);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.NavBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
-            this.Name = "Accueil";
+            this.Name = "TestView";
             this.Text = "Accueil";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Accueil_FormClosing);
             this.NavBar.ResumeLayout(false);
@@ -437,65 +358,71 @@ namespace CovidConsole
 
         private bool textBoxesAreEmpty()
         {
-            return NameTxt.Text.Trim() == "" || LnameTxt.Text.Trim() == "" || sexeBox.Text.Trim() == "" || statusBox.Text.Trim() == "";
+            return resultatTxt.Text.Trim() == "" || typeBox.Text.Trim() == "" || hasSymptomsBox.Text.Trim() == "";
         }
 
-        private void fillCinBox(bool yes)
+        private void fillIdBox(bool yes)
         {
             //to fill or unFill the cinbox
             if (yes)
             {
-                cinBox.DataSource = citoyens;
-                cinBox.DisplayMember = "_cin";
+                idTestBox.DataSource = tests;
+                idTestBox.DisplayMember = "_idTest";
             }
             else
             {
-                cinBox.DataSource = null;
+                idTestBox.DataSource = null;
                 if (currentAction == "modifier")
-                    cinBox.Text = currentCitoyen.getCin();
+                    idTestBox.Text = currentTest.getIdTest().ToString();
             }
         }
 
-        private void fillCitoyens()
+        private void fillTests()
         {
-            citoyens = Citoyen.getAll();
+            tests = Test.getAll(cinC);
             // at the start the selected citoyen is the first from the list
-            currentCitoyen = citoyens[0];
-            //set the number of patients we have
-            nbPatTxt.Text = citoyens.Count.ToString();
-            crntCitoyenTestCount = Test.getAll(currentCitoyen.getCin()).Count;
+            currentTest = tests[0];
         }
 
         private void clearTextBoxes()
         {
             foreach (var txtbx in textBoxes)
                 txtbx.Text = "";
-            cinBox.Text = "";
+            idTestBox.Text = "";
         }
 
         private void showComboboxes(bool yes)
         {
             if (yes)
             {
-                //statusBox
-                statusBox.DataSource = Citoyen.possibleStatus;
-                statusBox.DisplayMember = "possibleStatus";
-                statusBox.Visible = true;
-                StatusTxt.Visible = false;
-                //sexeBox
-                sexeBox.DataSource = Citoyen.possibleSexe;
-                sexeBox.DisplayMember = "possibleSexe";
-                sexeBox.Visible = true;
-                SexeTxt.Visible = false;
+                //hasSymptomsBox
+                hasSymptomsBox.DataSource = Test.possibleSymptoms;
+                hasSymptomsBox.DisplayMember = "possibleSymptoms";
+                hasSymptomsBox.Visible = true;
+                hasSymptomsTxt.Visible = false;
+                //typeBox
+                typeBox.DataSource = Test.possibleTypes;
+                typeBox.DisplayMember = "possibleTypes";
+                typeBox.Visible = true;
+                typeTxt.Visible = false;
+                //resulatBox
+                resulatBox.DataSource = Test.possibleResultat;
+                resulatBox.DisplayMember = "possibleResultat";
+                resulatBox.Visible = true;
+                resultatTxt.Visible = false;
+
             }
             else
             {
-                //statusBox
-                statusBox.Visible = false;
-                StatusTxt.Visible = true;
-                //sexeBox
-                sexeBox.Visible = false;
-                SexeTxt.Visible = true;
+                //hasSymptomsBox
+                hasSymptomsBox.Visible = false;
+                hasSymptomsTxt.Visible = true;
+                //typeBox
+                typeBox.Visible = false;
+                typeTxt.Visible = true;
+                //resulatBox
+                resulatBox.Visible = false;
+                resultatTxt.Visible = true;
             }
         }
 
@@ -519,8 +446,7 @@ namespace CovidConsole
         {
             foreach (Button nowBtn in lCtrlBtns)
             {
-                if (nowBtn == testViewBtn && crntCitoyenTestCount > 0)
-                    nowBtn.Enabled = true;
+                nowBtn.Enabled = true;
             }
         }
 
@@ -535,54 +461,49 @@ namespace CovidConsole
             foreach (Button nowBtn in lCtrlBtns)
             {
                 nowBtn.Enabled = false;
+                AnnulerBtn.Enabled = true;
+                EnregistrerBtn.Enabled = true;
             }
-            AnnulerBtn.Enabled = true;
-            EnregistrerBtn.Enabled = true;
         }
 
         private void changeReadOnlyTxtBoxsTo(bool yes)
         {
             foreach (TextBox textBox in textBoxes)
                 textBox.ReadOnly = yes;
-            dobPick.Enabled = !yes;
+            datePick.Enabled = !yes;
         }
 
         private void setTextBoxes(int i)
         {
-            if (cinBox.SelectedIndex > -1)
+            if (idTestBox.SelectedIndex > -1)
             {
-                currentCitoyen = citoyens[i];
-                NameTxt.Text = currentCitoyen.getPrenom();
-                LnameTxt.Text = currentCitoyen.getNom();
-                SexeTxt.Text = currentCitoyen.getSexe();
-                StatusTxt.Text = currentCitoyen.getstatus();
-                dobPick.Value = currentCitoyen.getdateDeNaissance();
-                colorPanel.BackColor = Color.FromName(currentCitoyen.getCodeCouleur());
-                testViewBtn.Enabled = (crntCitoyenTestCount > 0);
+                currentTest = tests[i];
+                resultatTxt.Text = (currentTest.getHasSymptoms()) ? "oui" : "non";
+                hasSymptomsTxt.Text = currentTest.getResultat();
+                datePick.Value = currentTest.getDate();
 
             }
         }
 
         private void deleteCitoyen()
         {
-            DialogResult result1 = MessageBox.Show(currentCitoyen.getFullName(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
+            DialogResult result1 = MessageBox.Show(currentTest.getIdTest().ToString(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
             {
-                currentCitoyen.delete();
+                currentTest.delete();
             }
         }
 
         private void modifyCitoyen()
         {
-            currentCitoyen.generateCodeCouleur();
-            currentCitoyen.updateAll(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), sexeBox.Text.Trim(),
-                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), dobPick.Value);
+            bool hasSymptoms = (hasSymptomsBox.Text.ToLower().Trim() == "oui") ? true : false;
+            currentTest.updateAll(typeBox.Text.Trim(), hasSymptoms);
         }
 
         private void addCitoyen()
         {
-            currentCitoyen.add(cinBox.Text.Trim(), LnameTxt.Text.Trim(), NameTxt.Text.Trim(), sexeBox.Text.Trim(),
-                Citoyen.getColorByStatus(statusBox.Text.Trim()), statusBox.Text.Trim(), dobPick.Value);
+            bool hasSymptoms = (hasSymptomsBox.Text.ToLower().Trim() == "oui") ? true : false;
+            currentTest.add(typeBox.Text.Trim(), datePick.Value, hasSymptoms, resultatTxt.Text, cinC) ;
         }
 
         private void EnregistrerBtn_Click(object sender, EventArgs e)
@@ -627,12 +548,12 @@ namespace CovidConsole
 
             }
             setAllOptBtnsTo(false);
-            fillCitoyens();
+            fillTests();
             AjouterBtn.Enabled = true;
             currentAction = "";
             changeReadOnlyTxtBoxsTo(true);
             setTextBoxes(0);
-            fillCinBox(true);
+            fillIdBox(true);
             showComboboxes(false);
 
         }
@@ -641,11 +562,11 @@ namespace CovidConsole
         {
             currentAction = "";
             changeReadOnlyTxtBoxsTo(true);
-            setTextBoxes(cinBox.SelectedIndex);
+            setTextBoxes(idTestBox.SelectedIndex);
             setAllOptBtnsTo(false);
             activateAllCtrlButtons();
             AjouterBtn.Enabled = true;
-            fillCinBox(true);
+            fillIdBox(true);
             showComboboxes(false);
         }
 
@@ -656,7 +577,7 @@ namespace CovidConsole
             changeReadOnlyTxtBoxsTo(false);
             clearTextBoxes();
             currentAction = "Ajouter";
-            fillCinBox(false);
+            fillIdBox(false);
             showComboboxes(true);
         }
 
@@ -665,7 +586,7 @@ namespace CovidConsole
             disableAllCtrlBtns();
             changeReadOnlyTxtBoxsTo(false);
             currentAction = "Modifier";
-            fillCinBox(false);
+            fillIdBox(false);
             showComboboxes(true);
         }
 
@@ -693,20 +614,13 @@ namespace CovidConsole
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            setTextBoxes(cinBox.SelectedIndex);
+            setTextBoxes(idTestBox.SelectedIndex);
         }
 
-        private void viewMapBtn_Click(object sender, EventArgs e)
+        private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new MapView().ShowDialog();
-            this.Close();
-        }
-
-        private void testViewBtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new TestView(currentCitoyen.getCin()).ShowDialog();
+            new Accueil().ShowDialog();
             this.Close();
         }
     }
