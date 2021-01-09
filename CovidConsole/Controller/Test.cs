@@ -126,7 +126,7 @@ namespace CovidConsole.Controller
 
         public void updateAll(string type, bool hasSymptoms, string resulat)
         {
-            update("resulat", resulat);
+            update("resultat", resulat);
             update("hassymptoms", hasSymptoms);
             update("typeT", type);
 

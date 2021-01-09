@@ -6,9 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GMap.Net" Version="1.0.1" />
-    <PackageReference Include="GMap.NET.Core" Version="2.0.1" />
-    <PackageReference Include="GMap.NET.WindowsForms" Version="1.7.5" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
@@ -25,9 +22,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="View\TestView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="View\MapView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="View\Accueil.cs">

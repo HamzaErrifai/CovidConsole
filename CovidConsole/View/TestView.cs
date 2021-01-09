@@ -64,6 +64,8 @@ namespace CovidConsole
             this.BackBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.patientLbl = new System.Windows.Forms.Label();
             this.resulatBox = new System.Windows.Forms.ComboBox();
             this.datePick = new System.Windows.Forms.DateTimePicker();
             this.msglbl = new System.Windows.Forms.Label();
@@ -83,8 +85,6 @@ namespace CovidConsole
             this.hasSymptomsTxt = new System.Windows.Forms.TextBox();
             this.typeTxt = new System.Windows.Forms.TextBox();
             this.resultatTxt = new System.Windows.Forms.TextBox();
-            this.patientLbl = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -149,8 +149,29 @@ namespace CovidConsole
             this.panel1.Size = new System.Drawing.Size(1107, 682);
             this.panel1.TabIndex = 2;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(121, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 24);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Patient :";
+            // 
+            // patientLbl
+            // 
+            this.patientLbl.AutoSize = true;
+            this.patientLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.patientLbl.Location = new System.Drawing.Point(390, 55);
+            this.patientLbl.Name = "patientLbl";
+            this.patientLbl.Size = new System.Drawing.Size(35, 24);
+            this.patientLbl.TabIndex = 24;
+            this.patientLbl.Text = "cin";
+            // 
             // resulatBox
             // 
+            this.resulatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.resulatBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resulatBox.FormattingEnabled = true;
             this.resulatBox.Location = new System.Drawing.Point(393, 186);
@@ -181,6 +202,7 @@ namespace CovidConsole
             // 
             // typeBox
             // 
+            this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.typeBox.FormattingEnabled = true;
             this.typeBox.Location = new System.Drawing.Point(393, 255);
@@ -191,6 +213,7 @@ namespace CovidConsole
             // 
             // hasSymptomsBox
             // 
+            this.hasSymptomsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.hasSymptomsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hasSymptomsBox.FormattingEnabled = true;
             this.hasSymptomsBox.Location = new System.Drawing.Point(393, 321);
@@ -266,6 +289,7 @@ namespace CovidConsole
             // 
             // idTestBox
             // 
+            this.idTestBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.idTestBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.idTestBox.FormattingEnabled = true;
             this.idTestBox.Location = new System.Drawing.Point(393, 108);
@@ -340,26 +364,6 @@ namespace CovidConsole
             this.resultatTxt.ReadOnly = true;
             this.resultatTxt.Size = new System.Drawing.Size(258, 29);
             this.resultatTxt.TabIndex = 1;
-            // 
-            // patientLbl
-            // 
-            this.patientLbl.AutoSize = true;
-            this.patientLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientLbl.Location = new System.Drawing.Point(390, 55);
-            this.patientLbl.Name = "patientLbl";
-            this.patientLbl.Size = new System.Drawing.Size(35, 24);
-            this.patientLbl.TabIndex = 24;
-            this.patientLbl.Text = "cin";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(121, 55);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 24);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "Patient :";
             // 
             // TestView
             // 
@@ -502,7 +506,6 @@ namespace CovidConsole
         {
             foreach (TextBox textBox in textBoxes)
                 textBox.ReadOnly = yes;
-            datePick.Enabled = !yes;
         }
 
         private void setTextBoxes(int i)

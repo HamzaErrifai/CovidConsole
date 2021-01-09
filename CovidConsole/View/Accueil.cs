@@ -43,7 +43,6 @@ namespace CovidConsole
         private ComboBox sexeBox;
         private Label msglbl;
         private DateTimePicker dobPick;
-        private Button viewMapBtn;
         private Button testViewBtn;
         private Citoyen currentCitoyen;
         private int crntCitoyenTestCount = 0;
@@ -69,7 +68,6 @@ namespace CovidConsole
         private void InitializeComponent()
         {
             this.NavBar = new System.Windows.Forms.Panel();
-            this.viewMapBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.testViewBtn = new System.Windows.Forms.Button();
@@ -104,23 +102,11 @@ namespace CovidConsole
             // NavBar
             // 
             this.NavBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(141)))), ((int)(((byte)(201)))));
-            this.NavBar.Controls.Add(this.viewMapBtn);
             this.NavBar.Controls.Add(this.label2);
             this.NavBar.Location = new System.Drawing.Point(0, 1);
             this.NavBar.Name = "NavBar";
             this.NavBar.Size = new System.Drawing.Size(1107, 70);
             this.NavBar.TabIndex = 1;
-            // 
-            // viewMapBtn
-            // 
-            this.viewMapBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.viewMapBtn.Location = new System.Drawing.Point(950, 11);
-            this.viewMapBtn.Name = "viewMapBtn";
-            this.viewMapBtn.Size = new System.Drawing.Size(130, 41);
-            this.viewMapBtn.TabIndex = 2;
-            this.viewMapBtn.Text = "Voir La map";
-            this.viewMapBtn.UseVisualStyleBackColor = true;
-            this.viewMapBtn.Click += new System.EventHandler(this.viewMapBtn_Click);
             // 
             // label2
             // 
@@ -198,6 +184,7 @@ namespace CovidConsole
             // 
             // sexeBox
             // 
+            this.sexeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sexeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sexeBox.FormattingEnabled = true;
             this.sexeBox.Location = new System.Drawing.Point(338, 270);
@@ -208,6 +195,7 @@ namespace CovidConsole
             // 
             // statusBox
             // 
+            this.statusBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusBox.FormattingEnabled = true;
             this.statusBox.Location = new System.Drawing.Point(338, 336);
@@ -680,13 +668,6 @@ namespace CovidConsole
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             setTextBoxes(cinBox.SelectedIndex);
-        }
-
-        private void viewMapBtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new MapView().ShowDialog();
-            this.Close();
         }
 
         private void testViewBtn_Click(object sender, EventArgs e)
