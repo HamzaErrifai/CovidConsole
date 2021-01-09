@@ -72,6 +72,7 @@ namespace CovidConsole
             this.viewMapBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.testViewBtn = new System.Windows.Forms.Button();
             this.dobPick = new System.Windows.Forms.DateTimePicker();
             this.msglbl = new System.Windows.Forms.Label();
             this.sexeBox = new System.Windows.Forms.ComboBox();
@@ -96,7 +97,6 @@ namespace CovidConsole
             this.SexeTxt = new System.Windows.Forms.TextBox();
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
-            this.testViewBtn = new System.Windows.Forms.Button();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -165,6 +165,17 @@ namespace CovidConsole
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1107, 682);
             this.panel1.TabIndex = 2;
+            // 
+            // testViewBtn
+            // 
+            this.testViewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.testViewBtn.Location = new System.Drawing.Point(702, 428);
+            this.testViewBtn.Name = "testViewBtn";
+            this.testViewBtn.Size = new System.Drawing.Size(267, 45);
+            this.testViewBtn.TabIndex = 23;
+            this.testViewBtn.Text = "Ajouter / voir tests";
+            this.testViewBtn.UseVisualStyleBackColor = true;
+            this.testViewBtn.Click += new System.EventHandler(this.testViewBtn_Click);
             // 
             // dobPick
             // 
@@ -405,18 +416,6 @@ namespace CovidConsole
             this.NameTxt.Size = new System.Drawing.Size(258, 29);
             this.NameTxt.TabIndex = 0;
             // 
-            // testViewBtn
-            // 
-            this.testViewBtn.Enabled = false;
-            this.testViewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.testViewBtn.Location = new System.Drawing.Point(702, 428);
-            this.testViewBtn.Name = "testViewBtn";
-            this.testViewBtn.Size = new System.Drawing.Size(267, 45);
-            this.testViewBtn.TabIndex = 23;
-            this.testViewBtn.Text = "Voir les tests de ce patient";
-            this.testViewBtn.UseVisualStyleBackColor = true;
-            this.testViewBtn.Click += new System.EventHandler(this.testViewBtn_Click);
-            // 
             // Accueil
             // 
             this.ClientSize = new System.Drawing.Size(1107, 759);
@@ -518,7 +517,6 @@ namespace CovidConsole
         {
             foreach (Button nowBtn in lCtrlBtns)
                 nowBtn.Enabled = true;
-            testViewBtn.Enabled = (crntCitoyenTestCount > 0) ? true : false;
         }
 
         private void setAllOptBtnsTo(bool yes)
@@ -556,8 +554,6 @@ namespace CovidConsole
                 StatusTxt.Text = currentCitoyen.getstatus();
                 dobPick.Value = currentCitoyen.getdateDeNaissance();
                 colorPanel.BackColor = Color.FromName(currentCitoyen.getCodeCouleur());
-                testViewBtn.Enabled = (crntCitoyenTestCount > 0);
-
             }
         }
 

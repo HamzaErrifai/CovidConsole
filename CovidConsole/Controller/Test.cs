@@ -122,12 +122,12 @@ namespace CovidConsole.Controller
 
         public void delete()
         {
-            deleteByCin(citoyen.getCin());
+            deleteById(idTest);
         }
 
-        public void updateAll(string type, bool hasSymptoms)
+        public void updateAll(string type, bool hasSymptoms, string resulat)
         {
-
+            update("resulat", resulat);
             update("hassymptoms", hasSymptoms);
             update("typeT", type);
 

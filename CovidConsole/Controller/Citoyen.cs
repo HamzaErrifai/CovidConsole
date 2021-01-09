@@ -17,13 +17,13 @@ namespace CovidConsole.Controller
         private Lieux histLieux = new Lieux();
         private Vaccination histVaccination = new Vaccination();
         public static List<string> possibleStatus { get; } = new List<string> { "", "inconnu", "malade", "suspect", "guerri", "bonne sante" };
-        public static List<string> possibleSexe { get; } = new List<string> { "","Homme", "Femme" };
+        public static List<string> possibleSexe { get; } = new List<string> { "", "Homme", "Femme" };
 
         private Citoyen()
         {
         }
 
-        public Citoyen(string o_cin, string o_nom, string o_prenom, string o_sexe, int jour, int mois, int annee) 
+        public Citoyen(string o_cin, string o_nom, string o_prenom, string o_sexe, int jour, int mois, int annee)
         {
             cin = o_cin;
             nom = o_nom;
@@ -55,7 +55,7 @@ namespace CovidConsole.Controller
 
         public void delete()
         {
-            deleteByCin(this.cin);
+            deleteById(this.cin);
         }
         public static List<Citoyen> getAll()
         {
@@ -76,12 +76,13 @@ namespace CovidConsole.Controller
             }
             return c;
         }
-
         public static Citoyen get(string cin)
         {
             Citoyen c = new Citoyen();
-            foreach (DataRow row in c.getByCin(cin).Rows)
+            DataTable dt = c.getByCin(cin);
+            if (dt.Rows.Count > 0)
             {
+                DataRow row = dt.Rows[0];
                 Citoyen temp = new Citoyen();
                 temp.cin = row["cin"].ToString();
                 temp.nom = row["nom"].ToString();
@@ -90,8 +91,10 @@ namespace CovidConsole.Controller
                 temp.status = row["statusC"].ToString();
                 temp.codeCouleur = row["codecouleur"].ToString();
                 temp.dateDeNaissance = ((DateTime)row["dateDeNaissance"]);
+                return temp;
             }
-            return c;
+            return null;
+
         }
 
         public string getCin()
