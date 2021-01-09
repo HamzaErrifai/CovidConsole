@@ -539,11 +539,11 @@ namespace CovidConsole
         private void addCitoyen()
         {
             bool hasSymptoms = (hasSymptomsBox.Text.ToLower().Trim() == "oui") ? true : false;
-            Citoyen myCitoyen;
             if (currentTest == null)
             {
-                myCitoyen = Citoyen.get(this.cinC);
-                myCitoyen.setTest(typeBox.Text.Trim(), hasSymptoms);
+                Test tempTest = new Test(Citoyen.get(cinC), datePick.Value, typeBox.Text.Trim(), hasSymptoms);
+                tempTest.setResultat(resulatBox.Text);
+                currentTest = tempTest;
             }
             else
                 currentTest.add(typeBox.Text.Trim(), datePick.Value, hasSymptoms, resulatBox.Text, cinC);

@@ -116,12 +116,6 @@ namespace CovidConsole.Controller
             return sexe;
         }
 
-        public void generateStatusFromTest()
-        {
-            // set the status from the 
-            setStatus(test.getResultat());
-        }
-
         public string getstatus()
         {
             return char.ToUpper(status[0]) + status.Substring(1);
@@ -190,7 +184,6 @@ namespace CovidConsole.Controller
         {
             //si l'utilisateur appel cette methode donc le citoyen a fait un test
             test = new Test(this, DateTime.Now, type, hasSymptoms);
-            generateStatusFromTest();
         }
 
         public void setStatus(string stat)
