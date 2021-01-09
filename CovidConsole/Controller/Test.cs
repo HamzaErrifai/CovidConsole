@@ -26,8 +26,6 @@ namespace CovidConsole.Controller
             this.date = date;
             this.hasSymptoms = hasSymptoms;
             add(this.type, this.date, this.hasSymptoms, this.resultat, this.citoyen.getCin());
-            //this.citoyen.setStatus(this.resultat);
-            //this.citoyen.update("codecouleur", this.citoyen.getCodeCouleur());
         }
 
         public void add(string type, DateTime date, bool hassymptoms, string resultat, string cinP)

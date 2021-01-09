@@ -5,7 +5,6 @@ using System.Windows.Forms;
 
 namespace CovidConsole
 {
-    //TODO: combo box id should be readonly
     public partial class TestView : Form
     {
         private Panel NavBar;

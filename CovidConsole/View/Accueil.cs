@@ -6,10 +6,9 @@ using System.Windows.Forms;
 
 namespace CovidConsole
 {
-
     //TODO: add location
     //TODO: demonstration comme le diagramme d'etat-transition
-    //TODO: Fix the counting problem from the Test
+
     public partial class Accueil : Form
     {
         private Panel NavBar;
