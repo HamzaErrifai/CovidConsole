@@ -113,7 +113,6 @@ namespace CovidConsole
             // 
             // viewMapBtn
             // 
-            this.viewMapBtn.Enabled = false;
             this.viewMapBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.viewMapBtn.Location = new System.Drawing.Point(950, 11);
             this.viewMapBtn.Name = "viewMapBtn";
@@ -606,15 +605,8 @@ namespace CovidConsole
                     }
                     break;
                 case "supprimer":
-                    if (!textBoxesAreEmpty())
-                    {
-                        deleteCitoyen();
-                        activateAllCtrlButtons();
-                    }
-                    else
-                    {
-                        ShowError("Il faut remplir tous les champs");
-                    }
+                    deleteCitoyen();
+                    activateAllCtrlButtons();
                     break;
                 default:
                     break;

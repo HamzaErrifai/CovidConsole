@@ -6,11 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\net46\World.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="LiveCharts.WinForms" Version="0.9.7.1" />
+    <PackageReference Include="GMap.Net" Version="1.0.1" />
+    <PackageReference Include="GMap.NET.Core" Version="2.0.1" />
+    <PackageReference Include="GMap.NET.WindowsForms" Version="1.7.5" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 

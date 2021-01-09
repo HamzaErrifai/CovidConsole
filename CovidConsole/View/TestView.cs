@@ -115,11 +115,11 @@ namespace CovidConsole
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(243, 8);
+            this.label2.Location = new System.Drawing.Point(367, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(581, 54);
+            this.label2.Size = new System.Drawing.Size(335, 54);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Gestion des patients Covid";
+            this.label2.Text = "Les Test Covid";
             // 
             // panel1
             // 
@@ -573,15 +573,8 @@ namespace CovidConsole
                     }
                     break;
                 case "supprimer":
-                    if (!textBoxesAreEmpty())
-                    {
-                        deleteCitoyen();
-                        activateAllCtrlButtons();
-                    }
-                    else
-                    {
-                        ShowError("Il faut remplir tous les champs");
-                    }
+                    deleteCitoyen();
+                    activateAllCtrlButtons();
                     break;
                 default:
                     break;

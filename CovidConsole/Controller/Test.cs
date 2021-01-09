@@ -114,7 +114,6 @@ namespace CovidConsole.Controller
             update("hassymptoms", this.hasSymptoms ? 1 : 0);
         }
 
-
         public void setResultat(string resultat)
         {
             this.resultat = resultat;
