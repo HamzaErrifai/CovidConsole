@@ -4,7 +4,6 @@ using System.Data;
 
 namespace CovidConsole.Controller
 {
-    //TODO: ADD types of Tests
     class Test : Model.Test
     {
         public static List<string> possibleTypes { get; } = new List<string> { "", "virologique", "sérologique" };
@@ -43,13 +42,14 @@ namespace CovidConsole.Controller
             foreach (DataRow row in t.getByCin(cinC).Rows)
             {
                 Test temp = new Test();
-                temp.idTest = (int)row["id"];
+                temp.idTest = (int)row["idTest"];
                 temp.citoyen = Citoyen.get(row["cinC"].ToString());
-                temp.type = row["type"].ToString();
+                temp.type = row["typeT"].ToString();
                 temp.resultat = row["resultat"].ToString();
                 temp.date = ((DateTime)row["dateT"]);
                 lt.Add(temp);
             }
+
             return lt;
         }
 

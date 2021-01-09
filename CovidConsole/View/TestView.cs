@@ -5,10 +5,6 @@ using System.Windows.Forms;
 
 namespace CovidConsole
 {
-    //TODO: Know more about OsmSharp or any map lib
-    //TODO: add Test
-    //TODO: add location
-    //TODO: demonstration comme le diagramme d'etat-transition
     public partial class TestView : Form
     {
         private Panel NavBar;
@@ -63,8 +59,10 @@ namespace CovidConsole
         private void InitializeComponent()
         {
             this.NavBar = new System.Windows.Forms.Panel();
+            this.BackBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.resulatBox = new System.Windows.Forms.ComboBox();
             this.datePick = new System.Windows.Forms.DateTimePicker();
             this.msglbl = new System.Windows.Forms.Label();
             this.typeBox = new System.Windows.Forms.ComboBox();
@@ -83,8 +81,6 @@ namespace CovidConsole
             this.hasSymptomsTxt = new System.Windows.Forms.TextBox();
             this.typeTxt = new System.Windows.Forms.TextBox();
             this.resultatTxt = new System.Windows.Forms.TextBox();
-            this.resulatBox = new System.Windows.Forms.ComboBox();
-            this.BackBtn = new System.Windows.Forms.Button();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +94,17 @@ namespace CovidConsole
             this.NavBar.Name = "NavBar";
             this.NavBar.Size = new System.Drawing.Size(1107, 70);
             this.NavBar.TabIndex = 1;
+            // 
+            // BackBtn
+            // 
+            this.BackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackBtn.Location = new System.Drawing.Point(22, 11);
+            this.BackBtn.Name = "BackBtn";
+            this.BackBtn.Size = new System.Drawing.Size(129, 41);
+            this.BackBtn.TabIndex = 24;
+            this.BackBtn.Text = "Revenir";
+            this.BackBtn.UseVisualStyleBackColor = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
             // label2
             // 
@@ -136,6 +143,15 @@ namespace CovidConsole
             this.panel1.Size = new System.Drawing.Size(1107, 682);
             this.panel1.TabIndex = 2;
             // 
+            // resulatBox
+            // 
+            this.resulatBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resulatBox.FormattingEnabled = true;
+            this.resulatBox.Location = new System.Drawing.Point(710, 184);
+            this.resulatBox.Name = "resulatBox";
+            this.resulatBox.Size = new System.Drawing.Size(258, 32);
+            this.resulatBox.TabIndex = 23;
+            // 
             // datePick
             // 
             this.datePick.Enabled = false;
@@ -160,7 +176,7 @@ namespace CovidConsole
             // 
             this.typeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.typeBox.FormattingEnabled = true;
-            this.typeBox.Location = new System.Drawing.Point(393, 255);
+            this.typeBox.Location = new System.Drawing.Point(710, 255);
             this.typeBox.Name = "typeBox";
             this.typeBox.Size = new System.Drawing.Size(258, 32);
             this.typeBox.TabIndex = 20;
@@ -318,26 +334,6 @@ namespace CovidConsole
             this.resultatTxt.Size = new System.Drawing.Size(258, 29);
             this.resultatTxt.TabIndex = 1;
             // 
-            // resulatBox
-            // 
-            this.resulatBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resulatBox.FormattingEnabled = true;
-            this.resulatBox.Location = new System.Drawing.Point(393, 186);
-            this.resulatBox.Name = "resulatBox";
-            this.resulatBox.Size = new System.Drawing.Size(258, 32);
-            this.resulatBox.TabIndex = 23;
-            // 
-            // BackBtn
-            // 
-            this.BackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BackBtn.Location = new System.Drawing.Point(22, 11);
-            this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(129, 41);
-            this.BackBtn.TabIndex = 24;
-            this.BackBtn.Text = "Revenir";
-            this.BackBtn.UseVisualStyleBackColor = true;
-            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
-            // 
             // TestView
             // 
             this.ClientSize = new System.Drawing.Size(1107, 759);
@@ -346,7 +342,7 @@ namespace CovidConsole
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "TestView";
-            this.Text = "Accueil";
+            this.Text = "TEST";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Accueil_FormClosing);
             this.NavBar.ResumeLayout(false);
             this.NavBar.PerformLayout();
@@ -478,8 +474,8 @@ namespace CovidConsole
             if (idTestBox.SelectedIndex > -1)
             {
                 currentTest = tests[i];
-                resultatTxt.Text = (currentTest.getHasSymptoms()) ? "oui" : "non";
-                hasSymptomsTxt.Text = currentTest.getResultat();
+                resultatTxt.Text =  currentTest.getResultat();
+                hasSymptomsTxt.Text = (currentTest.getHasSymptoms()) ? "oui" : "non";
                 datePick.Value = currentTest.getDate();
 
             }

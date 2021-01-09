@@ -193,7 +193,6 @@ namespace CovidConsole
             timer1.Enabled = true;
             timer1.Tick += new System.EventHandler(OnTimerEvent);
             msglbl.Text = msg;
-
         }
 
         private void OnTimerEvent(object sender, EventArgs e)
@@ -223,6 +222,5 @@ namespace CovidConsole
                 connecter();
             }
         }
-
     }
 }

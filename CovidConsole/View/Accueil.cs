@@ -6,8 +6,7 @@ using System.Windows.Forms;
 
 namespace CovidConsole
 {
-    //TODO: Know more about OsmSharp or any map lib
-    //TODO: add Test
+
     //TODO: add location
     //TODO: demonstration comme le diagramme d'etat-transition
     //TODO: Fix the counting problem from the Test
@@ -464,7 +463,6 @@ namespace CovidConsole
             currentCitoyen = citoyens[0];
             //set the number of patients we have
             nbPatTxt.Text = citoyens.Count.ToString();
-            crntCitoyenTestCount = Test.getAll(currentCitoyen.getCin()).Count;
         }
 
         private void clearTextBoxes()
@@ -519,10 +517,8 @@ namespace CovidConsole
         private void activateAllCtrlButtons()
         {
             foreach (Button nowBtn in lCtrlBtns)
-            {
-                if (nowBtn == testViewBtn && crntCitoyenTestCount > 0)
-                    nowBtn.Enabled = true;
-            }
+                nowBtn.Enabled = true;
+            testViewBtn.Enabled = (crntCitoyenTestCount > 0) ? true : false;
         }
 
         private void setAllOptBtnsTo(bool yes)
@@ -553,6 +549,7 @@ namespace CovidConsole
             if (cinBox.SelectedIndex > -1)
             {
                 currentCitoyen = citoyens[i];
+                crntCitoyenTestCount = Test.getAll(currentCitoyen.getCin()).Count;
                 NameTxt.Text = currentCitoyen.getPrenom();
                 LnameTxt.Text = currentCitoyen.getNom();
                 SexeTxt.Text = currentCitoyen.getSexe();

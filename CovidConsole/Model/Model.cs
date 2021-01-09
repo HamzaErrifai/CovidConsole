@@ -39,7 +39,7 @@ namespace CovidConsole.Model
             string cinName = (tableName == "citoyen") ? "cin" : "cinC";
 
             conn.Open();
-            command.CommandText = $"SELECT distinct * FROM {tableName} WHERE {cinName} = '{cinC}'";
+            command.CommandText = $"SELECT * FROM {tableName} WHERE {cinName} = '{cinC}'";
             command.Prepare();
             command.ExecuteNonQuery();
             adapter.Fill(dt);
