@@ -44,16 +44,16 @@ namespace CovidConsole
             InitializeComponent();
             try
             {
-                //to initate citoyens
                 this.cinC = cinC;
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
                 textBoxes = new List<TextBox> { resultatTxt, typeTxt, hasSymptomsTxt };
+                //to initate citoyens
                 fillTests();
                 setAllOptBtnsTo(false);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                ShowError(e.Message);
             }
         }
 
@@ -479,6 +479,7 @@ namespace CovidConsole
         {
             msglbl.Text = "";
         }
+
         private void activateAllCtrlButtons()
         {
             foreach (Button nowBtn in lCtrlBtns)
@@ -522,7 +523,7 @@ namespace CovidConsole
 
         private void deleteCitoyen()
         {
-            DialogResult result1 = MessageBox.Show(currentTest.getIdTest().ToString(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
+            DialogResult result1 = MessageBox.Show("Test Number: " + currentTest.getIdTest().ToString(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
             {
                 currentTest.delete();
@@ -582,12 +583,14 @@ namespace CovidConsole
                     break;
 
             }
-            setAllOptBtnsTo(false);
+            
             fillTests();
-            AjouterBtn.Enabled = true;
             currentAction = "";
             changeReadOnlyTxtBoxsTo(true);
-            setTextBoxes(0);
+            setTextBoxes(idTestBox.SelectedIndex);
+            setAllOptBtnsTo(false);
+            activateAllCtrlButtons();
+            AjouterBtn.Enabled = true;
             fillIdBox(true);
             showComboboxes(false);
 

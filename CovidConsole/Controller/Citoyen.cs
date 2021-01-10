@@ -96,7 +96,6 @@ namespace CovidConsole.Controller
             return null;
 
         }
-
         public string getCin()
         {
             return cin;
