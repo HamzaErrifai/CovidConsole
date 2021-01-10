@@ -222,5 +222,6 @@ namespace CovidConsole
                 connecter();
             }
         }
+
     }
 }
