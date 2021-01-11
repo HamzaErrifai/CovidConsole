@@ -43,6 +43,7 @@ namespace CovidConsole.View
         private Label msglbl;
         private DateTimePicker dobPick;
         private Button testViewBtn;
+        private Button button1;
         private Citoyen currentCitoyen;
 
         public Accueil()
@@ -93,6 +94,7 @@ namespace CovidConsole.View
             this.SexeTxt = new System.Windows.Forms.TextBox();
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -119,6 +121,7 @@ namespace CovidConsole.View
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.testViewBtn);
             this.panel1.Controls.Add(this.dobPick);
             this.panel1.Controls.Add(this.msglbl);
@@ -152,7 +155,7 @@ namespace CovidConsole.View
             // testViewBtn
             // 
             this.testViewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.testViewBtn.Location = new System.Drawing.Point(702, 428);
+            this.testViewBtn.Location = new System.Drawing.Point(700, 408);
             this.testViewBtn.Name = "testViewBtn";
             this.testViewBtn.Size = new System.Drawing.Size(267, 45);
             this.testViewBtn.TabIndex = 23;
@@ -400,6 +403,17 @@ namespace CovidConsole.View
             this.NameTxt.ReadOnly = true;
             this.NameTxt.Size = new System.Drawing.Size(258, 29);
             this.NameTxt.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(703, 470);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(267, 45);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Ajouter / voir vaccination";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Accueil
             // 
@@ -670,6 +684,13 @@ namespace CovidConsole.View
         {
             this.Hide();
             new TestView(currentCitoyen.getCin()).ShowDialog();
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new VaccinationView(currentCitoyen.getCin()).ShowDialog();
             this.Close();
         }
     }

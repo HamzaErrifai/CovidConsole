@@ -20,6 +20,7 @@ namespace CovidConsole.Controller
             dateV = DateTime.Now;
             this.type = type;
             this.cinC = cinC;
+            add(this.cinC, this.type);
         }
 
         public void add(string cinC, string type)
@@ -82,5 +83,13 @@ namespace CovidConsole.Controller
         {
             update("typeV", type);
         }
+        public int _id
+        {
+            get
+            {
+                return id;
+            }
+        }
+
     }
 }

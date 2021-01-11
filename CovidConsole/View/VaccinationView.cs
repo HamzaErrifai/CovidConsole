@@ -83,7 +83,7 @@ namespace CovidConsole.View
             this.NavBar.Controls.Add(this.label2);
             this.NavBar.Location = new System.Drawing.Point(0, 1);
             this.NavBar.Name = "NavBar";
-            this.NavBar.Size = new System.Drawing.Size(1107, 70);
+            this.NavBar.Size = new System.Drawing.Size(815, 70);
             this.NavBar.TabIndex = 1;
             // 
             // BackBtn
@@ -91,7 +91,7 @@ namespace CovidConsole.View
             this.BackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BackBtn.Location = new System.Drawing.Point(22, 11);
             this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(129, 41);
+            this.BackBtn.Size = new System.Drawing.Size(98, 41);
             this.BackBtn.TabIndex = 24;
             this.BackBtn.Text = "Revenir";
             this.BackBtn.UseVisualStyleBackColor = true;
@@ -102,7 +102,7 @@ namespace CovidConsole.View
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(157, 8);
+            this.label2.Location = new System.Drawing.Point(143, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(545, 54);
             this.label2.TabIndex = 1;
@@ -314,7 +314,7 @@ namespace CovidConsole.View
             if (yes)
             {
                 idTestBox.DataSource = vaccinations;
-                idTestBox.DisplayMember = "_idTest";
+                idTestBox.DisplayMember = "_id";
                 idTestBox.Enabled = true;
             }
             else
@@ -387,9 +387,7 @@ namespace CovidConsole.View
         private void activateAllCtrlButtons()
         {
             foreach (Button nowBtn in lCtrlBtns)
-            {
                 nowBtn.Enabled = true;
-            }
         }
 
         private void setAllOptBtnsTo(bool yes)
@@ -417,20 +415,17 @@ namespace CovidConsole.View
             if (idTestBox.SelectedIndex > -1)
             {
                 currentVaccination = vaccinations[i];
-                datePick.Value = currentVaccination.getDate();
                 typeTxt.Text = currentVaccination.getType();
-
+                datePick.Value = currentVaccination.getDate();
             }
         }
 
         private void deleteCitoyen()
         {
-            DialogResult result1 = MessageBox.Show("Test Number: " + 
+            DialogResult result1 = MessageBox.Show("Test Number: " +
                 currentVaccination.getId().ToString(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
-            {
                 currentVaccination.delete();
-            }
         }
 
         private void modifyCitoyen() => currentVaccination.updateAll(typeBox.Text.Trim());

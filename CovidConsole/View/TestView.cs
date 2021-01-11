@@ -47,7 +47,7 @@ namespace CovidConsole.View
                 this.cinC = cinC;
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
                 textBoxes = new List<TextBox> { resultatTxt, typeTxt, hasSymptomsTxt };
-                //to initate citoyens
+                //to initate Tests
                 fillTests();
                 setAllOptBtnsTo(false);
             }
@@ -95,7 +95,7 @@ namespace CovidConsole.View
             this.NavBar.Controls.Add(this.label2);
             this.NavBar.Location = new System.Drawing.Point(0, 1);
             this.NavBar.Name = "NavBar";
-            this.NavBar.Size = new System.Drawing.Size(1107, 70);
+            this.NavBar.Size = new System.Drawing.Size(891, 70);
             this.NavBar.TabIndex = 1;
             // 
             // BackBtn
@@ -114,11 +114,11 @@ namespace CovidConsole.View
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(367, 8);
+            this.label2.Location = new System.Drawing.Point(216, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(335, 54);
+            this.label2.Size = new System.Drawing.Size(434, 54);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Les Test Covid";
+            this.label2.Text = "Historique des tests";
             // 
             // panel1
             // 
@@ -145,14 +145,14 @@ namespace CovidConsole.View
             this.panel1.Controls.Add(this.resultatTxt);
             this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1107, 682);
+            this.panel1.Size = new System.Drawing.Size(891, 633);
             this.panel1.TabIndex = 2;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(121, 55);
+            this.label8.Location = new System.Drawing.Point(158, 57);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(76, 24);
             this.label8.TabIndex = 25;
@@ -162,7 +162,7 @@ namespace CovidConsole.View
             // 
             this.patientLbl.AutoSize = true;
             this.patientLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientLbl.Location = new System.Drawing.Point(390, 55);
+            this.patientLbl.Location = new System.Drawing.Point(427, 57);
             this.patientLbl.Name = "patientLbl";
             this.patientLbl.Size = new System.Drawing.Size(35, 24);
             this.patientLbl.TabIndex = 24;
@@ -173,7 +173,7 @@ namespace CovidConsole.View
             this.resulatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.resulatBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resulatBox.FormattingEnabled = true;
-            this.resulatBox.Location = new System.Drawing.Point(393, 186);
+            this.resulatBox.Location = new System.Drawing.Point(430, 188);
             this.resulatBox.Name = "resulatBox";
             this.resulatBox.Size = new System.Drawing.Size(258, 32);
             this.resulatBox.TabIndex = 23;
@@ -183,7 +183,7 @@ namespace CovidConsole.View
             // 
             this.datePick.Enabled = false;
             this.datePick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datePick.Location = new System.Drawing.Point(393, 393);
+            this.datePick.Location = new System.Drawing.Point(430, 395);
             this.datePick.Name = "datePick";
             this.datePick.Size = new System.Drawing.Size(258, 27);
             this.datePick.TabIndex = 22;
@@ -204,7 +204,7 @@ namespace CovidConsole.View
             this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.typeBox.FormattingEnabled = true;
-            this.typeBox.Location = new System.Drawing.Point(393, 255);
+            this.typeBox.Location = new System.Drawing.Point(430, 257);
             this.typeBox.Name = "typeBox";
             this.typeBox.Size = new System.Drawing.Size(258, 32);
             this.typeBox.TabIndex = 20;
@@ -215,7 +215,7 @@ namespace CovidConsole.View
             this.hasSymptomsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.hasSymptomsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hasSymptomsBox.FormattingEnabled = true;
-            this.hasSymptomsBox.Location = new System.Drawing.Point(393, 321);
+            this.hasSymptomsBox.Location = new System.Drawing.Point(430, 323);
             this.hasSymptomsBox.Name = "hasSymptomsBox";
             this.hasSymptomsBox.Size = new System.Drawing.Size(258, 32);
             this.hasSymptomsBox.TabIndex = 19;
@@ -224,7 +224,7 @@ namespace CovidConsole.View
             // AnnulerBtn
             // 
             this.AnnulerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.AnnulerBtn.Location = new System.Drawing.Point(849, 578);
+            this.AnnulerBtn.Location = new System.Drawing.Point(694, 506);
             this.AnnulerBtn.Name = "AnnulerBtn";
             this.AnnulerBtn.Size = new System.Drawing.Size(140, 44);
             this.AnnulerBtn.TabIndex = 17;
@@ -235,7 +235,7 @@ namespace CovidConsole.View
             // EnregistrerBtn
             // 
             this.EnregistrerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.EnregistrerBtn.Location = new System.Drawing.Point(683, 578);
+            this.EnregistrerBtn.Location = new System.Drawing.Point(548, 506);
             this.EnregistrerBtn.Name = "EnregistrerBtn";
             this.EnregistrerBtn.Size = new System.Drawing.Size(140, 44);
             this.EnregistrerBtn.TabIndex = 16;
@@ -246,7 +246,7 @@ namespace CovidConsole.View
             // SupprimerBtn
             // 
             this.SupprimerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.SupprimerBtn.Location = new System.Drawing.Point(393, 578);
+            this.SupprimerBtn.Location = new System.Drawing.Point(339, 506);
             this.SupprimerBtn.Name = "SupprimerBtn";
             this.SupprimerBtn.Size = new System.Drawing.Size(140, 44);
             this.SupprimerBtn.TabIndex = 15;
@@ -257,7 +257,7 @@ namespace CovidConsole.View
             // ModifierBtn
             // 
             this.ModifierBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.ModifierBtn.Location = new System.Drawing.Point(231, 578);
+            this.ModifierBtn.Location = new System.Drawing.Point(185, 506);
             this.ModifierBtn.Name = "ModifierBtn";
             this.ModifierBtn.Size = new System.Drawing.Size(140, 44);
             this.ModifierBtn.TabIndex = 14;
@@ -268,7 +268,7 @@ namespace CovidConsole.View
             // AjouterBtn
             // 
             this.AjouterBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.AjouterBtn.Location = new System.Drawing.Point(69, 578);
+            this.AjouterBtn.Location = new System.Drawing.Point(31, 506);
             this.AjouterBtn.Name = "AjouterBtn";
             this.AjouterBtn.Size = new System.Drawing.Size(140, 44);
             this.AjouterBtn.TabIndex = 13;
@@ -280,7 +280,7 @@ namespace CovidConsole.View
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(119, 108);
+            this.label7.Location = new System.Drawing.Point(156, 110);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 26);
             this.label7.TabIndex = 12;
@@ -291,7 +291,7 @@ namespace CovidConsole.View
             this.idTestBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.idTestBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.idTestBox.FormattingEnabled = true;
-            this.idTestBox.Location = new System.Drawing.Point(393, 108);
+            this.idTestBox.Location = new System.Drawing.Point(430, 110);
             this.idTestBox.Name = "idTestBox";
             this.idTestBox.Size = new System.Drawing.Size(258, 32);
             this.idTestBox.TabIndex = 11;
@@ -301,7 +301,7 @@ namespace CovidConsole.View
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(119, 393);
+            this.label6.Location = new System.Drawing.Point(156, 395);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(135, 26);
             this.label6.TabIndex = 10;
@@ -311,7 +311,7 @@ namespace CovidConsole.View
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(119, 324);
+            this.label5.Location = new System.Drawing.Point(156, 326);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(193, 26);
             this.label5.TabIndex = 9;
@@ -321,7 +321,7 @@ namespace CovidConsole.View
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(119, 255);
+            this.label4.Location = new System.Drawing.Point(156, 257);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 26);
             this.label4.TabIndex = 8;
@@ -331,7 +331,7 @@ namespace CovidConsole.View
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(119, 186);
+            this.label3.Location = new System.Drawing.Point(156, 188);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 26);
             this.label3.TabIndex = 7;
@@ -340,7 +340,7 @@ namespace CovidConsole.View
             // hasSymptomsTxt
             // 
             this.hasSymptomsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hasSymptomsTxt.Location = new System.Drawing.Point(393, 321);
+            this.hasSymptomsTxt.Location = new System.Drawing.Point(430, 323);
             this.hasSymptomsTxt.Name = "hasSymptomsTxt";
             this.hasSymptomsTxt.ReadOnly = true;
             this.hasSymptomsTxt.Size = new System.Drawing.Size(258, 29);
@@ -349,7 +349,7 @@ namespace CovidConsole.View
             // typeTxt
             // 
             this.typeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeTxt.Location = new System.Drawing.Point(393, 255);
+            this.typeTxt.Location = new System.Drawing.Point(430, 257);
             this.typeTxt.Name = "typeTxt";
             this.typeTxt.ReadOnly = true;
             this.typeTxt.Size = new System.Drawing.Size(258, 29);
@@ -358,7 +358,7 @@ namespace CovidConsole.View
             // resultatTxt
             // 
             this.resultatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultatTxt.Location = new System.Drawing.Point(393, 186);
+            this.resultatTxt.Location = new System.Drawing.Point(430, 188);
             this.resultatTxt.Name = "resultatTxt";
             this.resultatTxt.ReadOnly = true;
             this.resultatTxt.Size = new System.Drawing.Size(258, 29);
@@ -366,13 +366,13 @@ namespace CovidConsole.View
             // 
             // TestView
             // 
-            this.ClientSize = new System.Drawing.Size(1107, 759);
+            this.ClientSize = new System.Drawing.Size(892, 710);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.NavBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "TestView";
-            this.Text = "TEST";
+            this.Text = "Historique des tests";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Accueil_FormClosing);
             this.NavBar.ResumeLayout(false);
             this.NavBar.PerformLayout();
