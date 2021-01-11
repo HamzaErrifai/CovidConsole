@@ -171,7 +171,7 @@ namespace CovidConsole.Controller
 
         public List<Vaccination> getHistDeVaccination()
         {
-            return histVaccination.getAll(cin);
+            return Vaccination.getAll(cin);
         }
 
         public List<Lieux> getHistLieux()

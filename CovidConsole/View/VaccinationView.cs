@@ -5,18 +5,14 @@ using System.Windows.Forms;
 
 namespace CovidConsole.View
 {
-    public partial class TestView : Form
+    public partial class VaccinationView : Form
     {
         private Panel NavBar;
         private Label label2;
         private Panel panel1;
         private TextBox typeTxt;
-        private TextBox resultatTxt;
-        private TextBox hasSymptomsTxt;
         private Label label6;
-        private Label label5;
         private Label label4;
-        private Label label3;
         private Label label7;
         private ComboBox idTestBox;
         private Button EnregistrerBtn;
@@ -27,28 +23,26 @@ namespace CovidConsole.View
         private string currentAction = "";
         private List<Button> lCtrlBtns;
         private List<TextBox> textBoxes;
-        private List<Test> tests;
-        private ComboBox hasSymptomsBox;
+        private List<Vaccination> vaccinations;
         private ComboBox typeBox;
         private Label msglbl;
         private DateTimePicker datePick;
-        private Test currentTest;
-        private ComboBox resulatBox;
+        private Vaccination currentVaccination;
         private Button BackBtn;
         private Label label8;
         private Label patientLbl;
         private string cinC = "";
 
-        public TestView(string cinC)
+        public VaccinationView(string cinC)
         {
             InitializeComponent();
             try
             {
                 this.cinC = cinC;
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn };
-                textBoxes = new List<TextBox> { resultatTxt, typeTxt, hasSymptomsTxt };
-                //to initate citoyens
-                fillTests();
+                textBoxes = new List<TextBox> { typeTxt };
+                //to initate Vaccination
+                fillHistVaccination();
                 setAllOptBtnsTo(false);
             }
             catch (Exception e)
@@ -65,11 +59,9 @@ namespace CovidConsole.View
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.patientLbl = new System.Windows.Forms.Label();
-            this.resulatBox = new System.Windows.Forms.ComboBox();
             this.datePick = new System.Windows.Forms.DateTimePicker();
             this.msglbl = new System.Windows.Forms.Label();
             this.typeBox = new System.Windows.Forms.ComboBox();
-            this.hasSymptomsBox = new System.Windows.Forms.ComboBox();
             this.AnnulerBtn = new System.Windows.Forms.Button();
             this.EnregistrerBtn = new System.Windows.Forms.Button();
             this.SupprimerBtn = new System.Windows.Forms.Button();
@@ -78,12 +70,8 @@ namespace CovidConsole.View
             this.label7 = new System.Windows.Forms.Label();
             this.idTestBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.hasSymptomsTxt = new System.Windows.Forms.TextBox();
             this.typeTxt = new System.Windows.Forms.TextBox();
-            this.resultatTxt = new System.Windows.Forms.TextBox();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -114,21 +102,19 @@ namespace CovidConsole.View
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(367, 8);
+            this.label2.Location = new System.Drawing.Point(157, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(335, 54);
+            this.label2.Size = new System.Drawing.Size(545, 54);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Les Test Covid";
+            this.label2.Text = "Historique de vaccination";
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.patientLbl);
-            this.panel1.Controls.Add(this.resulatBox);
             this.panel1.Controls.Add(this.datePick);
             this.panel1.Controls.Add(this.msglbl);
             this.panel1.Controls.Add(this.typeBox);
-            this.panel1.Controls.Add(this.hasSymptomsBox);
             this.panel1.Controls.Add(this.AnnulerBtn);
             this.panel1.Controls.Add(this.EnregistrerBtn);
             this.panel1.Controls.Add(this.SupprimerBtn);
@@ -137,22 +123,18 @@ namespace CovidConsole.View
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.idTestBox);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.hasSymptomsTxt);
             this.panel1.Controls.Add(this.typeTxt);
-            this.panel1.Controls.Add(this.resultatTxt);
             this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1107, 682);
+            this.panel1.Size = new System.Drawing.Size(815, 503);
             this.panel1.TabIndex = 2;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(121, 55);
+            this.label8.Location = new System.Drawing.Point(149, 59);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(76, 24);
             this.label8.TabIndex = 25;
@@ -162,28 +144,17 @@ namespace CovidConsole.View
             // 
             this.patientLbl.AutoSize = true;
             this.patientLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientLbl.Location = new System.Drawing.Point(390, 55);
+            this.patientLbl.Location = new System.Drawing.Point(418, 59);
             this.patientLbl.Name = "patientLbl";
             this.patientLbl.Size = new System.Drawing.Size(35, 24);
             this.patientLbl.TabIndex = 24;
             this.patientLbl.Text = "cin";
             // 
-            // resulatBox
-            // 
-            this.resulatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.resulatBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resulatBox.FormattingEnabled = true;
-            this.resulatBox.Location = new System.Drawing.Point(393, 186);
-            this.resulatBox.Name = "resulatBox";
-            this.resulatBox.Size = new System.Drawing.Size(258, 32);
-            this.resulatBox.TabIndex = 23;
-            this.resulatBox.Visible = false;
-            // 
             // datePick
             // 
             this.datePick.Enabled = false;
             this.datePick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datePick.Location = new System.Drawing.Point(393, 393);
+            this.datePick.Location = new System.Drawing.Point(421, 264);
             this.datePick.Name = "datePick";
             this.datePick.Size = new System.Drawing.Size(258, 27);
             this.datePick.TabIndex = 22;
@@ -194,7 +165,7 @@ namespace CovidConsole.View
             this.msglbl.BackColor = System.Drawing.SystemColors.Control;
             this.msglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.msglbl.ForeColor = System.Drawing.Color.Red;
-            this.msglbl.Location = new System.Drawing.Point(66, 506);
+            this.msglbl.Location = new System.Drawing.Point(59, 328);
             this.msglbl.Name = "msglbl";
             this.msglbl.Size = new System.Drawing.Size(0, 24);
             this.msglbl.TabIndex = 21;
@@ -204,27 +175,16 @@ namespace CovidConsole.View
             this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.typeBox.FormattingEnabled = true;
-            this.typeBox.Location = new System.Drawing.Point(393, 255);
+            this.typeBox.Location = new System.Drawing.Point(421, 182);
             this.typeBox.Name = "typeBox";
             this.typeBox.Size = new System.Drawing.Size(258, 32);
             this.typeBox.TabIndex = 20;
             this.typeBox.Visible = false;
             // 
-            // hasSymptomsBox
-            // 
-            this.hasSymptomsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.hasSymptomsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hasSymptomsBox.FormattingEnabled = true;
-            this.hasSymptomsBox.Location = new System.Drawing.Point(393, 321);
-            this.hasSymptomsBox.Name = "hasSymptomsBox";
-            this.hasSymptomsBox.Size = new System.Drawing.Size(258, 32);
-            this.hasSymptomsBox.TabIndex = 19;
-            this.hasSymptomsBox.Visible = false;
-            // 
             // AnnulerBtn
             // 
             this.AnnulerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.AnnulerBtn.Location = new System.Drawing.Point(849, 578);
+            this.AnnulerBtn.Location = new System.Drawing.Point(663, 400);
             this.AnnulerBtn.Name = "AnnulerBtn";
             this.AnnulerBtn.Size = new System.Drawing.Size(140, 44);
             this.AnnulerBtn.TabIndex = 17;
@@ -235,7 +195,7 @@ namespace CovidConsole.View
             // EnregistrerBtn
             // 
             this.EnregistrerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.EnregistrerBtn.Location = new System.Drawing.Point(683, 578);
+            this.EnregistrerBtn.Location = new System.Drawing.Point(497, 400);
             this.EnregistrerBtn.Name = "EnregistrerBtn";
             this.EnregistrerBtn.Size = new System.Drawing.Size(140, 44);
             this.EnregistrerBtn.TabIndex = 16;
@@ -246,7 +206,7 @@ namespace CovidConsole.View
             // SupprimerBtn
             // 
             this.SupprimerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.SupprimerBtn.Location = new System.Drawing.Point(393, 578);
+            this.SupprimerBtn.Location = new System.Drawing.Point(314, 400);
             this.SupprimerBtn.Name = "SupprimerBtn";
             this.SupprimerBtn.Size = new System.Drawing.Size(140, 44);
             this.SupprimerBtn.TabIndex = 15;
@@ -257,7 +217,7 @@ namespace CovidConsole.View
             // ModifierBtn
             // 
             this.ModifierBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.ModifierBtn.Location = new System.Drawing.Point(231, 578);
+            this.ModifierBtn.Location = new System.Drawing.Point(168, 400);
             this.ModifierBtn.Name = "ModifierBtn";
             this.ModifierBtn.Size = new System.Drawing.Size(140, 44);
             this.ModifierBtn.TabIndex = 14;
@@ -268,7 +228,7 @@ namespace CovidConsole.View
             // AjouterBtn
             // 
             this.AjouterBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.AjouterBtn.Location = new System.Drawing.Point(69, 578);
+            this.AjouterBtn.Location = new System.Drawing.Point(22, 400);
             this.AjouterBtn.Name = "AjouterBtn";
             this.AjouterBtn.Size = new System.Drawing.Size(140, 44);
             this.AjouterBtn.TabIndex = 13;
@@ -280,18 +240,18 @@ namespace CovidConsole.View
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(119, 108);
+            this.label7.Location = new System.Drawing.Point(147, 112);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 26);
+            this.label7.Size = new System.Drawing.Size(161, 26);
             this.label7.TabIndex = 12;
-            this.label7.Text = "Id Test :";
+            this.label7.Text = "Id Vaccination :";
             // 
             // idTestBox
             // 
             this.idTestBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.idTestBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.idTestBox.FormattingEnabled = true;
-            this.idTestBox.Location = new System.Drawing.Point(393, 108);
+            this.idTestBox.Location = new System.Drawing.Point(421, 112);
             this.idTestBox.Name = "idTestBox";
             this.idTestBox.Size = new System.Drawing.Size(258, 32);
             this.idTestBox.TabIndex = 11;
@@ -301,79 +261,40 @@ namespace CovidConsole.View
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(119, 393);
+            this.label6.Location = new System.Drawing.Point(147, 264);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(135, 26);
+            this.label6.Size = new System.Drawing.Size(215, 26);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Date de test:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(119, 324);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(193, 26);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "A des symptoms ?";
+            this.label6.Text = "Date de vaccination :";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(119, 255);
+            this.label4.Location = new System.Drawing.Point(147, 182);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 26);
             this.label4.TabIndex = 8;
             this.label4.Text = "Type :";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(119, 186);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 26);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Resultat :";
-            // 
-            // hasSymptomsTxt
-            // 
-            this.hasSymptomsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hasSymptomsTxt.Location = new System.Drawing.Point(393, 321);
-            this.hasSymptomsTxt.Name = "hasSymptomsTxt";
-            this.hasSymptomsTxt.ReadOnly = true;
-            this.hasSymptomsTxt.Size = new System.Drawing.Size(258, 29);
-            this.hasSymptomsTxt.TabIndex = 3;
-            // 
             // typeTxt
             // 
             this.typeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeTxt.Location = new System.Drawing.Point(393, 255);
+            this.typeTxt.Location = new System.Drawing.Point(421, 182);
             this.typeTxt.Name = "typeTxt";
             this.typeTxt.ReadOnly = true;
             this.typeTxt.Size = new System.Drawing.Size(258, 29);
             this.typeTxt.TabIndex = 2;
             // 
-            // resultatTxt
+            // VaccinationView
             // 
-            this.resultatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultatTxt.Location = new System.Drawing.Point(393, 186);
-            this.resultatTxt.Name = "resultatTxt";
-            this.resultatTxt.ReadOnly = true;
-            this.resultatTxt.Size = new System.Drawing.Size(258, 29);
-            this.resultatTxt.TabIndex = 1;
-            // 
-            // TestView
-            // 
-            this.ClientSize = new System.Drawing.Size(1107, 759);
+            this.ClientSize = new System.Drawing.Size(815, 580);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.NavBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
-            this.Name = "TestView";
-            this.Text = "TEST";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Accueil_FormClosing);
+            this.Name = "VaccinationView";
+            this.Text = "Historique de vaccinations";
             this.NavBar.ResumeLayout(false);
             this.NavBar.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -384,7 +305,7 @@ namespace CovidConsole.View
 
         private bool textBoxesAreEmpty()
         {
-            return resulatBox.Text.Trim() == "" || typeBox.Text.Trim() == "" || hasSymptomsBox.Text.Trim() == "";
+            return typeBox.Text.Trim() == "";
         }
 
         private void fillIdBox(bool yes)
@@ -392,7 +313,7 @@ namespace CovidConsole.View
             //to fill or unFill the cinbox
             if (yes)
             {
-                idTestBox.DataSource = tests;
+                idTestBox.DataSource = vaccinations;
                 idTestBox.DisplayMember = "_idTest";
                 idTestBox.Enabled = true;
             }
@@ -400,25 +321,25 @@ namespace CovidConsole.View
             {
                 idTestBox.DataSource = null;
                 if (currentAction == "modifier")
-                    idTestBox.Text = currentTest.getIdTest().ToString();
+                    idTestBox.Text = currentVaccination.getId().ToString();
                 idTestBox.Enabled = false;
             }
         }
 
-        private void fillTests()
+        private void fillHistVaccination()
         {
-            tests = Test.getAll(cinC);
+            vaccinations = Vaccination.getAll(cinC);
             patientLbl.Text = cinC;
             // at the start the selected citoyen is the first from the list
-            if (tests.Count > 0)
-                currentTest = tests[0];
+            if (vaccinations.Count > 0)
+                currentVaccination = vaccinations[0];
             else
             {
                 disableAllCtrlBtns();
                 setAllOptBtnsTo(false);
                 AjouterBtn.Enabled = true;
             }
-            fillIdBox(tests.Count > 0);
+            fillIdBox(vaccinations.Count > 0);
         }
 
         private void clearTextBoxes()
@@ -432,34 +353,17 @@ namespace CovidConsole.View
         {
             if (yes)
             {
-                //hasSymptomsBox
-                hasSymptomsBox.DataSource = Test.possibleSymptoms;
-                hasSymptomsBox.DisplayMember = "possibleSymptoms";
-                hasSymptomsBox.Visible = true;
-                hasSymptomsTxt.Visible = false;
                 //typeBox
-                typeBox.DataSource = Test.possibleTypes;
+                typeBox.DataSource = Vaccination.possibleTypes;
                 typeBox.DisplayMember = "possibleTypes";
                 typeBox.Visible = true;
                 typeTxt.Visible = false;
-                //resulatBox
-                resulatBox.DataSource = Test.possibleResultat;
-                resulatBox.DisplayMember = "possibleResultat";
-                resulatBox.Visible = true;
-                resultatTxt.Visible = false;
-
             }
             else
             {
-                //hasSymptomsBox
-                hasSymptomsBox.Visible = false;
-                hasSymptomsTxt.Visible = true;
                 //typeBox
                 typeBox.Visible = false;
                 typeTxt.Visible = true;
-                //resulatBox
-                resulatBox.Visible = false;
-                resultatTxt.Visible = true;
             }
         }
 
@@ -512,41 +416,34 @@ namespace CovidConsole.View
         {
             if (idTestBox.SelectedIndex > -1)
             {
-                currentTest = tests[i];
-                resultatTxt.Text = currentTest.getResultat();
-                hasSymptomsTxt.Text = (currentTest.getHasSymptoms()) ? "oui" : "non";
-                datePick.Value = currentTest.getDate();
-                typeTxt.Text = currentTest.getType();
+                currentVaccination = vaccinations[i];
+                datePick.Value = currentVaccination.getDate();
+                typeTxt.Text = currentVaccination.getType();
 
             }
         }
 
         private void deleteCitoyen()
         {
-            DialogResult result1 = MessageBox.Show("Test Number: " + currentTest.getIdTest().ToString(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
+            DialogResult result1 = MessageBox.Show("Test Number: " + 
+                currentVaccination.getId().ToString(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
             {
-                currentTest.delete();
+                currentVaccination.delete();
             }
         }
 
-        private void modifyCitoyen()
-        {
-            bool hasSymptoms = (hasSymptomsBox.Text.ToLower().Trim() == "oui") ? true : false;
-            currentTest.updateAll(typeBox.Text.Trim(), hasSymptoms, resulatBox.Text);
-        }
+        private void modifyCitoyen() => currentVaccination.updateAll(typeBox.Text.Trim());
 
         private void addCitoyen()
         {
-            bool hasSymptoms = (hasSymptomsBox.Text.ToLower().Trim() == "oui") ? true : false;
-            if (currentTest == null)
+            if (currentVaccination == null)
             {
-                Test tempTest = new Test(Citoyen.get(cinC), datePick.Value, typeBox.Text.Trim(), hasSymptoms);
-                tempTest.setResultat(resulatBox.Text);
-                currentTest = tempTest;
+                Vaccination tempTest = new Vaccination(cinC, typeBox.Text.Trim());
+                currentVaccination = tempTest;
             }
             else
-                currentTest.add(typeBox.Text.Trim(), datePick.Value, hasSymptoms, resulatBox.Text, cinC);
+                currentVaccination.add(cinC, typeBox.Text.Trim());
         }
 
         private void EnregistrerBtn_Click(object sender, EventArgs e)
@@ -583,8 +480,8 @@ namespace CovidConsole.View
                     break;
 
             }
-            
-            fillTests();
+
+            fillHistVaccination();
             currentAction = "";
             changeReadOnlyTxtBoxsTo(true);
             setTextBoxes(idTestBox.SelectedIndex);

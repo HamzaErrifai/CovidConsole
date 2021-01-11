@@ -6,39 +6,38 @@ namespace CovidConsole.Controller
 {
     class Vaccination : Model.Vaccination
     {
-        /*types de vaccins:
-        * https://www.francetvinfo.fr/sante/maladie/coronavirus/vaccin/coronavirus-les-trois-types-de-vaccins_4206807.html
-        * ARN Messager
-        * Vecteur viral
-        * sanofi
-        */
+        public static List<string> possibleTypes { get; } = new List<string> { "", "ARN Messager", "Vecteur viral", "sanofi" };
+        private int id;
         private string type;
-        private DateTime dateV;
         private string cinC;
+        private DateTime dateV;
 
         public Vaccination()
         {}
 
-        public Vaccination(string type, string cinC)
+        public Vaccination(string cinC, string type)
         {
             dateV = DateTime.Now;
             this.type = type;
             this.cinC = cinC;
-            addData(this.cinC, this.type, dateV);
         }
 
+        public void add(string cinC, string type)
+        {
+            addData(this.cinC, this.type, DateTime.Now);
+        }
 
         public void update<T>(string itemName, T itemValue)
         {
             UpdateByCin(cinC, itemName, itemValue);
         }
 
-        public DateTime getTime()
+        public DateTime getDate()
         {
             return dateV;
         }
 
-        public void setTime(int jour, int mois, int annee)
+        public void setDate(int jour, int mois, int annee)
         {
             dateV = new DateTime(jour, mois, annee);
             update("dateV", dateV);
@@ -53,13 +52,19 @@ namespace CovidConsole.Controller
         {
             return type;
         }
+        public int getId()
+        {
+            return id;
+        }
 
-        public List<Vaccination> getAll(string cinC)
+        public static List<Vaccination> getAll(string cinC)
         {
             List<Vaccination> lt = new List<Vaccination>();
-            foreach (DataRow row in getByCin(cinC).Rows)
+            Vaccination v = new Vaccination();
+            foreach (DataRow row in v.getByCin(cinC).Rows)
             {
                 Vaccination temp = new Vaccination();
+                temp.id = (int)row["id"];
                 temp.cinC = row["cinC"].ToString();
                 temp.type = row["typeV"].ToString();
                 temp.dateV = ((DateTime)row["dateV"]);
@@ -68,5 +73,14 @@ namespace CovidConsole.Controller
             return lt;
         }
 
+        public void delete()
+        {
+            deleteById(id);
+        }
+
+        public void updateAll(string type)
+        {
+            update("typeV", type);
+        }
     }
 }

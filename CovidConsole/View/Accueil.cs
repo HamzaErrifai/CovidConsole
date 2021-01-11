@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace CovidConsole
+namespace CovidConsole.View
 {
-    //TODO: add location
+    //TODO: add Vaccination
     //TODO: demonstration comme le diagramme d'etat-transition
 
     public partial class Accueil : Form
@@ -44,7 +44,6 @@ namespace CovidConsole
         private DateTimePicker dobPick;
         private Button testViewBtn;
         private Citoyen currentCitoyen;
-        private int crntCitoyenTestCount = 0;
 
         public Accueil()
         {
@@ -492,7 +491,6 @@ namespace CovidConsole
             timer1.Enabled = true;
             timer1.Tick += new System.EventHandler(OnTimerEvent);
             msglbl.Text = msg;
-
         }
 
         private void OnTimerEvent(object sender, EventArgs e)
@@ -533,7 +531,6 @@ namespace CovidConsole
             if (cinBox.SelectedIndex > -1)
             {
                 currentCitoyen = citoyens[i];
-                crntCitoyenTestCount = Test.getAll(currentCitoyen.getCin()).Count;
                 NameTxt.Text = currentCitoyen.getPrenom();
                 LnameTxt.Text = currentCitoyen.getNom();
                 SexeTxt.Text = currentCitoyen.getSexe();
