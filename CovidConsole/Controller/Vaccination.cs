@@ -83,6 +83,7 @@ namespace CovidConsole.Controller
         {
             update("typeV", type);
         }
+
         public int _id
         {
             get

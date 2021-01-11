@@ -549,6 +549,18 @@ namespace CovidConsole.View
                 currentTest.add(typeBox.Text.Trim(), datePick.Value, hasSymptoms, resulatBox.Text, cinC);
         }
 
+        private void backState()
+        {
+            currentAction = "";
+            changeReadOnlyTxtBoxsTo(true);
+            setTextBoxes(idTestBox.SelectedIndex);
+            setAllOptBtnsTo(false);
+            activateAllCtrlButtons();
+            AjouterBtn.Enabled = true;
+            fillIdBox(true);
+            showComboboxes(false);
+        }
+
         private void EnregistrerBtn_Click(object sender, EventArgs e)
         {
             switch (currentAction.ToLower())
@@ -585,27 +597,13 @@ namespace CovidConsole.View
             }
             
             fillTests();
-            currentAction = "";
-            changeReadOnlyTxtBoxsTo(true);
-            setTextBoxes(idTestBox.SelectedIndex);
-            setAllOptBtnsTo(false);
-            activateAllCtrlButtons();
-            AjouterBtn.Enabled = true;
-            fillIdBox(true);
-            showComboboxes(false);
+            backState();
 
         }
 
         private void AnnulerBtn_Click(object sender, EventArgs e)
         {
-            currentAction = "";
-            changeReadOnlyTxtBoxsTo(true);
-            setTextBoxes(idTestBox.SelectedIndex);
-            setAllOptBtnsTo(false);
-            activateAllCtrlButtons();
-            AjouterBtn.Enabled = true;
-            fillIdBox(true);
-            showComboboxes(false);
+            backState();
         }
 
         private void AjouterBtn_Click(object sender, EventArgs e)
