@@ -114,11 +114,11 @@ namespace CovidConsole.View
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(216, 8);
+            this.label2.Location = new System.Drawing.Point(251, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(434, 54);
+            this.label2.Size = new System.Drawing.Size(410, 54);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Historique des tests";
+            this.label2.Text = "Historique de tests";
             // 
             // panel1
             // 

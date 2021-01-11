@@ -105,7 +105,7 @@ namespace CovidConsole.View
             this.NavBar.Controls.Add(this.label2);
             this.NavBar.Location = new System.Drawing.Point(0, 1);
             this.NavBar.Name = "NavBar";
-            this.NavBar.Size = new System.Drawing.Size(1107, 70);
+            this.NavBar.Size = new System.Drawing.Size(1027, 70);
             this.NavBar.TabIndex = 1;
             // 
             // label2
@@ -113,7 +113,7 @@ namespace CovidConsole.View
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(243, 8);
+            this.label2.Location = new System.Drawing.Point(214, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(581, 54);
             this.label2.TabIndex = 1;
@@ -149,17 +149,17 @@ namespace CovidConsole.View
             this.panel1.Controls.Add(this.NameTxt);
             this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1107, 682);
+            this.panel1.Size = new System.Drawing.Size(1027, 624);
             this.panel1.TabIndex = 2;
             // 
             // testViewBtn
             // 
             this.testViewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.testViewBtn.Location = new System.Drawing.Point(700, 408);
+            this.testViewBtn.Location = new System.Drawing.Point(691, 358);
             this.testViewBtn.Name = "testViewBtn";
             this.testViewBtn.Size = new System.Drawing.Size(267, 45);
             this.testViewBtn.TabIndex = 23;
-            this.testViewBtn.Text = "Ajouter / voir tests";
+            this.testViewBtn.Text = "Historique de Tests";
             this.testViewBtn.UseVisualStyleBackColor = true;
             this.testViewBtn.Click += new System.EventHandler(this.testViewBtn_Click);
             // 
@@ -167,7 +167,7 @@ namespace CovidConsole.View
             // 
             this.dobPick.Enabled = false;
             this.dobPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dobPick.Location = new System.Drawing.Point(338, 408);
+            this.dobPick.Location = new System.Drawing.Point(320, 408);
             this.dobPick.Name = "dobPick";
             this.dobPick.Size = new System.Drawing.Size(258, 27);
             this.dobPick.TabIndex = 22;
@@ -178,7 +178,7 @@ namespace CovidConsole.View
             this.msglbl.BackColor = System.Drawing.SystemColors.Control;
             this.msglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.msglbl.ForeColor = System.Drawing.Color.Red;
-            this.msglbl.Location = new System.Drawing.Point(66, 506);
+            this.msglbl.Location = new System.Drawing.Point(48, 506);
             this.msglbl.Name = "msglbl";
             this.msglbl.Size = new System.Drawing.Size(0, 24);
             this.msglbl.TabIndex = 21;
@@ -188,7 +188,7 @@ namespace CovidConsole.View
             this.sexeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sexeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sexeBox.FormattingEnabled = true;
-            this.sexeBox.Location = new System.Drawing.Point(338, 270);
+            this.sexeBox.Location = new System.Drawing.Point(320, 270);
             this.sexeBox.Name = "sexeBox";
             this.sexeBox.Size = new System.Drawing.Size(258, 32);
             this.sexeBox.TabIndex = 20;
@@ -199,7 +199,7 @@ namespace CovidConsole.View
             this.statusBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusBox.FormattingEnabled = true;
-            this.statusBox.Location = new System.Drawing.Point(338, 336);
+            this.statusBox.Location = new System.Drawing.Point(320, 336);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(258, 32);
             this.statusBox.TabIndex = 19;
@@ -209,7 +209,7 @@ namespace CovidConsole.View
             // 
             this.nbPatTxt.AutoSize = true;
             this.nbPatTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nbPatTxt.Location = new System.Drawing.Point(311, 14);
+            this.nbPatTxt.Location = new System.Drawing.Point(293, 14);
             this.nbPatTxt.Name = "nbPatTxt";
             this.nbPatTxt.Size = new System.Drawing.Size(24, 26);
             this.nbPatTxt.TabIndex = 18;
@@ -219,7 +219,7 @@ namespace CovidConsole.View
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(64, 14);
+            this.label8.Location = new System.Drawing.Point(46, 14);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(217, 26);
             this.label8.TabIndex = 0;
@@ -228,7 +228,7 @@ namespace CovidConsole.View
             // AnnulerBtn
             // 
             this.AnnulerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.AnnulerBtn.Location = new System.Drawing.Point(849, 578);
+            this.AnnulerBtn.Location = new System.Drawing.Point(821, 536);
             this.AnnulerBtn.Name = "AnnulerBtn";
             this.AnnulerBtn.Size = new System.Drawing.Size(140, 44);
             this.AnnulerBtn.TabIndex = 17;
@@ -239,7 +239,7 @@ namespace CovidConsole.View
             // EnregistrerBtn
             // 
             this.EnregistrerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.EnregistrerBtn.Location = new System.Drawing.Point(683, 578);
+            this.EnregistrerBtn.Location = new System.Drawing.Point(655, 536);
             this.EnregistrerBtn.Name = "EnregistrerBtn";
             this.EnregistrerBtn.Size = new System.Drawing.Size(140, 44);
             this.EnregistrerBtn.TabIndex = 16;
@@ -250,7 +250,7 @@ namespace CovidConsole.View
             // SupprimerBtn
             // 
             this.SupprimerBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.SupprimerBtn.Location = new System.Drawing.Point(393, 578);
+            this.SupprimerBtn.Location = new System.Drawing.Point(365, 536);
             this.SupprimerBtn.Name = "SupprimerBtn";
             this.SupprimerBtn.Size = new System.Drawing.Size(140, 44);
             this.SupprimerBtn.TabIndex = 15;
@@ -261,7 +261,7 @@ namespace CovidConsole.View
             // ModifierBtn
             // 
             this.ModifierBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.ModifierBtn.Location = new System.Drawing.Point(231, 578);
+            this.ModifierBtn.Location = new System.Drawing.Point(203, 536);
             this.ModifierBtn.Name = "ModifierBtn";
             this.ModifierBtn.Size = new System.Drawing.Size(140, 44);
             this.ModifierBtn.TabIndex = 14;
@@ -272,7 +272,7 @@ namespace CovidConsole.View
             // AjouterBtn
             // 
             this.AjouterBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.AjouterBtn.Location = new System.Drawing.Point(69, 578);
+            this.AjouterBtn.Location = new System.Drawing.Point(41, 536);
             this.AjouterBtn.Name = "AjouterBtn";
             this.AjouterBtn.Size = new System.Drawing.Size(140, 44);
             this.AjouterBtn.TabIndex = 13;
@@ -284,7 +284,7 @@ namespace CovidConsole.View
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(64, 62);
+            this.label7.Location = new System.Drawing.Point(46, 62);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 26);
             this.label7.TabIndex = 12;
@@ -294,7 +294,7 @@ namespace CovidConsole.View
             // 
             this.cinBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.cinBox.FormattingEnabled = true;
-            this.cinBox.Location = new System.Drawing.Point(338, 62);
+            this.cinBox.Location = new System.Drawing.Point(320, 62);
             this.cinBox.Name = "cinBox";
             this.cinBox.Size = new System.Drawing.Size(258, 32);
             this.cinBox.TabIndex = 11;
@@ -304,7 +304,7 @@ namespace CovidConsole.View
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(64, 408);
+            this.label6.Location = new System.Drawing.Point(46, 408);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(204, 26);
             this.label6.TabIndex = 10;
@@ -314,7 +314,7 @@ namespace CovidConsole.View
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(64, 339);
+            this.label5.Location = new System.Drawing.Point(46, 339);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 26);
             this.label5.TabIndex = 9;
@@ -324,7 +324,7 @@ namespace CovidConsole.View
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(64, 270);
+            this.label4.Location = new System.Drawing.Point(46, 270);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 26);
             this.label4.TabIndex = 8;
@@ -334,7 +334,7 @@ namespace CovidConsole.View
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(64, 201);
+            this.label3.Location = new System.Drawing.Point(46, 201);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 26);
             this.label3.TabIndex = 7;
@@ -344,7 +344,7 @@ namespace CovidConsole.View
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(64, 132);
+            this.label1.Location = new System.Drawing.Point(46, 132);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 26);
             this.label1.TabIndex = 6;
@@ -354,7 +354,7 @@ namespace CovidConsole.View
             // 
             this.CcLbl.AutoSize = true;
             this.CcLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CcLbl.Location = new System.Drawing.Point(695, 98);
+            this.CcLbl.Location = new System.Drawing.Point(686, 48);
             this.CcLbl.Name = "CcLbl";
             this.CcLbl.Size = new System.Drawing.Size(147, 26);
             this.CcLbl.TabIndex = 0;
@@ -363,7 +363,7 @@ namespace CovidConsole.View
             // colorPanel
             // 
             this.colorPanel.BackColor = System.Drawing.Color.Gray;
-            this.colorPanel.Location = new System.Drawing.Point(701, 132);
+            this.colorPanel.Location = new System.Drawing.Point(692, 82);
             this.colorPanel.Name = "colorPanel";
             this.colorPanel.Size = new System.Drawing.Size(269, 254);
             this.colorPanel.TabIndex = 5;
@@ -371,7 +371,7 @@ namespace CovidConsole.View
             // StatusTxt
             // 
             this.StatusTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusTxt.Location = new System.Drawing.Point(338, 336);
+            this.StatusTxt.Location = new System.Drawing.Point(320, 336);
             this.StatusTxt.Name = "StatusTxt";
             this.StatusTxt.ReadOnly = true;
             this.StatusTxt.Size = new System.Drawing.Size(258, 29);
@@ -380,7 +380,7 @@ namespace CovidConsole.View
             // SexeTxt
             // 
             this.SexeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SexeTxt.Location = new System.Drawing.Point(338, 270);
+            this.SexeTxt.Location = new System.Drawing.Point(320, 270);
             this.SexeTxt.Name = "SexeTxt";
             this.SexeTxt.ReadOnly = true;
             this.SexeTxt.Size = new System.Drawing.Size(258, 29);
@@ -389,7 +389,7 @@ namespace CovidConsole.View
             // LnameTxt
             // 
             this.LnameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LnameTxt.Location = new System.Drawing.Point(338, 201);
+            this.LnameTxt.Location = new System.Drawing.Point(320, 201);
             this.LnameTxt.Name = "LnameTxt";
             this.LnameTxt.ReadOnly = true;
             this.LnameTxt.Size = new System.Drawing.Size(258, 29);
@@ -398,7 +398,7 @@ namespace CovidConsole.View
             // NameTxt
             // 
             this.NameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameTxt.Location = new System.Drawing.Point(338, 132);
+            this.NameTxt.Location = new System.Drawing.Point(320, 132);
             this.NameTxt.Name = "NameTxt";
             this.NameTxt.ReadOnly = true;
             this.NameTxt.Size = new System.Drawing.Size(258, 29);
@@ -407,17 +407,17 @@ namespace CovidConsole.View
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(703, 470);
+            this.button1.Location = new System.Drawing.Point(694, 420);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(267, 45);
             this.button1.TabIndex = 24;
-            this.button1.Text = "Ajouter / voir vaccination";
+            this.button1.Text = "Historique de Vaccination";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Accueil
             // 
-            this.ClientSize = new System.Drawing.Size(1107, 759);
+            this.ClientSize = new System.Drawing.Size(1027, 699);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.NavBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
