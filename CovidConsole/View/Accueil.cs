@@ -6,9 +6,6 @@ using System.Windows.Forms;
 
 namespace CovidConsole.View
 {
-    //TODO: add Vaccination
-    //TODO: demonstration comme le diagramme d'etat-transition
-
     public partial class Accueil : Form
     {
         private Panel NavBar;
@@ -43,7 +40,7 @@ namespace CovidConsole.View
         private Label msglbl;
         private DateTimePicker dobPick;
         private Button testViewBtn;
-        private Button button1;
+        private Button VaccinationBtn;
         private Citoyen currentCitoyen;
 
         public Accueil()
@@ -51,10 +48,9 @@ namespace CovidConsole.View
             InitializeComponent();
             try
             {
-                //to initate citoyens
-                fillCitoyens();
                 lCtrlBtns = new List<Button> { AjouterBtn, ModifierBtn, SupprimerBtn, testViewBtn };
                 textBoxes = new List<TextBox> { NameTxt, LnameTxt, SexeTxt, StatusTxt };
+                fillCitoyens();
                 fillCinBox(true);
                 setAllOptBtnsTo(false);
             }
@@ -69,6 +65,7 @@ namespace CovidConsole.View
             this.NavBar = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.VaccinationBtn = new System.Windows.Forms.Button();
             this.testViewBtn = new System.Windows.Forms.Button();
             this.dobPick = new System.Windows.Forms.DateTimePicker();
             this.msglbl = new System.Windows.Forms.Label();
@@ -94,7 +91,6 @@ namespace CovidConsole.View
             this.SexeTxt = new System.Windows.Forms.TextBox();
             this.LnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.NavBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -121,7 +117,7 @@ namespace CovidConsole.View
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.VaccinationBtn);
             this.panel1.Controls.Add(this.testViewBtn);
             this.panel1.Controls.Add(this.dobPick);
             this.panel1.Controls.Add(this.msglbl);
@@ -152,15 +148,28 @@ namespace CovidConsole.View
             this.panel1.Size = new System.Drawing.Size(1027, 624);
             this.panel1.TabIndex = 2;
             // 
+            // VaccinationBtn
+            // 
+            this.VaccinationBtn.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.VaccinationBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VaccinationBtn.Location = new System.Drawing.Point(691, 420);
+            this.VaccinationBtn.Name = "VaccinationBtn";
+            this.VaccinationBtn.Size = new System.Drawing.Size(270, 45);
+            this.VaccinationBtn.TabIndex = 24;
+            this.VaccinationBtn.Text = "Historique de Vaccination";
+            this.VaccinationBtn.UseVisualStyleBackColor = false;
+            this.VaccinationBtn.Click += new System.EventHandler(this.VaccinationBtn_Click);
+            // 
             // testViewBtn
             // 
+            this.testViewBtn.BackColor = System.Drawing.SystemColors.ControlLight;
             this.testViewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.testViewBtn.Location = new System.Drawing.Point(691, 358);
             this.testViewBtn.Name = "testViewBtn";
-            this.testViewBtn.Size = new System.Drawing.Size(267, 45);
+            this.testViewBtn.Size = new System.Drawing.Size(270, 45);
             this.testViewBtn.TabIndex = 23;
             this.testViewBtn.Text = "Historique de Tests";
-            this.testViewBtn.UseVisualStyleBackColor = true;
+            this.testViewBtn.UseVisualStyleBackColor = false;
             this.testViewBtn.Click += new System.EventHandler(this.testViewBtn_Click);
             // 
             // dobPick
@@ -404,17 +413,6 @@ namespace CovidConsole.View
             this.NameTxt.Size = new System.Drawing.Size(258, 29);
             this.NameTxt.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(694, 420);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(267, 45);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Historique de Vaccination";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Accueil
             // 
             this.ClientSize = new System.Drawing.Size(1027, 699);
@@ -511,6 +509,7 @@ namespace CovidConsole.View
         {
             msglbl.Text = "";
         }
+
         private void activateAllCtrlButtons()
         {
             foreach (Button nowBtn in lCtrlBtns)
@@ -526,9 +525,7 @@ namespace CovidConsole.View
         private void disableAllCtrlBtns()
         {
             foreach (Button nowBtn in lCtrlBtns)
-            {
                 nowBtn.Enabled = false;
-            }
             AnnulerBtn.Enabled = true;
             EnregistrerBtn.Enabled = true;
         }
@@ -558,9 +555,7 @@ namespace CovidConsole.View
         {
             DialogResult result1 = MessageBox.Show(currentCitoyen.getFullName(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
-            {
                 currentCitoyen.delete();
-            }
         }
 
         private void modifyCitoyen()
@@ -587,9 +582,7 @@ namespace CovidConsole.View
                         activateAllCtrlButtons();
                     }
                     else
-                    {
                         ShowError("Il faut remplir tous les champs");
-                    }
                     break;
                 case "modifier":
                     if (!textBoxesAreEmpty())
@@ -598,9 +591,7 @@ namespace CovidConsole.View
                         activateAllCtrlButtons();
                     }
                     else
-                    {
                         ShowError("Il faut remplir tous les champs");
-                    }
                     break;
                 case "supprimer":
                     deleteCitoyen();
@@ -687,7 +678,7 @@ namespace CovidConsole.View
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void VaccinationBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
             new VaccinationView(currentCitoyen.getCin()).ShowDialog();

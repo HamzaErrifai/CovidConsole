@@ -105,7 +105,7 @@ namespace CovidConsole.View
             this.BackBtn.Name = "BackBtn";
             this.BackBtn.Size = new System.Drawing.Size(129, 41);
             this.BackBtn.TabIndex = 24;
-            this.BackBtn.Text = "Revenir";
+            this.BackBtn.Text = "Accueil";
             this.BackBtn.UseVisualStyleBackColor = true;
             this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
@@ -483,9 +483,7 @@ namespace CovidConsole.View
         private void activateAllCtrlButtons()
         {
             foreach (Button nowBtn in lCtrlBtns)
-            {
                 nowBtn.Enabled = true;
-            }
         }
 
         private void setAllOptBtnsTo(bool yes)
@@ -517,7 +515,6 @@ namespace CovidConsole.View
                 hasSymptomsTxt.Text = (currentTest.getHasSymptoms()) ? "oui" : "non";
                 datePick.Value = currentTest.getDate();
                 typeTxt.Text = currentTest.getType();
-
             }
         }
 
@@ -525,9 +522,7 @@ namespace CovidConsole.View
         {
             DialogResult result1 = MessageBox.Show("Test Number: " + currentTest.getIdTest().ToString(), "Vous êtes sure de suprimer cette élément ?", MessageBoxButtons.YesNo);
             if (result1 == DialogResult.Yes)
-            {
                 currentTest.delete();
-            }
         }
 
         private void modifyCitoyen()
@@ -595,7 +590,7 @@ namespace CovidConsole.View
                     break;
 
             }
-            
+
             fillTests();
             backState();
 

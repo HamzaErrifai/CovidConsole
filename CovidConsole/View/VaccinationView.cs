@@ -93,7 +93,7 @@ namespace CovidConsole.View
             this.BackBtn.Name = "BackBtn";
             this.BackBtn.Size = new System.Drawing.Size(98, 41);
             this.BackBtn.TabIndex = 24;
-            this.BackBtn.Text = "Revenir";
+            this.BackBtn.Text = "Accueil";
             this.BackBtn.UseVisualStyleBackColor = true;
             this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
@@ -330,7 +330,6 @@ namespace CovidConsole.View
         {
             vaccinations = Vaccination.getAll(cinC);
             patientLbl.Text = cinC;
-            // at the start the selected citoyen is the first from the list
             if (vaccinations.Count > 0)
                 currentVaccination = vaccinations[0];
             else

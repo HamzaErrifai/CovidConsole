@@ -12,8 +12,7 @@ namespace CovidConsole.Controller
         private string cinC;
         private DateTime dateV;
 
-        public Vaccination()
-        {}
+        public Vaccination(){}
 
         public Vaccination(string cinC, string type)
         {

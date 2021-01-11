@@ -15,7 +15,7 @@ namespace CovidConsole.Controller
         private string type;
         private DateTime date;
         private bool hasSymptoms;
-        private string resultat; // Le status du citoyen
+        private string resultat;
 
         private Test() { }
 
