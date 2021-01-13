@@ -16,12 +16,11 @@ namespace CovidConsole.Controller
         private Test test;
         private Lieux histLieux = new Lieux();
         private Vaccination histVaccination = new Vaccination();
-        public static List<string> possibleStatus { get; } = new List<string> { "", "inconnu", "malade", "suspect", "guerri", "bonne sante" };
+        public static List<string> possibleStatus { get; } = new List<string> { "", "inconnu", "suspect", "malade", "guerri", "bonne sante" };
         public static List<string> possibleSexe { get; } = new List<string> { "", "Homme", "Femme" };
 
         private Citoyen()
-        {
-        }
+        { }
 
         public Citoyen(string o_cin, string o_nom, string o_prenom, string o_sexe, int jour, int mois, int annee)
         {

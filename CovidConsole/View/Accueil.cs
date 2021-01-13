@@ -428,7 +428,6 @@ namespace CovidConsole.View
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         private bool textBoxesAreEmpty()

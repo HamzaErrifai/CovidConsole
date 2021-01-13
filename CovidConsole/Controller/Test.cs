@@ -47,8 +47,25 @@ namespace CovidConsole.Controller
                 temp.date = ((DateTime)row["dateT"]);
                 lt.Add(temp);
             }
-
             return lt;
+        }
+
+        public static Test getLast(string cinC)
+        {
+            Test t = new Test();
+            DataTable dt = t.getLastRecord(cinC);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                Test temp = new Test();
+                temp.idTest = (int)row["idTest"];
+                temp.citoyen = Citoyen.get(row["cinC"].ToString());
+                temp.type = row["typeT"].ToString();
+                temp.resultat = row["resultat"].ToString();
+                temp.date = ((DateTime)row["dateT"]);
+                return temp;
+            }
+            return null;
         }
 
         public int getIdTest()

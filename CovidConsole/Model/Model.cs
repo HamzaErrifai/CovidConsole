@@ -102,7 +102,26 @@ namespace CovidConsole.Model
             command.ExecuteNonQuery();
             conn.Close();
         }
+        /*
+         * returns the last item of the the table selected
+         * **/
+        protected DataTable getLastRecord(string cinC)
+        {
+            //SELECT TOP 1 * FROM foo ORDER BY Dates DESC
+            SqlConnection conn = Db.Connect();
+            SqlCommand command = new SqlCommand(null, conn);
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable dt = new DataTable();
+            string cinName = (tableName == "citoyen") ? "cin" : "cinC";
 
+            conn.Open();
+            command.CommandText = $"SELECT TOP 1 * FROM {tableName} WHERE {cinName} = '{cinC}' ORDER BY Dates DESC";
+            command.Prepare();
+            command.ExecuteNonQuery();
+            adapter.Fill(dt);
+            conn.Close();
+            return dt;
+        }
 
     }
 }
